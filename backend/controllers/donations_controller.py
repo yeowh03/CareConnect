@@ -1,0 +1,254 @@
+# server/controllers/donations_controller.py
+from flask import jsonify, request
+from ..extensions import db
+from ..models import Donation, Item, Request, Reservation
+from ..services.find_user import get_current_user, find_manager_by_email
+from ..services.image_upload import upload_image_to_supabase
+from datetime import datetime, timezone
+from ..services.run_allocation import run_allocation
+
+class DonationController:
+    def get_my_donation(donation_id: int):
+        u = get_current_user()
+        if not u: return jsonify({"message": "Unauthorized"}), 401
+
+        d = Donation.query.get(donation_id)
+        if not d or d.donor_email != u.email:
+            return jsonify({"message": "Not found"}), 404
+
+        return jsonify({
+            "id": d.id,
+            "donation_category": d.donation_category,
+            "donation_item": d.donation_item,
+            "donation_quantity": d.donation_quantity,
+            "location": d.location,
+            "status": d.status,
+            "image_link": d.image_link,
+            "expiryDate": d.expiryDate.isoformat() if d.expiryDate else None,
+        }), 200
+
+    def update_pending_donation(donation_id: int, supabase, bucket):
+        """
+        Only allow updates when donation is Pending.
+        Optional image replacement; Food/Drinks still require an expiry date.
+        """
+        u = get_current_user()
+        if not u: return jsonify({"message": "Unauthorized"}), 401
+
+        d = Donation.query.get(donation_id)
+        if not d or d.donor_email != u.email:
+            return jsonify({"message": "Not found"}), 404
+
+        if d.status != "Pending":
+            return jsonify({"message": "Only Pending donations can be updated"}), 400
+
+        # Accept JSON or multipart (to allow optional image)
+        if request.content_type and "multipart/form-data" in request.content_type:
+            donation_category = (request.form.get("donation_category") or d.donation_category).strip()
+            donation_item     = (request.form.get("donation_item") or d.donation_item).strip()
+            donation_quantity = int(request.form.get("donation_quantity") or d.donation_quantity)
+            location          = (request.form.get("location") or d.location).strip()
+            expiry_str        = (request.form.get("expiryDate") or (d.expiryDate.isoformat() if d.expiryDate else "")).strip()
+            image_file        = request.files.get("image")
+        else:
+            data = request.get_json(force=True, silent=True) or {}
+            donation_category = (data.get("donation_category") or d.donation_category).strip()
+            donation_item     = (data.get("donation_item") or d.donation_item).strip()
+            donation_quantity = int(data.get("donation_quantity") or d.donation_quantity)
+            location          = (data.get("location") or d.location).strip()
+            expiry_str        = (data.get("expiryDate") or (d.expiryDate.isoformat() if d.expiryDate else "")).strip()
+            image_file        = None
+
+        if donation_quantity < 1: return jsonify({"message": "donation_quantity must be >= 1"}), 400
+        if not donation_category: return jsonify({"message": "donation_category is required"}), 400
+        if not donation_item: return jsonify({"message": "donation_item is required"}), 400
+        if not location: return jsonify({"message": "location is required"}), 400
+
+        expiry_date = None
+        if donation_category in ("Food", "Drinks"):
+            if not expiry_str:
+                return jsonify({"message": "expiryDate is required for Food and Drinks"}), 400
+            from datetime import datetime as _dt
+            try:
+                expiry_date = _dt.strptime(expiry_str, "%Y-%m-%d").date()
+            except ValueError:
+                return jsonify({"message": "expiryDate must be YYYY-MM-DD"}), 400
+
+        try:
+            d.donation_category = donation_category
+            d.donation_item = donation_item
+            d.donation_quantity = donation_quantity
+            d.location = location
+            d.expiryDate = expiry_date
+
+            # optional new image
+            if image_file:
+                new_url = upload_image_to_supabase(image_file, supabase, bucket)
+                d.image_link = new_url
+
+            db.session.commit()
+            return jsonify({"ok": True, "id": d.id}), 200
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"message": "Failed to update donation", "error": str(e)}), 500
+
+    def delete_pending_or_approved(donation_id: int):
+        """
+        Donor may delete if status is Pending or Approved (i.e., not yet 'Added' into items).
+        """
+        u = get_current_user()
+        if not u: return jsonify({"message": "Unauthorized"}), 401
+
+        d = Donation.query.get(donation_id)
+        if not d or d.donor_email != u.email:
+            return jsonify({"message": "Not found"}), 404
+
+        if d.status not in ("Pending", "Approved"):
+            return jsonify({"message": "Only Pending or Approved donations can be deleted"}), 400
+
+        try:
+            db.session.delete(d)
+            db.session.commit()
+            return jsonify({"ok": True, "deleted_donation_id": donation_id}), 200
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"message": "Failed to delete donation", "error": str(e)}), 500
+        
+    def create_donation(supabase, bucket):
+        u = get_current_user()
+        if not u:
+            return jsonify({"message": "Unauthorized"}), 401
+
+        donation_category = request.form.get("donation_category", "").strip()
+        donation_item     = request.form.get("donation_item", "").strip()
+        donation_quantity = request.form.get("donation_quantity", "1").strip()
+        location          = request.form.get("location", "").strip()
+        image_file        = request.files.get("image")
+        expiry_str        = request.form.get("expiryDate", "").strip()
+
+        if not donation_category: return jsonify({"message": "donation_category is required"}), 400
+        if not donation_item: return jsonify({"message": "donation_item is required"}), 400
+        try:
+            donation_quantity = int(donation_quantity)
+            if donation_quantity < 1: raise ValueError
+        except Exception:
+            return jsonify({"message": "donation_quantity must be a positive integer"}), 400
+        if not location: return jsonify({"message": "location is required"}), 400
+        if not image_file: return jsonify({"message": "image is required"}), 400
+
+        expiry_date = None
+        if donation_category in ("Food", "Drinks"):
+            if not expiry_str:
+                return jsonify({"message": "expiryDate is required for Food and Drinks"}), 400
+            from datetime import datetime
+            try:
+                expiry_date = datetime.strptime(expiry_str, "%Y-%m-%d").date()
+            except ValueError:
+                return jsonify({"message": "expiryDate must be in YYYY-MM-DD format"}), 400
+
+        try:
+            public_url = upload_image_to_supabase(image_file, supabase, bucket)
+        except Exception as e:
+            return jsonify({"message": f"Image upload failed: {e}"}), 400
+
+        d = Donation(
+            donor_email=u.email, donation_category=donation_category, donation_item=donation_item,
+            donation_quantity=donation_quantity, location=location, status="Pending",
+            image_link=public_url, expiryDate=expiry_date
+        )
+        db.session.add(d); db.session.commit()
+
+        return jsonify({
+            "id": d.id, "image_link": d.image_link, "status": d.status,
+            "expiryDate": d.expiryDate.isoformat() if d.expiryDate else None,
+        }), 201
+
+    def my_donations():
+        u = get_current_user()
+        if not u: return jsonify({"message": "Unauthorized"}), 401
+        rows = Donation.query.filter_by(donor_email=u.email).order_by(Donation.id.desc()).all()
+        data = [{
+            "id": d.id, "donation_category": d.donation_category, "donation_item": d.donation_item,
+            "donation_quantity": d.donation_quantity, "location": d.location,
+            "image_link": d.image_link, "status": d.status, "expiryDate":d.expiryDate
+        } for d in rows]
+        return jsonify({"donations": data}), 200
+
+    def manager_list_donations():
+        u = get_current_user()
+        if not u: return jsonify({"message": "Unauthorized"}), 401
+        m = find_manager_by_email(u.email)
+        rows = Donation.query.filter(Donation.location == m.cc, Donation.status.in_(["Pending", "Approved"]))\
+                            .order_by(Donation.id.desc()).all()
+        def ser(d: Donation):
+            return {
+                "id": d.id, "donor_email": d.donor_email, "donation_category": d.donation_category,
+                "donation_item": d.donation_item, "donation_quantity": d.donation_quantity,
+                "location": d.location, "image_link": d.image_link, "status": d.status,
+                "expiryDate": d.expiryDate.isoformat() if d.expiryDate else None,
+            }
+        pending = [ser(d) for d in rows if d.status == "Pending"]
+        approved = [ser(d) for d in rows if d.status == "Approved"]
+        return jsonify({"pending": pending, "approved": approved}), 200
+
+    def manager_approve(donation_id: int):
+        u = get_current_user()
+        if not u: return jsonify({"message": "Unauthorized"}), 401
+        m = find_manager_by_email(u.email)
+        d = Donation.query.get(donation_id)
+        if not d: return jsonify({"message": "Donation not found"}), 404
+        if d.location != m.cc: return jsonify({"message": "Cannot modify donations outside your CC"}), 403
+        if d.status != "Pending": return jsonify({"message": "Only Pending donations can be approved"}), 400
+        d.status = "Approved"; db.session.commit()
+        return jsonify({"ok": True, "id": d.id, "status": d.status}), 200
+
+    def manager_reject(donation_id: int):
+        u = get_current_user()
+        if not u: return jsonify({"message": "Unauthorized"}), 401
+        m = find_manager_by_email(u.email)
+        d = Donation.query.get(donation_id)
+        if not d: return jsonify({"message": "Donation not found"}), 404
+        if d.location != m.cc: return jsonify({"message": "Cannot modify donations outside your CC"}), 403
+        if d.status not in ("Pending", "Approved"):
+            return jsonify({"message": "Only Pending or Approved donations can be rejected"}), 400
+        db.session.delete(d)
+        db.session.commit()
+        return jsonify({"ok": True, "id": donation_id, "deleted": True}), 200
+
+    def manager_add(donation_id: int):
+        """
+        Approve → Added:
+        - Create Item rows as Available only (no reservations).
+        - Allocation is performed by the 10-min background allocator.
+        """
+        u = get_current_user()
+        if not u: return jsonify({"message": "Unauthorized"}), 401
+        m = find_manager_by_email(u.email)
+
+        d = Donation.query.get(donation_id)
+        if not d: return jsonify({"message": "Donation not found"}), 404
+        if d.location != m.cc: return jsonify({"message": "Cannot modify donations outside your CC"}), 403
+        if d.status != "Approved": return jsonify({"message": "Only Approved donations can be added"}), 400
+
+        try:
+            d.status = "Added"
+            created_items = []
+            for _ in range(int(d.donation_quantity) or 0):
+                it = Item(donation_id=d.id, status="Available")
+                db.session.add(it)
+                created_items.append(it)
+
+            db.session.commit()
+
+            run_allocation()
+
+            return jsonify({
+                "message": f"{len(created_items)} items created as Available for donation {d.id}",
+                "donation": {"id": d.id, "status": d.status},
+                "items": [{"id": it.id, "status": it.status} for it in created_items],
+                "note": "Allocator will match these to Pending requests automatically."
+            }), 201
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"message": "Failed to add items for donation", "error": str(e)}), 500
+
