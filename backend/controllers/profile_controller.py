@@ -26,7 +26,11 @@ class ProfileController:
             try:
                 mi = float(data["monthlyIncome"])
                 if mi < 0: raise ValueError
-                if c: c.monthly_income = mi
+                if c: 
+                    # if change income, must verify again
+                    if c.monthly_income != mi:
+                        c.monthly_income = mi
+                        c.account_status = "Pending"
             except Exception:
                 return jsonify({"error": "monthly_income must be non-negative"}), 400
         if "password" in data: u.password_hash = hash_password(data["password"])
