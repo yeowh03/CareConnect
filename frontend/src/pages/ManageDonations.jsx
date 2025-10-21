@@ -379,7 +379,7 @@ export default function ManageDonations() {
           <h1 style={{ margin: 0 }}>Manage Donations</h1>
           <div style={{ color: "#666" }}>{email} — <strong>{cc}</strong></div>
         </div>
-        <Link to="/clienthome">
+        <Link to="/managerhome">
           <button style={{ padding: "10px 16px", borderRadius: 10, background: "#fff", border: "1px solid #ddd" }}>
             Map
           </button>
