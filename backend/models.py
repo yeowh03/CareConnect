@@ -67,3 +67,15 @@ class Notification(db.Model):
     link = db.Column(db.String(255))
     is_read = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+
+# # --- NEW: who wants to receive CC broadcast alerts ---
+# class BroadcastSubscription(db.Model):
+#     __tablename__ = "broadcast_subscription"
+#     id = db.Column(db.Integer, primary_key=True)
+#     email = db.Column(db.String(255), db.ForeignKey("user.email", ondelete="CASCADE"), nullable=False)
+#     cc = db.Column(db.String(255), nullable=False)
+#     active = db.Column(db.Boolean, default=True, nullable=False)
+
+#     __table_args__ = (
+#     db.UniqueConstraint("email", "cc", name="uq_sub_email_cc"),
+#     )

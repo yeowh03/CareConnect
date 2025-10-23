@@ -5,6 +5,7 @@ from ..models import Request, Item, Donation, Reservation, Manager
 from ..services.find_user import get_current_user
 from datetime import datetime, timezone, timedelta
 from ..services.run_allocation import run_allocation
+from ..services.metrics import check_and_broadcast_for_cc
 
 class RequestController:
     def get_my_request(req_id: int):
@@ -213,6 +214,9 @@ class RequestController:
             db.session.commit()
             
             run_allocation()
+
+            # Check this CC's fulfilment after adding the new request
+            check_and_broadcast_for_cc(location)
 
             return jsonify({
                 "id": req.id, "status": req.status, "location": req.location,

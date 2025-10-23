@@ -15,7 +15,6 @@ from ..services.jobs_service import (
     run_expire_matched_requests_once,
 )
 
-
 @dataclass
 class JobStatus:
     last_ok: str = ""

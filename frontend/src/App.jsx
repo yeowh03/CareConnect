@@ -15,6 +15,7 @@ import DonationsList from "./pages/DonationsList.jsx";
 import DonationForm from "./pages/DonationForm.jsx";
 import ManageDonations from "./pages/ManageDonations.jsx";
 import CompleteRequest from "./pages/CompleteRequest.jsx";
+import Notifications from "./pages/Notifications.jsx";
 
 export default function App() {
 
@@ -39,6 +40,7 @@ export default function App() {
         {/* ⬇ same component, edit mode uses :id */}
         <Route path="/donations/:id/edit" element={<DonationForm />} />
         <Route path="/completeRequests" element={<CompleteRequest/>} />
+        <Route path="/notification" element={<Notifications/>} />
       </Routes>
     </BrowserRouter>
   );

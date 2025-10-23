@@ -10,6 +10,7 @@ from typing import Dict, List
 
 from ..models import db, Request, Donation, Item, Reservation
 from .run_allocation import run_allocation
+from ..services.metrics import check_and_broadcast_for_cc
 
 # Asia/Singapore timezone for date cutoffs, etc.
 SG_TZ = timezone(timedelta(hours=8))
@@ -62,6 +63,16 @@ def run_cleanup_expired_items_once() -> Dict[str, object]:
     db.session.commit()
 
     run_allocation()
+
+    # Identify affected CCs and broadcast if needed
+    affected_ccs = set()
+    from ..models import Request
+    for rid in affected_request_ids:
+        req = Request.query.get(rid)
+        if req and req.location:
+            affected_ccs.add(req.location)
+    for cc in affected_ccs:
+        check_and_broadcast_for_cc(cc)
 
     return {
         "job": "cleanup_expired_items",
