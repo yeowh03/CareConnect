@@ -60,6 +60,7 @@ class ProfileController:
         for client, user in rows:
             out.append({"client": {"email": client.email, "monthly_income": client.monthly_income},
                         "user": {"contact_number": user.contact_number, "name": user.name}})
+            print(out)
         return jsonify(out)
 
     def process_registrations(outcome: bool, email: str):

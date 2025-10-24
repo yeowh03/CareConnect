@@ -77,7 +77,7 @@ export default function ManagerHome() {
             height="65vh"
             onCountChange={setCount}
           />
-      </div>
+        </div>
     </>
   );
 }

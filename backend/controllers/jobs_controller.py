@@ -10,9 +10,9 @@ from dataclasses import dataclass, asdict
 from typing import Dict
 
 from ..services.jobs_service import (
-    # run_allocation_once,
     run_cleanup_expired_items_once,
     run_expire_matched_requests_once,
+    run_cleanup_approved_donations_once,
 )
 
 @dataclass
@@ -29,6 +29,7 @@ class JobsController:
         "allocation": JobStatus(),
         "cleanup_expired_items": JobStatus(),
         "expire_matched_requests": JobStatus(),
+        "cleanup_approved_donations": JobStatus(),
     }
 
     _schedulers_started = False  # prevent double-starts
@@ -48,16 +49,10 @@ class JobsController:
         except Exception as e:
             # Capture full error message for /status endpoint
             s.last_error = str(e)
-            print("erro")
         finally:
             s.running = False
 
     # ---------- Manual job triggers (requests have app context) ----------
-    # @staticmethod
-    # def run_allocation_now():
-    #     JobsController._safe_run("allocation", run_allocation_once)
-    #     return {"ok": True, "status": asdict(JobsController.status["allocation"])}
-
     @staticmethod
     def run_cleanup_now():
         JobsController._safe_run("cleanup_expired_items", run_cleanup_expired_items_once)
@@ -87,14 +82,6 @@ class JobsController:
             return
         JobsController._schedulers_started = True
 
-        # def allocation_loop():
-        #     while True:
-        #         # Each iteration needs an app context for DB access
-        #         with app.app_context():
-        #             JobsController._safe_run("allocation", run_allocation_once)
-        #         print("bigggg")
-        #         time.sleep(allocation_interval_sec)  # default: every 10 minutes
-
         def cleanup_loop():
             while True:
                 with app.app_context():
@@ -106,7 +93,16 @@ class JobsController:
                 with app.app_context():
                     JobsController._safe_run("expire_matched_requests", run_expire_matched_requests_once)
                 time.sleep(24*60*60)  # daily
-
-        # threading.Thread(target=allocation_loop, name="jobs-allocation", daemon=True).start()
+                
+        def approved_donation_loop():
+            while True:
+                with app.app_context():
+                    JobsController._safe_run(
+                        "cleanup_approved_donations",
+                        run_cleanup_approved_donations_once
+                    )
+                time.sleep(24 * 60 * 60)  # run daily
+        
         threading.Thread(target=cleanup_loop, name="jobs-cleanup", daemon=True).start()
         threading.Thread(target=expiry_loop, name="jobs-expiry", daemon=True).start()
+        threading.Thread(target=approved_donation_loop, name="jobs-approved-cleanup", daemon=True).start()

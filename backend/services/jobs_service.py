@@ -62,6 +62,7 @@ def run_cleanup_expired_items_once() -> Dict[str, object]:
 
     db.session.commit()
 
+    # run matching
     run_allocation()
 
     # Identify affected CCs and broadcast if needed
@@ -118,9 +119,59 @@ def run_expire_matched_requests_once(days_until_expire: int = 2) -> Dict[str, st
 
         db.session.commit()
 
+        # run matching
         run_allocation()
         
         return {"job": "expire_matched_requests", "status": "ok", "count": len(to_expire), "at": now_utc.isoformat()}
     except Exception as e:
         db.session.rollback()
         raise e
+    
+# ----------------------------------------
+# 3) Expire approved donations (uncollected items)
+# ----------------------------------------
+def run_cleanup_approved_donations_once(days_until_delete: int = 2) -> Dict[str, str]:
+    """
+    Delete donations with status == 'Approved' that are older than N days.
+    Also, send a notification to the donor about removal.
+    """
+    now_utc = datetime.now(timezone.utc)
+    cutoff = now_utc - timedelta(days=days_until_delete)
+
+    # Find old approved donations
+    old_donations: List[Donation] = Donation.query.filter(
+        Donation.status == "Approved",
+        Donation.approved_at <= cutoff
+    ).all()
+
+    if not old_donations:
+        return {"job": "cleanup_approved_donations", "status": "ok", "deleted": 0, "at": now_utc.isoformat()}
+
+    from ..models import Notification
+
+    deleted_count = 0
+    for donation in old_donations:
+        # Create notification for the donor
+        message = (
+            f"Your donation '{donation.donation_item}' in {donation.location} "
+            "has been automatically removed after 2 days of approval."
+        )
+        notif = Notification(
+            receiver_email=donation.donor_email,
+            message=message,
+            link="/donations"  # optional, adjust to your frontend route
+        )
+        db.session.add(notif)
+
+        # Delete donation (cascade removes items, reservations)
+        db.session.delete(donation)
+        deleted_count += 1
+
+    db.session.commit()
+
+    return {
+        "job": "cleanup_approved_donations",
+        "status": "ok",
+        "deleted": deleted_count,
+        "at": now_utc.isoformat(),
+    }

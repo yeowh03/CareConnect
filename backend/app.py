@@ -16,6 +16,7 @@ from backend.routes.requests_routes import requests_bp
 from backend.routes.community_routes import community_bp
 from backend.routes.jobs_routes import jobs_bp
 from backend.routes.notification_routes import notification_bp
+from backend.routes.inventory_routes import inventory_bp
 
 from .controllers.jobs_controller import JobsController
 
@@ -47,6 +48,7 @@ def create_app():
     app.register_blueprint(community_bp)
     app.register_blueprint(notification_bp)
     app.register_blueprint(jobs_bp)
+    app.register_blueprint(inventory_bp)
 
     # start_allocator_daemon(app, every_minutes=1)
     # start_cleanup_expired_items_daemon(app, run_at_hour_sg=0, run_at_minute_sg=0)

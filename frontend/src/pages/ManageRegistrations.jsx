@@ -16,15 +16,14 @@ export default function ManagerRegistrations() {
           navigate("/login");
           return;
         }
-        console.log(resp.data);
-        setEmail(resp.data.email);
+        setEmail(me.data.email);
         
         const r = await httpClient.get(`/api/pending_registrations`);
         setRegistrations(r.data);
 
       } catch (error) {
-          if (e?.response?.data?.message == "Not authenticated!"){
-          alert("Not authenticated as Manager!");
+          if (error.response?.data?.message == "Not authenticated!"){
+          alert("Not authenticated!");
           navigate("/login");
           return;
         }

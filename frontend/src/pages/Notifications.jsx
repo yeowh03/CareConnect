@@ -19,10 +19,23 @@ export default function Notifications() {
     }
 
     useEffect(() => {
-        load();
-        const t = setInterval(load, 10000); // refresh every 10s
+        const run = async () => {
+            try {
+                await httpClient.get("/api/@me");
+            } catch {
+                alert("Not authenticated");
+                navigate("/login");
+            return;
+            }
+            load();
+        };
+
+        run();
+        
+        const t = setInterval(load, 10000);
         return () => clearInterval(t);
     }, []);
+
 
     async function subscribe() {
         if (!cc) { alert("Enter a CC name first"); return; }

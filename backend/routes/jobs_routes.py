@@ -16,13 +16,6 @@ def get_status():
     """Return current job status summary."""
     return jsonify(JobsController.get_status())
 
-
-# @jobs_bp.post("/run/allocation")
-# def run_allocation_now():
-#     result = JobsController.run_allocation_now()
-#     return jsonify(result)
-
-
 @jobs_bp.get("/run/cleanup")
 def run_cleanup_now():
     print("yeyey")
@@ -35,4 +28,10 @@ def run_cleanup_now():
 def run_expiry_now():
     days = int(request.args.get("days", 2))
     result = JobsController.run_expiry_now(days=days)
+    return jsonify(result)
+
+@jobs_bp.post("/run/cleanup-approved")
+def run_cleanup_approved_donations_now():
+    days = int(request.args.get("days", 2))
+    result = JobsController.run_cleanup_approved_donations_now(days=days)
     return jsonify(result)

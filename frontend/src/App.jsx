@@ -16,6 +16,8 @@ import DonationForm from "./pages/DonationForm.jsx";
 import ManageDonations from "./pages/ManageDonations.jsx";
 import CompleteRequest from "./pages/CompleteRequest.jsx";
 import Notifications from "./pages/Notifications.jsx";
+import ManagerDashboard from "./pages/ManagerDashboard.jsx";
+import ClientDashboard from "./pages/ClientDashboard.jsx";
 
 export default function App() {
 
@@ -41,6 +43,8 @@ export default function App() {
         <Route path="/donations/:id/edit" element={<DonationForm />} />
         <Route path="/completeRequests" element={<CompleteRequest/>} />
         <Route path="/notification" element={<Notifications/>} />
+        <Route path="/managerDashboard" element={<ManagerDashboard/>}/>
+        <Route path="/clientDashboard" element={<ClientDashboard/>}/>
       </Routes>
     </BrowserRouter>
   );

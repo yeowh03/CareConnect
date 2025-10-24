@@ -17,7 +17,9 @@ def get_client_profile(user_email): return c.get_client_profile(user_email)
 def get_manager_profile(user_email): return c.get_manager_profile(user_email)
 
 @profile_bp.get("/pending_registrations")
-def pending_registrations(): return c.list_pending_registrations()
+def pending_registrations(): 
+    print("Pennnnn")
+    return c.list_pending_registrations()
 
 @profile_bp.post("/process_registrations")
 def process_registrations():
