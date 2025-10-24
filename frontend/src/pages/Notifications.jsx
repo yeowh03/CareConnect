@@ -31,7 +31,7 @@ export default function Notifications() {
         };
 
         run();
-        
+
         const t = setInterval(load, 10000);
         return () => clearInterval(t);
     }, []);
@@ -81,8 +81,8 @@ export default function Notifications() {
             </div>
 
             <div>
-                <h3 className="text-lg font-medium mb-2">Broadcasts to You</h3>
-                {notes.length === 0 && <p className="text-sm text-gray-600">No broadcasts yet.</p>}
+                <h3 className="text-lg font-medium mb-2">Notifications</h3>
+                {notes.length === 0 && <p className="text-sm text-gray-600">No notification yet.</p>}
                 <ul className="space-y-2">
                     {notes.map((n) => (
                         <li key={n.id} className="border rounded p-3">
