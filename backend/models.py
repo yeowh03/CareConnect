@@ -19,7 +19,7 @@ class Client(db.Model):
     __tablename__ = "client"
     email = db.Column(db.String(255), db.ForeignKey("user.email", ondelete="CASCADE"), primary_key=True)
     monthly_income = db.Column(db.Numeric(12, 2), nullable=True)
-    account_status = db.Column(db.Enum("Pending", "Confirmed", name="account_enum"), nullable=False, default="Pending")
+    account_status = db.Column(db.Enum("Pending", "Confirmed", "Rejected", name="account_status"), nullable=False, default="Pending")
     gmail_acc = db.Column(db.Boolean, nullable=False, default=False)
 
 class Request(db.Model):
@@ -65,6 +65,4 @@ class Notification(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     receiver_email = db.Column(db.String(255), db.ForeignKey("user.email", ondelete="CASCADE"), nullable=False)
     message = db.Column(db.String(255), nullable=False)
-    link = db.Column(db.String(255))
-    is_read = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))

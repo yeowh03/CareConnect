@@ -4,6 +4,7 @@ from ..extensions import db
 from ..models import User, Client, Manager
 from ..services.find_user import get_current_user, find_client_by_email, find_manager_by_email
 from ..services.password import hash_password
+from ..services.notification_service import create_notification
 
 class ProfileController:
     def me():
@@ -20,6 +21,9 @@ class ProfileController:
         if not u:
             return jsonify({"error": "Unauthorized"}), 401
         c = find_client_by_email(u.email)
+
+        income_changed = False
+
         if "name" in data: u.name = data["name"]
         if "contactNumber" in data: u.contact_number = data["contactNumber"]
         if "monthlyIncome" in data:
@@ -31,11 +35,26 @@ class ProfileController:
                     if c.monthly_income != mi:
                         c.monthly_income = mi
                         c.account_status = "Pending"
+                        income_changed = True
             except Exception:
                 return jsonify({"error": "monthly_income must be non-negative"}), 400
         if "password" in data: u.password_hash = hash_password(data["password"])
         if "email" in data: u.email = data["email"]
         db.session.commit()
+
+        # If monthly income changed, notify all managers to re-verify this user
+        if income_changed:
+            managers = User.query.filter(User.role == "M").all()
+            if managers:
+                msg = (
+                    f"Client {u.name} ({u.email}) updated monthly income and requires re-verification."
+                )
+                for m in managers:
+                    create_notification(
+                        message=msg,
+                        receiver_email=m.email
+                    )
+
         return jsonify({"ok": True}), 200
 
     def get_client_profile(user_email):
@@ -66,9 +85,37 @@ class ProfileController:
     def process_registrations(outcome: bool, email: str):
         c = Client.query.get(email)
         if not c: return jsonify({"error": "Client not found"}), 404
-        if outcome:
-            c.account_status = "Confirmed"
-        else:
-            db.session.delete(c)
-        db.session.commit()
-        return jsonify({"ok": True})
+
+        u = User.query.get(email)
+
+        try:
+            if outcome:
+                c.account_status = "Confirmed"
+                db.session.commit()
+
+                # Notify user: approved
+                msg = "Your registration has been approved. Welcome aboard!"
+                create_notification(
+                    message=msg,
+                    receiver_email=email
+                )
+            else:
+                # Notify user: rejected
+                c.account_status = "Rejected"
+                db.session.commit()
+
+                name = u.name if u else email             
+                msg = (
+                    f"Hi {name}, your registration has been rejected. "
+                    "You may re-apply with updated information."
+                )
+                create_notification(
+                    message=msg,
+                    receiver_email=email
+                )
+
+            return jsonify({"ok": True})
+        
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"error": "Failed to process registration", "details": str(e)}), 500

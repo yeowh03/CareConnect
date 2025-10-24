@@ -11,6 +11,7 @@ from typing import Dict, List
 from ..models import db, Request, Donation, Item, Reservation
 from .run_allocation import run_allocation
 from ..services.metrics import check_and_broadcast_for_cc
+from ..services.notification_service import create_notification
 
 # Asia/Singapore timezone for date cutoffs, etc.
 SG_TZ = timezone(timedelta(hours=8))
@@ -115,7 +116,13 @@ def run_expire_matched_requests_once(days_until_expire: int = 2) -> Dict[str, st
                 db.session.delete(res)
 
             req.status = "Expired"
-            # (optional) req.matched_at = None
+            
+            msg = (
+                f"Your request '{req.request_item}' in {req.location} "
+                "has expired after 2 days of being matched."
+                "Please make another request if needed."
+            )
+            create_notification(message=msg, receiver_email=req.requester_email)
 
         db.session.commit()
 
@@ -147,8 +154,6 @@ def run_cleanup_approved_donations_once(days_until_delete: int = 2) -> Dict[str,
     if not old_donations:
         return {"job": "cleanup_approved_donations", "status": "ok", "deleted": 0, "at": now_utc.isoformat()}
 
-    from ..models import Notification
-
     deleted_count = 0
     for donation in old_donations:
         # Create notification for the donor
@@ -156,12 +161,7 @@ def run_cleanup_approved_donations_once(days_until_delete: int = 2) -> Dict[str,
             f"Your donation '{donation.donation_item}' in {donation.location} "
             "has been automatically removed after 2 days of approval."
         )
-        notif = Notification(
-            receiver_email=donation.donor_email,
-            message=message,
-            link="/donations"  # optional, adjust to your frontend route
-        )
-        db.session.add(notif)
+        create_notification(message=message, receiver_email=donation.donor_email)
 
         # Delete donation (cascade removes items, reservations)
         db.session.delete(donation)

@@ -3,6 +3,7 @@ from sqlalchemy import or_
 from typing import Dict, List
 
 from ..models import db, Request, Donation, Item, Reservation
+from ..services.notification_service import create_notification
 
 # Asia/Singapore timezone for date cutoffs, etc.
 SG_TZ = timezone(timedelta(hours=8))
@@ -61,6 +62,12 @@ def run_allocation() -> Dict[str, str]:
             req.status = "Matched"
             req.matched_at = now_utc
             changed = True
+
+            message = (
+                f"Good news! Your request '{req.request_item}' in {req.location} "
+                "has been successfully matched with available items."
+            )
+            create_notification(message=message, receiver_email=req.requester_email)
 
     if changed:
         db.session.commit()

@@ -22,3 +22,7 @@ def list_subscriptions():
 @notification_bp.route("/notifications", methods=["GET"])
 def my_notifications():
     return c.my_notifications()
+
+@notification_bp.route("/notifications/<int:notification_id>", methods=["DELETE"])
+def delete_notification(notification_id: int):
+    return c.delete_notification(notification_id)

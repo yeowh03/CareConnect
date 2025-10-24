@@ -239,7 +239,7 @@ class RequestController:
         } for r in rows]
         return jsonify({"requests": data}), 200
 
-    # server/controllers/requests_controller.py  (REPLACE reject_matched_request)
+    # server/controllers/requests_controller.py
     def reject_matched_request():
         u = get_current_user()
         if not u: return jsonify({"message": "Unauthorized"}), 401

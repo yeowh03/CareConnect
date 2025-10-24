@@ -15,7 +15,7 @@ export default function ManagerDashboard() {
   const [showFilter, setShowFilter] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ Fetch all CC summaries initially
+  // Fetch all CC summaries initially
   useEffect(() => {
     fetchAllCCSummary();
   }, []);
@@ -35,7 +35,7 @@ export default function ManagerDashboard() {
     }
   };
 
-  // ✅ Fetch complete inventory (not only shortages)
+  // Fetch complete inventory (not only shortages)
   const fetchCCInventory = async (location) => {
     setLoading(true);
     try {
@@ -73,7 +73,7 @@ export default function ManagerDashboard() {
     );
   }
 
-  // ✅ Detailed CC inventory view
+  // Detailed CC inventory view
   if (selectedCC) {
     return (
       <div className="manager-dashboard-container">
@@ -96,7 +96,6 @@ export default function ManagerDashboard() {
               <tr>
                 <th>Item Name</th>
                 <th>Total Requested</th>
-                <th>Fulfilled Quantity</th>
                 <th>Total Donated</th>
                 <th>Fulfillment %</th>
               </tr>
@@ -109,7 +108,6 @@ export default function ManagerDashboard() {
                 >
                   <td>{item.item_name}</td>
                   <td>{item.total_requested}</td>
-                  <td>{item.fulfilled_quantity}</td>
                   <td>{item.total_donated}</td>
                   <td>{item.fulfillment_pct}%</td>
                 </tr>
@@ -117,7 +115,7 @@ export default function ManagerDashboard() {
             </tbody>
           </table>
 
-          {/* ✅ Legend */}
+          {/* Legend */}
           <div className="legend">
             <span className="legend-box shortage"></span>
             <span>Items highlighted in red are in severe shortage (fulfillment &lt; 50%)</span>
@@ -127,7 +125,7 @@ export default function ManagerDashboard() {
     );
   }
 
-  // ✅ Overview with all CC cards
+  // Overview with all CC cards
   return (
     <>
         <TopNav role = "Manager" />

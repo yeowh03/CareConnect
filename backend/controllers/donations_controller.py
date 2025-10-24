@@ -6,6 +6,8 @@ from ..services.find_user import get_current_user, find_manager_by_email
 from ..services.image_upload import upload_image_to_supabase
 from datetime import datetime, timezone
 from ..services.run_allocation import run_allocation
+from ..services.notification_service import create_notification
+from ..services.find_user import find_managers_by_cc
 
 class DonationController:
     def get_my_donation(donation_id: int):
@@ -42,22 +44,12 @@ class DonationController:
         if d.status != "Pending":
             return jsonify({"message": "Only Pending donations can be updated"}), 400
 
-        # Accept JSON or multipart (to allow optional image)
-        if request.content_type and "multipart/form-data" in request.content_type:
-            donation_category = (request.form.get("donation_category") or d.donation_category).strip()
-            donation_item     = (request.form.get("donation_item") or d.donation_item).strip()
-            donation_quantity = int(request.form.get("donation_quantity") or d.donation_quantity)
-            location          = (request.form.get("location") or d.location).strip()
-            expiry_str        = (request.form.get("expiryDate") or (d.expiryDate.isoformat() if d.expiryDate else "")).strip()
-            image_file        = request.files.get("image")
-        else:
-            data = request.get_json(force=True, silent=True) or {}
-            donation_category = (data.get("donation_category") or d.donation_category).strip()
-            donation_item     = (data.get("donation_item") or d.donation_item).strip()
-            donation_quantity = int(data.get("donation_quantity") or d.donation_quantity)
-            location          = (data.get("location") or d.location).strip()
-            expiry_str        = (data.get("expiryDate") or (d.expiryDate.isoformat() if d.expiryDate else "")).strip()
-            image_file        = None
+        donation_category = (request.form.get("donation_category") or d.donation_category).strip()
+        donation_item     = (request.form.get("donation_item") or d.donation_item).strip()
+        donation_quantity = int(request.form.get("donation_quantity") or d.donation_quantity)
+        location          = (request.form.get("location") or d.location).strip()
+        expiry_str        = (request.form.get("expiryDate") or (d.expiryDate.isoformat() if d.expiryDate else "")).strip()
+        image_file        = request.files.get("image")
 
         if donation_quantity < 1: return jsonify({"message": "donation_quantity must be >= 1"}), 400
         if not donation_category: return jsonify({"message": "donation_category is required"}), 400
@@ -158,6 +150,21 @@ class DonationController:
         )
         db.session.add(d); db.session.commit()
 
+        # notify manager
+        try:
+            manager = find_managers_by_cc(location) or {}
+            if manager:
+                msg = (
+                    f"New pending donation at {location}: '{donation_item}' x{donation_quantity} "
+                    f"submitted by {u.name} ({u.email}). Please review and approve/reject."
+                )
+                create_notification(message=msg, receiver_email=manager.email)
+
+        except Exception as e:
+            # Soft-fail the notifications (donation was already created successfully)
+            # You can log this instead of printing in production.
+            print("Manager notification failed:", e)
+
         return jsonify({
             "id": d.id, "image_link": d.image_link, "status": d.status,
             "expiryDate": d.expiryDate.isoformat() if d.expiryDate else None,
@@ -200,6 +207,14 @@ class DonationController:
         if d.location != m.cc: return jsonify({"message": "Cannot modify donations outside your CC"}), 403
         if d.status != "Pending": return jsonify({"message": "Only Pending donations can be approved"}), 400
         d.status = "Approved"; db.session.commit()
+
+        # notify donor
+        msg = (
+            f"Your donation '{d.donation_item}' at {d.location} was approved by {m.cc}. "
+            "Please come down within 2 days to donate your items. Thanks for contributing!"
+        )
+        create_notification(message=msg, receiver_email=d.donor_email)
+
         return jsonify({"ok": True, "id": d.id, "status": d.status}), 200
 
     def manager_reject(donation_id: int):
@@ -213,6 +228,14 @@ class DonationController:
             return jsonify({"message": "Only Pending or Approved donations can be rejected"}), 400
         db.session.delete(d)
         db.session.commit()
+        
+        # notify donor
+        msg = (
+            f"Your donation '{d.donation_item}' at {d.location} was rejected. "
+            "If you believe this was a mistake, please submit a new donation."
+        )
+        create_notification(message=msg, receiver_email=d.donor_email)
+
         return jsonify({"ok": True, "id": donation_id, "deleted": True}), 200
 
     def manager_add(donation_id: int):
@@ -239,6 +262,13 @@ class DonationController:
                 created_items.append(it)
 
             db.session.commit()
+
+            # notify donors
+            msg = (
+                f"Your donation '{d.donation_item}' at {d.location} has been added to inventory "
+                f"with {len(created_items)} item(s). We’ll match them to requests soon!"
+            )
+            create_notification(message=msg, receiver_email=d.donor_email)
 
             run_allocation()
 

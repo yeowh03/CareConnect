@@ -16,7 +16,7 @@ class InventoryController:
             db.session.query(
                 Request.location,
                 func.sum(Request.request_quantity),
-                func.sum(case((Request.status == "Matched", Request.request_quantity), else_=0))
+                func.sum(Request.allocation)
             )
             .group_by(Request.location)
             .all()
@@ -25,7 +25,12 @@ class InventoryController:
         don_rows = (
             db.session.query(
                 Donation.location,
-                func.sum(Donation.donation_quantity)
+                func.sum(
+                case(
+                        (Donation.status == "Added", Donation.donation_quantity),
+                        else_=0
+                    )
+                )
             )
             .group_by(Donation.location)
             .all()
@@ -34,7 +39,7 @@ class InventoryController:
         req_dict = {r[0]: {"total_requests": int(r[1] or 0), "fulfilled": int(r[2] or 0)} for r in req_rows}
         don_dict = {d[0]: int(d[1] or 0) for d in don_rows}
 
-        # ✅ All CC names from cache
+        # All CC names from cache
         cc_names = [m["name"] for m in _cc_cache["markers"]]
 
         summary = []
@@ -42,7 +47,10 @@ class InventoryController:
             req_info = req_dict.get(name, {"total_requests": 0, "fulfilled": 0})
             total_req = req_info["total_requests"]
             fulfilled = req_info["fulfilled"]
-            fulfill_rate = (fulfilled / total_req * 100) if total_req > 0 else 0
+            if total_req == 0:
+                fulfill_rate = 100
+            else:
+                fulfill_rate = (fulfilled / total_req * 100)
             total_don = don_dict.get(name, 0)
 
             summary.append({
@@ -79,12 +87,7 @@ class InventoryController:
                 Request.location,
                 Request.request_item,
                 func.sum(Request.request_quantity).label("total_requested"),
-                func.sum(
-                    case(
-                        (Request.status == "Matched", Request.request_quantity),
-                        else_=0
-                    )
-                ).label("fulfilled_quantity")
+                func.sum(Request.allocation).label("fulfilled_quantity")
             )
             .group_by(Request.location, Request.request_item)
             .all()
@@ -152,10 +155,13 @@ class InventoryController:
             db.session.query(
                 Request.request_item.label("item_name"),
                 func.sum(Request.request_quantity).label("total_requested"),
-                func.sum(
-                    case((Request.status == "Matched", Request.request_quantity), else_=0)
-                ).label("fulfilled_quantity"),
-                func.coalesce(func.sum(Donation.donation_quantity), 0).label("total_donated")
+                func.sum(Request.allocation).label("fulfilled_quantity"),
+                func.coalesce(func.sum(
+                    case(
+                        (Donation.status == "Added", Donation.donation_quantity),
+                        else_=0
+                    )
+                ), 0).label("total_donated")
             )
             .outerjoin(Donation, Donation.donation_item == Request.request_item)
             .filter(Request.location == location)
@@ -167,11 +173,10 @@ class InventoryController:
         for i in items:
             total_req = int(i.total_requested or 0)
             fulfilled = int(i.fulfilled_quantity or 0)
-            fulfill_pct = round((fulfilled / total_req) * 100, 1) if total_req > 0 else 0
+            fulfill_pct = round((fulfilled / total_req) * 100, 1) if total_req > 0 else 1
             result.append({
                 "item_name": i.item_name,
                 "total_requested": total_req,
-                "fulfilled_quantity": fulfilled,
                 "total_donated": int(i.total_donated or 0),
                 "fulfillment_pct": fulfill_pct
             })

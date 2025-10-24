@@ -5,6 +5,8 @@ from ..models import User, Client
 from ..extensions import db
 from ..services.find_user import find_user_by_email
 from ..services.password import hash_password, verify_password
+from ..services.notification_service import create_notification
+
 
 class AuthController:
     def start_google_login():
@@ -52,6 +54,17 @@ class AuthController:
 
         client = Client(monthly_income=float(data["monthlyIncome"]), email=data["email"])
         db.session.add(client); db.session.commit()
+
+        # notify managers
+        managers = User.query.filter(User.role == "M").all()
+        if managers:
+            msg = (
+                f"New client registration from {user.name} ({user.email}) "
+                "is awaiting verification."
+            )
+        for m in managers:
+            # Link can point to whatever page managers use to review registrations
+            create_notification(message=msg, receiver_email=m.email)
 
         session["user_email"] = user.email
         return jsonify({"ok": True}), 200

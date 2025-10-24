@@ -1,6 +1,6 @@
 // src/components/CommunityClubsMap.jsx
 import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import httpClient from "../httpClient";
@@ -18,7 +18,7 @@ export default function CommunityClubsMap({
   const navigate = useNavigate();
 
   // modal
-  const [selected, setSelected] = useState(null); // { name, address?, link?, fulfilmentRate?, lowFulfilment?, counts? }
+  const [selected, setSelected] = useState(null); // { name, address?, link?, fulfilmentRate?, lowFulfilment?}
 
   // data + geo errors
   const [dataError, setDataError] = useState("");
@@ -130,7 +130,6 @@ export default function CommunityClubsMap({
           link: m.link,
           fulfilmentRate: m.fulfilmentRate,
           lowFulfilment: m.lowFulfilment,
-          counts: m.counts,
         })
       );
 
@@ -322,16 +321,11 @@ export default function CommunityClubsMap({
 
             <p style={{ marginTop: 6 }}>
               <strong>Fulfilment rate:</strong> {formatPercent(selected.fulfilmentRate)}
-              {selected.counts && (
-                <>
-                  {" "}
-                  <span style={{ color: "#666", fontSize: 13 }}>
-                    ({selected.counts.success} out of {selected.counts.considered})
-                  </span>
-                </>
-              )}
               {selected.lowFulfilment && (
-                <span style={{ marginLeft: 8, color: "#b00020", fontWeight: 600 }}>(Below 50%)</span>
+                <>
+                  <span style={{ marginLeft: 8, color: "#b00020", fontWeight: 600 }}>(Below 50%)</span>
+                  <span> Click <Link to="/clientDashboard">here</Link> to view shortages.</span>
+                </>
               )}
             </p>
 

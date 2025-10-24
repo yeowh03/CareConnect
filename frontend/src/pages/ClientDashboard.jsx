@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaFilter } from "react-icons/fa"; // ✅ Icon imports
+import { FaArrowLeft, FaFilter } from "react-icons/fa"; //  Icon imports
 import httpClient from "../httpClient";
 import "../styles/ClientDashboard.css";
 
@@ -53,12 +53,12 @@ export default function ClientDashboard() {
 
   return (
     <div className="client-dashboard-container">
-      {/* ✅ Back button (icon) */}
+      {/*  Back button (icon) */}
       <button className="icon-btn back-btn" onClick={() => navigate(-1)}>
         <FaArrowLeft size={18} />
       </button>
 
-      {/* ✅ Filter icon (top-right) */}
+      {/*  Filter icon (top-right) */}
       <div className="filter-icon-container">
         <button
           className="icon-btn filter-btn"

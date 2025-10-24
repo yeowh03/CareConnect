@@ -2,34 +2,41 @@ from flask import jsonify, request
 from ..models import Notification, db  # keep db import if you later need it
 from ..services.find_user import get_current_user
 from ..services.broadcast_observer import subject, SubscriptionObserver
-
+from ..services.notification_service import create_notification
 
 class NotificationController:
     """Encapsulates all notification-related request handling."""
-
     @staticmethod
-    def create_notification(message, receiver_email):
+    def create_notification(message, receiver_email, link=None):
+        try:
+            notif = create_notification(message, receiver_email, link)
+            return {"ok": True, "id": notif.id}, 201
+        except ValueError as ve:
+            return {"error": str(ve)}, 400
+        except Exception as e:
+            # Note: the service already committed/raised, but keep this guard.
+            return {"error": str(e)}, 500
+        
+    @staticmethod
+    def delete_notification(notification_id: int):
         """
-        Create a new notification record in the database.
-        Parameters:
-            message (str): The message content.
-            receiver_email (str): The email of the receiver.
+        Delete a single notification owned by the current user.
         """
-        if not message or not receiver_email:
-            return {"error": "message and receiver_email are required"}, 400
+        user = get_current_user()
+        if not user:
+            return jsonify({"message": "Unauthorized"}), 401
+
+        n = Notification.query.filter_by(id=notification_id, receiver_email=user.email).first()
+        if not n:
+            return jsonify({"message": "Notification not found"}), 404
 
         try:
-            new_notification = Notification(
-                message=message,
-                receiver_email=receiver_email,
-                is_read=False
-            )
-            db.session.add(new_notification)
+            db.session.delete(n)
             db.session.commit()
-            return {"ok": True, "id": new_notification.id}, 201
+            return jsonify({"ok": True, "id": notification_id}), 200
         except Exception as e:
             db.session.rollback()
-            return {"error": str(e)}, 500
+            return jsonify({"message": "Failed to delete notification", "error": str(e)}), 500
 
     # POST /api/broadcast/subscribe
     @staticmethod
@@ -98,7 +105,6 @@ class NotificationController:
         data = [{
             "id": n.id,
             "message": n.message,
-            "is_read": n.is_read,
             "created_at": n.created_at.isoformat(),
         } for n in rows]
 
