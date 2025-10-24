@@ -106,47 +106,6 @@ class InventoryController:
 
         return jsonify(summary)
 
-
-    # ----------------------------------------------------------
-    # 🔹 Manager Severe Shortage Details
-    # ----------------------------------------------------------
-    @staticmethod
-    def severe_shortage(location):
-        """Detailed shortages for a specific CC."""
-
-        items = (
-            db.session.query(
-                Request.request_item,
-                func.sum(Request.request_quantity).label("total_requested"),
-                func.sum(
-                    case(
-                        (Request.status == "Matched", Request.request_quantity),
-                        else_=0
-                    )
-                ).label("fulfilled_quantity"),
-                func.sum(Donation.donation_quantity).label("total_donated")
-            )
-            .outerjoin(Donation, Donation.donation_item == Request.request_item)
-            .filter(Request.location == location)
-            .group_by(Request.request_item)
-            .all()
-        )
-
-        severe = []
-        for i in items:
-            total_req = int(i.total_requested or 0)
-            fulfilled_qty = int(i.fulfilled_quantity or 0)
-            if total_req > 0 and fulfilled_qty < 0.5 * total_req:
-                severe.append({
-                    "item_name": i.request_item,
-                    "total_requested": total_req,
-                    "fulfilled_quantity": fulfilled_qty,
-                    "total_donated": int(i.total_donated or 0),
-                    "fulfillment_pct": round((fulfilled_qty / total_req) * 100, 1)
-                })
-
-        return jsonify(severe)
-
     @staticmethod
     def get_cc_inventory(location):
         """Return all inventory items for a CC, highlighting shortage items."""

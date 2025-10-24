@@ -324,7 +324,7 @@ export default function CommunityClubsMap({
               {selected.lowFulfilment && (
                 <>
                   <span style={{ marginLeft: 8, color: "#b00020", fontWeight: 600 }}>(Below 50%)</span>
-                  <span> Click <Link to="/clientDashboard">here</Link> to view shortages.</span>
+                  <span> Click <Link to={role=="C"?"/clientDashboard":"/managerDashboard"}>here</Link> to view shortages.</span>
                 </>
               )}
             </p>
