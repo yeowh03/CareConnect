@@ -29,13 +29,6 @@
   transform: scale(1.05);
 }
 
-/* ✅ Back button top-left */
-.back-btn {
-  position: absolute;
-  top: 1.2rem;
-  left: 1.5rem;
-}
-
 /* ✅ Filter icon top-right */
 .filter-icon-container {
   position: absolute;
@@ -73,14 +66,14 @@
 
 /* ✅ Page header */
 .page-title {
-  text-align: center;
+  text-align: left;
   font-size: 2rem;
-  color: #333;
+  color: #5b4f9b;
   margin-bottom: 0.5rem;
 }
 
 .page-description {
-  text-align: center;
+  text-align: left;
   color: #555;
   margin-bottom: 1.5rem;
 }
@@ -98,11 +91,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
-}
-
-.cc-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .cc-card-header {

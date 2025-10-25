@@ -34,7 +34,9 @@
   position: absolute;
   top: 1.2rem;
   left: 1.5rem;
+  z-index: 2; /* ensure it stays above the title if overlapping */
 }
+
 
 /* ✅ Filter button (top-right) */
 .filter-icon-container {
@@ -75,7 +77,15 @@
   cursor: pointer;
 }
 
-/* Rest of layout (unchanged) */
+/* Space between back button and selected CC name */
+.selected-cc-name {
+  margin-top: 4.2rem; /* ⬅️ creates space below back icon */
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #5b4f9b;
+  text-align: left;
+}
+
 .page-title { text-align: center; font-size: 2rem; color: #333; margin-bottom: 0.5rem; }
 .page-description { text-align: center; color: #555; margin-bottom: 1.5rem; }
 .cc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }

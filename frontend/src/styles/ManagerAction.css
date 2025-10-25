@@ -1,0 +1,92 @@
+/* === Page Layout === */
+.manager-action {
+  max-width: 1080px;
+  margin: 2rem auto;
+  padding: 2rem;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background-color: #ffffff;
+  color: #1f2937;
+  text-align: center;
+}
+
+/* === Page Title === */
+.manager-action-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #5b4f9b;
+  margin-bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.manager-action-title svg {
+  color: #7f6edb;
+  font-size: 1.3rem;
+}
+
+/* === Info Box === */
+.manager-info-box {
+  background-color: #eef2ff;
+  color: #3730a3;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid #c7d2fe;
+  box-shadow: 0 2px 4px rgba(59, 130, 246, 0.15);
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+/* === Button Group === */
+.manager-action-btns {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+}
+
+/* === Unified Button Style === */
+.manager-btn {
+  background-color: #7f6edb;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: background-color 0.25s, transform 0.1s, box-shadow 0.2s;
+}
+
+.manager-btn:hover {
+  background-color: #5b4f9b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.manager-btn:active {
+  transform: translateY(0);
+}
+
+.manager-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(91, 79, 155, 0.3);
+}
+
+/* === Responsive Layout === */
+@media (max-width: 640px) {
+  .manager-action {
+    padding: 1.2rem;
+  }
+
+  .manager-action-title {
+    font-size: 1.5rem;
+  }
+
+  .manager-btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}

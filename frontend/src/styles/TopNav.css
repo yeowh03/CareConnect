@@ -49,6 +49,30 @@
   transform: scale(1.05);
 }
 
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logo-text {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #4B0082;
+}
+
+.logo-img {
+  height: 40px;        /* adjust to desired size — 40–60px works well */
+  width: auto;         /* keeps aspect ratio */
+  border-radius: 50%;  /* keeps it circular */
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
 @media (max-width: 768px) {
   .nav-container {
     flex-direction: column;
@@ -67,3 +91,30 @@
     text-align: left;
   }
 }
+
+/* Badge container so badge can sit above the button */
+.nav-btn-badge-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.notif-badge-count {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: #e11d48; /* rose-600 */
+  color: white;
+  font-size: 11px;
+  line-height: 18px;
+  text-align: center;
+  font-weight: 700;
+  box-shadow: 0 0 0 2px white;
+}
+
+
+
+

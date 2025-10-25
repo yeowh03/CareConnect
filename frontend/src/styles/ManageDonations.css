@@ -1,0 +1,201 @@
+/* === Base Layout === */
+.manager-donations-container {
+  position: relative;
+  max-width: 1080px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #1f2937;
+}
+
+/* === Back Button === */
+.icon-btn.back-btn {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  background-color: #f3f3f3;
+  border: none;
+  border-radius: 50%;
+  color: #333;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.icon-btn.back-btn:hover {
+  background-color: #7f6edb;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* === Header === */
+.manager-donations-header {
+  margin-top: 4rem; /* below back button */
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #5b4f9b;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.4rem;
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #5b4f9b;
+  margin-bottom: 0.3rem;
+}
+
+.manager-info {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* === Error & Empty === */
+.error-box {
+  background: #fde2e2;
+  border: 1px solid #f6bcbc;
+  color: #7a0b0b;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.empty-text {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.donations-section {
+  position: relative;
+  margin: 0.5rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #1f2937;
+}
+
+/* === Section Titles (Pending / Approved) === */
+.section-title {
+  font-size: 0.5rem;
+  font-weight: 600;
+  color: #8879dc !important;
+  margin-bottom: 0.8rem;
+  position: relative;
+  padding-bottom: 0.4rem;
+  text-align: left !important; 
+}
+
+/* Add a thin line below section titles */
+.section-title::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px; /* subtle and clean */
+  background-color: #e5e7eb; /* light gray, less prominent than main title */
+  opacity: 0.7; /* make it lighter */
+}
+
+/* === Donation Grid === */
+.donations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* === Footer inside DonationCard === */
+.donation-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-pill {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.status-pill.pending {
+  background: #fff7e6;
+  border: 1px solid #ffe0b3;
+  color: #8a5300;
+}
+
+.status-pill.approved {
+  background: #e6f0ff;
+  border: 1px solid #c7d4ff;
+  color: #2848a5;
+}
+
+/* === Buttons for Actions === */
+.donation-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.reject-btn {
+  background: #fff;
+  color: #b00020;
+  border: 1px solid #f0c2c6;
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.reject-btn:hover {
+  background-color: #fdecec;
+  transform: translateY(-1px);
+}
+
+.approve-btn {
+  background: #111;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.approve-btn:hover {
+  background-color: #333;
+  transform: translateY(-1px);
+}
+
+/* === Loading === */
+.loading-text {
+  padding: 16px;
+  text-align: center;
+  color: #5b4f9b;
+  font-weight: 600;
+}
+
+/* === Responsive Layout === */
+@media (max-width: 640px) {
+  .manager-donations-container {
+    padding: 1.2rem;
+  }
+
+  .manager-donations-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .map-btn {
+    width: 100%;
+  }
+}

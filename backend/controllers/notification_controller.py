@@ -3,6 +3,7 @@ from ..models import Notification, db  # keep db import if you later need it
 from ..services.find_user import get_current_user
 from ..services.broadcast_observer import subject, SubscriptionObserver
 from ..services.notification_service import create_notification
+from sqlalchemy import func
 
 class NotificationController:
     """Encapsulates all notification-related request handling."""
@@ -109,16 +110,42 @@ class NotificationController:
         } for n in rows]
 
         return jsonify({"notifications": data}), 200
-        
+
     @staticmethod
-    def mark_all_read():
+    def get_unread_count():
+        """
+        Return the number of unread notifications for the current user.
+        Does NOT mark them as read.
+        """
         user = get_current_user()
         if not user:
             return jsonify({"message": "Unauthorized"}), 401
+
         try:
-            Notification.query.filter_by(receiver_email=user.email, viewed=False).update({"viewed": True})
+            unread_count = (
+                db.session.query(func.count(Notification.id))
+                .filter_by(receiver_email=user.email, viewed=False)
+                .scalar()
+            )
+            return jsonify({"unread": int(unread_count)}), 200
+        except Exception as e:
+            return jsonify({"message": "Failed to fetch unread count", "error": str(e)}), 500
+
+    @staticmethod
+    def mark_all_read():
+        """
+        Mark all notifications as read for the current user.
+        """
+        user = get_current_user()
+        if not user:
+            return jsonify({"message": "Unauthorized"}), 401
+
+        try:
+            Notification.query.filter_by(
+                receiver_email=user.email, viewed=False
+            ).update({"viewed": True})
             db.session.commit()
-            return jsonify({"ok": True}), 200
+            return jsonify({"message": "Marked all as read"}), 200
         except Exception as e:
             db.session.rollback()
-            return jsonify({"message": "Failed to mark notifications as read", "error": str(e)}), 500
+            return jsonify({"message": "Failed to mark read", "error": str(e)}), 500

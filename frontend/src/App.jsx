@@ -18,6 +18,7 @@ import CompleteRequest from "./pages/CompleteRequest.jsx";
 import Notifications from "./pages/Notifications.jsx";
 import ManagerDashboard from "./pages/ManagerDashboard.jsx";
 import ClientDashboard from "./pages/ClientDashboard.jsx";
+import Subscriptions from "./pages/Subscriptions.jsx";
 
 export default function App() {
 
@@ -45,6 +46,7 @@ export default function App() {
         <Route path="/notification" element={<Notifications/>} />
         <Route path="/managerDashboard" element={<ManagerDashboard/>}/>
         <Route path="/clientDashboard" element={<ClientDashboard/>}/>
+        <Route path="/subscriptions" element={<Subscriptions/>}/>
       </Routes>
     </BrowserRouter>
   );

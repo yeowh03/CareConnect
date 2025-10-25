@@ -27,6 +27,11 @@ def my_notifications():
 def delete_notification(notification_id: int):
     return c.delete_notification(notification_id)
 
+@notification_bp.route("/notifications/unread-count", methods=["GET"])
+def get_unread_count():
+    return c.get_unread_count()
+
 @notification_bp.route("/notifications/mark-read", methods=["POST"])
 def mark_all_read():
     return c.mark_all_read()
+
