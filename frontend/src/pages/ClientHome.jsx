@@ -100,121 +100,92 @@
 //   );
 // }
 
+// src/pages/ClientHome.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaArrowLeft, FaFilter } from "react-icons/fa"; //  Icon imports
-import httpClient from "../httpClient";
 import TopNav from "./TopNav";
-import "../styles/ClientDashboard.css";
+import httpClient from "../httpClient";
+import CommunityClubsMap from "./CommunityClubsMap";
+import "../styles/ClientHome.css";
 
-export default function ClientDashboard() {
-  const [ccList, setCcList] = useState([]);
-  const [selectedCC, setSelectedCC] = useState("");
-  const [showFilter, setShowFilter] = useState(false);
-  const [loading, setLoading] = useState(true);
+export default function ClientHome() {
+  const [query, setQuery] = useState("");
+  const [count, setCount] = useState(0);
+  const [profile, setProfile] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetchAllCCSummary();
+    const fetchData = async () => {
+      try {
+        const resp = await httpClient.get("/api/@me");
+        const pf = await httpClient.get(`/api/get_ClientProfile/${resp.data.email}`);
+        setProfile(pf.data);
+      } catch (error) {
+        alert("Not authenticated");
+        navigate("/login");
+      }
+    };
+    fetchData();
   }, []);
 
-  const fetchAllCCSummary = async () => {
-    setLoading(true);
-    try {
-      const res = await httpClient.get("/api/client/cc_summary");
-      console.log(res)
-      const sortedData = [...res.data].sort((a, b) =>
-        a.location.toLowerCase().localeCompare(b.location.toLowerCase())
-      );
-      console.log(sortedData);
-      setCcList(sortedData);
-    } catch (err) {
-      console.error("Error fetching client summary:", err);
-    } finally {
-      setLoading(false);
-    }
+  const handleEdit = () => {
+    navigate("/register", { state: { profile: profile } });
   };
-
-  const handleFilterChange = (e) => {
-    const location = e.target.value;
-    setSelectedCC(location);
-    setShowFilter(false);
-  };
-
-  if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="spinner"></div>
-        <p>Loading community data...</p>
-      </div>
-    );
-  }
-
-  const filteredList = selectedCC
-    ? ccList.filter((cc) => cc.location === selectedCC)
-    : ccList;
 
   return (
     <>
-    <TopNav role = "Client"/>
-    <div className="client-dashboard-container">
-      {/*  Filter icon (top-right) */}
-      <div className="filter-icon-container">
-        <button
-          className="icon-btn filter-btn"
-          onClick={() => setShowFilter((prev) => !prev)}
-        >
-          <FaFilter size={18} />
-        </button>
+      <TopNav role="Client" />
 
-        {showFilter && (
-          <div className="filter-dropdown">
-            <label htmlFor="ccFilter"><strong>Filter by CC:</strong></label>
-            <select id="ccFilter" value={selectedCC} onChange={handleFilterChange}>
-              <option value="">All CCs</option>
-              {ccList.map((cc, i) => (
-                <option key={i} value={cc.location}>
-                  {cc.location}
-                </option>
-              ))}
-            </select>
+      <div className="client-home">
+        <h2 className="client-home-title">
+          Home
+        </h2>
+        {!profile?.profile_complete && (
+          <div className="client-warning-box">
+            Your profile is incomplete. Please fill it in on the{" "}
+            <button className="link-button" onClick={handleEdit}>
+              registration
+            </button>{" "}
+            page.
           </div>
         )}
+
+        {/* Search Bar */}
+        <div className="client-search">
+          <input
+            type="text"
+            placeholder="Search Community Club by name…"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === "Escape" && setQuery("")}
+            className="client-search-input"
+          />
+          {query && (
+            <button
+              onClick={() => setQuery("")}
+              className="client-clear-btn"
+              title="Clear"
+            >
+              Clear
+            </button>
+          )}
+          <span className="client-result-count">
+            {count} result{count === 1 ? "" : "s"}
+          </span>
+        </div>
       </div>
 
-      <h1 className="page-title">Community Club Inventory</h1>
-      <p className="page-description">
-        View donation and request statistics for each CC. Items in shortage are highlighted.
-      </p>
-
-      <div className="cc-grid">
-        {filteredList.map((cc) => (
-          <div key={cc.location} className="cc-card">
-            <div className="cc-card-header">
-              <h2>{cc.location}</h2>
-            </div>
-            <div className="cc-card-content">
-              <p><strong>Total Donations:</strong> {cc.total_donations}</p>
-              <p><strong>Total Requests:</strong> {cc.total_requests}</p>
-              <p><strong>Fulfilled Requests:</strong> {cc.fulfilled_requests}</p>
-
-              {cc.severe_shortage_items && cc.severe_shortage_items.length > 0 ? (
-                <div className="shortage-warning">
-                  <p>⚠️ Severe Shortage Items:</p>
-                  <ul>
-                    {cc.severe_shortage_items.map((item, i) => (
-                      <li key={i}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              ) : (
-                <p className="no-shortage">✅ No severe shortages</p>
-              )}
-            </div>
-          </div>
-        ))}
+      {/* Reusable Map */}
+      <div className="client-map-container">
+        <CommunityClubsMap
+          query={query}
+          height="65vh"
+          onCountChange={setCount}
+          role={profile?.role}
+          monthlyIncome={profile?.monthly_income}
+          accountStatus={profile?.account_status}
+        />
       </div>
-    </div>
     </>
   );
 }
