@@ -218,6 +218,8 @@ class RequestController:
             # Check this CC's fulfilment after adding the new request
             check_and_broadcast_for_cc(location)
 
+            print("suxccc")
+
             return jsonify({
                 "id": req.id, "status": req.status, "location": req.location,
                 "request_item": req.request_item, "request_quantity": req.request_quantity,

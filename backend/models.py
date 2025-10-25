@@ -66,3 +66,4 @@ class Notification(db.Model):
     receiver_email = db.Column(db.String(255), db.ForeignKey("user.email", ondelete="CASCADE"), nullable=False)
     message = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now(timezone.utc))
+    viewed = db.Column(db.Boolean, default=False)

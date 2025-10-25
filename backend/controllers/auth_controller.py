@@ -66,6 +66,12 @@ class AuthController:
             # Link can point to whatever page managers use to review registrations
             create_notification(message=msg, receiver_email=m.email)
 
+        # welcome msg for new users
+        msg = (
+            f"Welcome to CareConnect, {user.name}. Our admins will verify your account shortly. Once verified, you will be able to donate and request (if applicable)."
+        ) 
+        create_notification(msg, user.email)
+
         session["user_email"] = user.email
         return jsonify({"ok": True}), 200
 

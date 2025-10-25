@@ -109,3 +109,16 @@ class NotificationController:
         } for n in rows]
 
         return jsonify({"notifications": data}), 200
+        
+    @staticmethod
+    def mark_all_read():
+        user = get_current_user()
+        if not user:
+            return jsonify({"message": "Unauthorized"}), 401
+        try:
+            Notification.query.filter_by(receiver_email=user.email, viewed=False).update({"viewed": True})
+            db.session.commit()
+            return jsonify({"ok": True}), 200
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({"message": "Failed to mark notifications as read", "error": str(e)}), 500

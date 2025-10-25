@@ -94,7 +94,7 @@ class ProfileController:
                 db.session.commit()
 
                 # Notify user: approved
-                msg = "Your registration has been approved. Welcome aboard!"
+                msg = "Your registration has been approved. Welcome aboard! View the map and select the CC to make a new donation or request (if applicable)."
                 create_notification(
                     message=msg,
                     receiver_email=email

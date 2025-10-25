@@ -26,3 +26,7 @@ def my_notifications():
 @notification_bp.route("/notifications/<int:notification_id>", methods=["DELETE"])
 def delete_notification(notification_id: int):
     return c.delete_notification(notification_id)
+
+@notification_bp.route("/notifications/mark-read", methods=["POST"])
+def mark_all_read():
+    return c.mark_all_read()

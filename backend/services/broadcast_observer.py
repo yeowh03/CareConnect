@@ -6,6 +6,7 @@ from threading import RLock
 from typing import List, Optional
 
 from ..models import db, Notification
+from ..services.notification_service import create_notification
 
 # ---------- Interfaces ----------
 class IObserver(ABC):
@@ -52,14 +53,7 @@ class SubscriptionObserver(IObserver):
         now = datetime.now(timezone.utc)
         msg = f"⚠️ {self.cc}: {desc}"
         try:
-            db.session.add(Notification(
-                receiver_email=self.user_email,
-                message=msg[:255],
-                link=None,
-                is_read=False,
-                created_at=now,
-            ))
-            db.session.commit()
+            create_notification(msg, self.user_email)
         except Exception:
             db.session.rollback()
             raise
