@@ -101,15 +101,15 @@ export default function Subscriptions() {
           ) : (
             <div className="subscriptions-grid">
               {subs.map((s) => (
-                <div key={s.id} className="subscription-card">
-                  <div className="subscription-name">{s.cc}</div>
-                  <button
-                    className="unsubscribe-btn"
-                    onClick={() => unsubscribe(s.cc)}
-                  >
-                    Unsubscribe
-                  </button>
-                </div>
+                <div key={s.id} className="subscription-item">
+                    <span className="subscription-name">{s.cc}</span>
+                    <button
+                        className="unsubscribe-btn"
+                        onClick={() => unsubscribe(s.cc)}
+                    >
+                        Unsubscribe
+                    </button>
+                    </div>
               ))}
             </div>
           )}
