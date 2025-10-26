@@ -147,14 +147,21 @@
 }
 
 /* === Status Pills (concise style) === */
+/* Centered, consistent status pill */
 .status-pill {
-  display: inline-block;
-  padding: 8px 6px;
-  border-radius: 6px;
-  font-size: 0.78rem;
-  font-weight: 600;
-  line-height: 1.2;
-  text-transform: capitalize;
+  display: inline-flex;             /* allows true centering */
+  align-items: center;              /* vertical center */
+  justify-content: center;          /* horizontal center */
+  padding: 6px 10px;                /* balanced padding */
+  min-height: 28px;                 /* keeps height consistent */
+  min-width: 44px;                  /* small pill still looks like a pill */
+  border-radius: 999px;             /* always pill-shaped */
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;                   /* prevents extra vertical jitter */
+  text-align: center;               /* fallback alignment */
+  white-space: nowrap;              /* keep long single words on one line */
+  letter-spacing: 0.2px;
 }
 
 .status-pill.pending {

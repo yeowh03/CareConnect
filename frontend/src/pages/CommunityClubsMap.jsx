@@ -352,6 +352,7 @@ import { useNavigate, Link } from "react-router-dom";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import httpClient from "../httpClient";
+import "../styles/CommunityClubsMap.css";
 
 export default function CommunityClubsMap({
   query = "",
@@ -626,70 +627,72 @@ export default function CommunityClubsMap({
       {/* Modal */}
       {selected && (
         <div
+          className="cc-modal-overlay"
           onClick={() => setSelected(null)}
-          style={{
-            position: "fixed",
-            inset: 0,
-            background: "rgba(0,0,0,0.55)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            zIndex: 9999,
-          }}
         >
           <div
+            className="cc-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cc-modal-title"
             onClick={(e) => e.stopPropagation()}
-            style={{
-              background: "white",
-              borderRadius: 12,
-              padding: "20px 24px",
-              width: "min(520px, 90vw)",
-              boxShadow: "0 10px 40px rgba(0,0,0,0.25)",
-            }}
           >
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-              <h2 style={{ margin: 0 }}>Community Club</h2>
+            <div className="cc-modal-header">
+              <h2 id="cc-modal-title" className="cc-modal-title">Community Club</h2>
               <button
-                onClick={() => setSelected(null)}
+                className="cc-modal-close"
                 aria-label="Close"
-                style={{ border: "none", background: "transparent", fontSize: 20, cursor: "pointer", lineHeight: 1 }}
+                onClick={() => setSelected(null)}
               >
                 ✕
               </button>
             </div>
 
-            <p style={{ marginTop: 12, fontSize: 18 }}>
-              <strong>Name:</strong> {selected.name}
-            </p>
+            <p><strong>Name:</strong> {selected.name}</p>
             {selected.address && (
-              <p style={{ marginTop: 6 }}>
-                <strong>Address:</strong> {selected.address}
-              </p>
+              <p><strong>Address:</strong> {selected.address}</p>
             )}
 
-            <p style={{ marginTop: 6 }}>
+            <p>
               <strong>Fulfilment rate:</strong> {formatPercent(selected.fulfilmentRate)}
               {selected.lowFulfilment && (
                 <>
-                  <span style={{ marginLeft: 8, color: "#b00020", fontWeight: 600 }}>(Below 50%)</span>
-                  <span> Click <Link to={role=="C"?"/clientDashboard":"/managerDashboard"}>here</Link> to view shortages.</span>
+                  <span className="cc-modal-low">(Below 50%)</span>
+                  <span>
+                    {" "}
+                    Click{" "}
+                    <Link to={role == "C" ? "/clientDashboard" : "/managerDashboard"}>
+                      here
+                    </Link>{" "}
+                    to view shortages.
+                  </span>
                 </>
               )}
             </p>
 
-            {role == "C" && accountStatus == "Confirmed" && (
-              <button onClick={() => navigate("/donationForm", { state: { cc: selected.name } })}>
-                Donate
-              </button>
-            )}
-            {role == "C" && monthlyIncome < 800 && accountStatus == "Confirmed" && (
-              <button onClick={() => navigate("/requestForm", { state: { cc: selected.name } })}>
-                Request
-              </button>
+            {(role == "C" && accountStatus == "Confirmed") && (
+              <div className="cc-modal-actions">
+                <button
+                  className="cc-btn"
+                  onClick={() => navigate("/donationForm", { state: { cc: selected.name } })}
+                >
+                  Donate
+                </button>
+
+                {monthlyIncome < 800 && (
+                  <button
+                    className="cc-btn"
+                    onClick={() => navigate("/requestForm", { state: { cc: selected.name } })}
+                  >
+                    Request
+                  </button>
+                )}
+              </div>
             )}
           </div>
         </div>
       )}
+
     </div>
   );
 }
