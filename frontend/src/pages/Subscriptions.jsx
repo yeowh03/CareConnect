@@ -66,6 +66,7 @@ export default function Subscriptions() {
       {role && <TopNav role={role === "M" ? "Manager" : "Client"} />}
       <div className="notifications-page">
         <h2 className="page-title">Community Club Subscriptions</h2>
+        <p>Subscribe for severe shortage announcements from your selected CCs</p>
 
         <div className="cc-select-row">
           <select
@@ -103,7 +104,7 @@ export default function Subscriptions() {
                 <div key={s.id} className="subscription-card">
                   <div className="subscription-name">{s.cc}</div>
                   <button
-                    className="btn-unsubscribe"
+                    className="unsubscribe-btn"
                     onClick={() => unsubscribe(s.cc)}
                   >
                     Unsubscribe
