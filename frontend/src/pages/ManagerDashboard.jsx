@@ -15,6 +15,24 @@ export default function ManagerDashboard() {
   const [showFilter, setShowFilter] = useState(false);
   const navigate = useNavigate();
 
+  // authenticate
+  useEffect(() => {
+    (async () => {
+      try {
+        const resp = await httpClient.get("/api/@me");
+        const user = resp.data;
+        if (!user || user.role !== "M") {
+          alert("Managers only");
+          navigate("/login");
+          return;
+        }
+      } catch (error) {
+        alert("Not authenticated");
+        navigate("/login");
+      }
+    })();
+  }, []);
+
   // Fetch all CC summaries initially
   useEffect(() => {
     fetchAllCCSummary();

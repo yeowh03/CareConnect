@@ -132,6 +132,18 @@ export default function ClientDashboard() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
+  // authenticate
+  useEffect(() => {
+    (async () => {
+      try {
+        const resp = await httpClient.get("/api/@me");
+      } catch (error) {
+        alert("Not authenticated");
+        navigate("/login");
+      }
+    })();
+  }, []);
+
   useEffect(() => {
     fetchAllCCSummary();
   }, []);

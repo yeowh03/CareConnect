@@ -224,7 +224,6 @@ function formatDate(iso) {
 }
 
 export default function ManageDonations() {
-  const [email, setEmail] = useState("");
   const [cc, setCc] = useState("");
   const [pending, setPending] = useState([]);
   const [approved, setApproved] = useState([]);
@@ -240,11 +239,10 @@ export default function ManageDonations() {
       const resp = await httpClient.get("/api/@me");
       const me = resp.data;
       if (!me || me.role !== "M") {
-        alert("Not authenticated as Manager!");
+        alert("Managers only");
         navigate("/login");
         return;
       }
-      setEmail(me.email);
 
       const prof = await httpClient.get(`/api/get_ManagerProfile/${me.email}`);
       setCc(prof.data.cc);
@@ -254,7 +252,7 @@ export default function ManageDonations() {
       setApproved(res.data.approved || []);
     } catch (e) {
       if (e?.response?.data?.message === "Not authenticated!") {
-        alert("Not authenticated as Manager!");
+        alert("Not authenticated");
         navigate("/login");
         return;
       }
