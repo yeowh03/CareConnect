@@ -14,6 +14,9 @@ class IObserver(ABC):
     def update(self, cc: str) -> None:
         """Called by Subject. Observer should PULL details from Subject."""
         raise NotImplementedError
+    
+    @abstractmethod
+    def is_interested_in(self, cc: str) -> bool: ...
 
 class ISubject(ABC):
     @abstractmethod
@@ -43,7 +46,7 @@ class SubscriptionObserver(IObserver):
     """
     user_email: str
     cc: str
-    _subject: "CCFulfilmentSubject"
+    _subject : ISubject
 
     def update(self, cc: str) -> None:
         if cc != self.cc:
@@ -58,6 +61,9 @@ class SubscriptionObserver(IObserver):
             db.session.rollback()
             raise
 
+    def is_interested_in(self, cc):
+        return self.cc == cc
+
 # ---------- Concrete Subject ----------
 class CCFulfilmentSubject(ISubject):
     """
@@ -69,17 +75,17 @@ class CCFulfilmentSubject(ISubject):
     """
     def __init__(self, threshold: float = 0.5):
         self._lock = RLock()
-        self._observers: List[SubscriptionObserver] = []
+        self._observers: List[IObserver] = []
         self.threshold = threshold
         self.desc: Optional[str] = None # last broadcast description
 
     # --- ISubject impl ---
-    def register(self, observer: SubscriptionObserver) -> None:
+    def register(self, observer: IObserver) -> None:
         with self._lock:
             if observer not in self._observers:
                 self._observers.append(observer)
 
-    def unregister(self, observer: SubscriptionObserver) -> None:
+    def unregister(self, observer: IObserver) -> None:
         with self._lock:
             try:
                 self._observers.remove(observer)
@@ -91,7 +97,7 @@ class CCFulfilmentSubject(ISubject):
         with self._lock:
             observers = list(self._observers)
         for obs in observers:
-            if isinstance(obs, SubscriptionObserver) and obs.cc == cc:
+            if obs.is_interested_in(cc):
                 obs.update(cc)
 
     def set_desc(self, desc: str) -> None:
@@ -102,14 +108,14 @@ class CCFulfilmentSubject(ISubject):
         return self.desc
 
     # --- Utilities for routes ---
-    def find(self, user_email: str, cc: str) -> Optional[SubscriptionObserver]:
+    def find(self, user_email: str, cc: str) -> Optional[IObserver]:
         with self._lock:
             for o in self._observers:
                 if o.user_email == user_email and o.cc == cc:
                     return o
         return None
 
-    def subscriptions_for_user(self, user_email: str) -> List[SubscriptionObserver]:
+    def subscriptions_for_user(self, user_email: str) -> List[IObserver]:
         with self._lock:
             return [o for o in self._observers if o.user_email == user_email]
 
