@@ -1,90 +1,57 @@
 # server/controllers/auth_controller.py
 from flask import jsonify, redirect, url_for, session, request
 from ..extensions import oauth
-from ..models import User, Client
-from ..extensions import db
-from ..services.find_user import find_user_by_email
-from ..services.password import hash_password, verify_password
-from ..services.notification_service import create_notification
+from ..services.auth_strategies import (
+    AuthenticationContext,
+    GoogleOAuthStrategy,
+    PasswordStrategy
+)
 
 
 class AuthController:
+    def __init__(self):
+        self.auth_context = AuthenticationContext()
+    
+    @staticmethod
     def start_google_login():
+        """Initiate Google OAuth flow"""
         redirect_uri = url_for("auth.auth_callback", _external=True)
         return oauth.google.authorize_redirect(redirect_uri)
 
+    @staticmethod
     def google_callback(frontend_origin: str):
-        oauth.google.authorize_access_token()
-        userinfo_endpoint = oauth.google.load_server_metadata().get("userinfo_endpoint") \
-            or "https://openidconnect.googleapis.com/v1/userinfo"
-        info = oauth.google.get(userinfo_endpoint).json()
-        email = info.get("email")
-        if not email:
-            return jsonify({"error": "No email from Google"}), 400
-
-        user = find_user_by_email(email)
-        if not user:
-            user = User(email=email, name=info.get("name"), role="C")
-            db.session.add(user); db.session.commit()
-            client = Client(gmail_acc=True, email=email)
-            db.session.add(client); db.session.commit()
+        """Handle Google OAuth callback using strategy pattern"""
+        auth_context = AuthenticationContext()
+        auth_context.set_strategy(GoogleOAuthStrategy())
+        
+        result, status_code = auth_context.authenticate({})
+        
+        if status_code == 200 or status_code == 201:
+            redirect_path = result.get("redirect", "/clienthome")
+            return redirect(frontend_origin + redirect_path)
         else:
-            user.name = user.name or info.get("name")
-            db.session.commit()
+            return jsonify(result), status_code
 
-        session["user_email"] = user.email
-        return redirect(frontend_origin + "/clienthome")
-
+    @staticmethod
     def register_user(data):
-        try:
-            mi = float(data["monthlyIncome"])
-            if mi < 0: raise ValueError
-        except Exception:
-            return jsonify({"error": "monthly_income must be a non-negative number"}), 400
+        """Register user using password strategy"""
+        auth_context = AuthenticationContext()
+        auth_context.set_strategy(PasswordStrategy())
+        
+        result, status_code = auth_context.create_user(data)
+        return jsonify(result), status_code
 
-        if User.query.get(data["email"]):
-            return jsonify({"error": "Email already registered"}), 409
-
-        phash = hash_password(data["password"])
-        user = User(
-            name=data["name"], contact_number=data["contactNumber"], role="C",
-            email=data["email"], password_hash=phash,
-        )
-        db.session.add(user); db.session.commit()
-
-        client = Client(monthly_income=float(data["monthlyIncome"]), email=data["email"])
-        db.session.add(client); db.session.commit()
-
-        # notify managers
-        managers = User.query.filter(User.role == "M").all()
-        if managers:
-            msg = (
-                f"New client registration from {user.name} ({user.email}) "
-                "is awaiting verification."
-            )
-        for m in managers:
-            # Link can point to whatever page managers use to review registrations
-            create_notification(message=msg, receiver_email=m.email)
-
-        # welcome msg for new users
-        msg = (
-            f"Welcome to CareConnect, {user.name}. Our admins will verify your account shortly. Once verified, you will be able to donate and request (if applicable)."
-        ) 
-        create_notification(msg, user.email)
-
-        session["user_email"] = user.email
-        return jsonify({"ok": True}), 200
-
+    @staticmethod
     def login_with_password(data):
-        email, password = data.get("email"), data.get("password")
-        if not email or not password:
-            return jsonify({"error": "email and password are required"}), 400
-        user = User.query.get(email)
-        if not user or not user.password_hash or not verify_password(password, user.password_hash):
-            return jsonify({"error": "Invalid credentials"}), 401
-        session["user_email"] = user.email
-        return jsonify({"role": user.role}), 200
+        """Login using password strategy"""
+        auth_context = AuthenticationContext()
+        auth_context.set_strategy(PasswordStrategy())
+        
+        result, status_code = auth_context.authenticate(data)
+        return jsonify(result), status_code
 
+    @staticmethod
     def logout_user():
+        """Logout user (strategy-agnostic)"""
         session.clear()
         return jsonify({"ok": True}), 200
