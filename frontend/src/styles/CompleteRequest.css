@@ -1,0 +1,146 @@
+/* === Page Container === */
+.complete-requests-container {
+  position: relative;
+  max-width: 1080px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #1f2937;
+}
+
+/* === Back Button === */
+.icon-btn.back-btn {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  background-color: #f3f3f3;
+  border: none;
+  border-radius: 50%;
+  color: #333;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.icon-btn.back-btn:hover {
+  background-color: #7f6edb;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* === Header === */
+.complete-header {
+  margin-top: 3.8rem; /* ⬅️ ensures title is below back button */
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.page-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #5b4f9b;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.4rem;
+}
+
+.manager-info {
+  font-size: 0.95rem;
+  color: #666;
+}
+
+/* === Loading and Error States === */
+.loading-text {
+  text-align: center;
+  color: #5b4f9b;
+  font-weight: 600;
+  margin-top: 2rem;
+}
+
+.error-box {
+  background: #fde2e2;
+  border: 1px solid #f6bcbc;
+  color: #7a0b0b;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.empty-box {
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  color: #475569;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/* === Table Styling === */
+.table-container {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.data-table th {
+  background-color: #E6E6FA !important;
+  color: #4B0082 !important;
+  font-weight: 600;
+}
+
+.data-table tr:hover {
+  background-color: #f8f9ff;
+}
+
+/* === Complete Button === */
+.complete-btn {
+  background-color: #7f6edb;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.complete-btn:hover {
+  background-color: #5b4f9b;
+  transform: translateY(-1px);
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .complete-requests-container {
+    padding: 1.2rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.85rem;
+  }
+}

@@ -1,0 +1,233 @@
+/* === Layout === */
+.page-container {
+  max-width: 1080px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: "Inter", sans-serif;
+  color: #1f2937;
+  background-color: #ffffff;
+}
+
+/* === Header === */
+.page-header {
+  display: flex;
+  color: #5b4f9b;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.signed-in {
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+/* === Filters === */
+.filters-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 12px;
+  margin-top: 16px;
+  align-items: center;
+}
+
+.filters-bar select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  font-size: 0.9rem;
+  color: #1f2937;
+  transition: border-color 0.2s;
+}
+
+.filters-bar select:focus {
+  border-color: #1c4e80;
+  outline: none;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-buttons button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.filter-buttons button:hover {
+  background: #e0f2fe;
+  border-color: #bae6fd;
+}
+
+/* === Empty State === */
+.empty-box {
+  margin-top: 24px;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px dashed #cbd5e1;
+  background: #f8fafc;
+  color: #475569;
+  text-align: center;
+}
+
+/* === Request Cards === */
+.requests-grid {
+  margin-top: 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.request-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s, transform 0.1s;
+}
+
+.request-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.request-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.request-title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.request-qty {
+  font-weight: 500;
+  color: #64748b;
+}
+
+.request-location {
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.request-notes {
+  font-size: 0.9rem;
+  color: #334155;
+  margin-top: 8px;
+  white-space: pre-wrap;
+}
+
+/* === Bottom Row === */
+.request-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.request-meta {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.request-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* === Buttons === */
+.btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.btn-secondary {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #1c4e80;
+}
+
+.btn-secondary:hover {
+  background: #e0f2fe;
+}
+
+.btn-danger {
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+  color: #991b1b;
+}
+
+.btn-danger:hover {
+  background: #fee2e2;
+}
+
+/* === Status Pills === */
+/* === Status Pills (concise, modern style) === */
+
+.status-pill {
+  display: inline-flex;             /* allows true centering */
+  align-items: center;              /* vertical center */
+  justify-content: center;          /* horizontal center */
+  padding: 6px 10px;                /* balanced padding */
+  min-height: 28px;                 /* keeps height consistent */
+  min-width: 44px;                  /* small pill still looks like a pill */
+  border-radius: 999px;             /* always pill-shaped */
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;                   /* prevents extra vertical jitter */
+  text-align: center;               /* fallback alignment */
+  white-space: nowrap;              /* keep long single words on one line */
+  letter-spacing: 0.2px;
+}
+
+.status-pill.pending {
+  color: #1d4ed8; /* Deep blue */
+  background-color: #e0ebff;
+}
+
+.status-pill.matched {
+  color: #047857; /* Emerald green */
+  background-color: #dcfce7;
+}
+
+.status-pill.expired {
+  color: #b91c1c; /* Red tone */
+  background-color: #fee2e2;
+}
+
+.status-pill.completed {
+  color: #1e293b; /* Neutral slate */
+  background-color: #e2e8f0;
+}
+
+.status-pill.default {
+  color: #334155;
+  background-color: #f1f5f9;
+}
+
+/* === Error Box === */
+.error-box {
+  color: #b91c1c;
+  background: #fee2e2;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #fecaca;
+  margin-top: 12px;
+}

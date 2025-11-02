@@ -1,0 +1,193 @@
+/* === Layout === */
+.page-container {
+  max-width: 1080px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  font-family: "Inter", sans-serif;
+  color: #1f2937;
+  background-color: #ffffff;
+}
+
+/* === Header === */
+.page-header {
+  display: flex;
+  color: #5b4f9b;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.page-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #5b4f9b;
+}
+
+.user-email {
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+/* === Filters === */
+.filters-bar {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  align-items: end;
+  margin-bottom: 1.2rem;
+}
+
+.filters-bar label {
+  display: block;
+  font-size: 0.85rem;
+  margin-bottom: 6px;
+  color: #334155;
+}
+
+.filters-bar select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #fff;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+
+.filters-bar select:focus {
+  border-color: #1c4e80;
+  outline: none;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-buttons button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.filter-buttons button:hover {
+  background: #e0f2fe;
+  border-color: #bae6fd;
+}
+
+/* === Error Box === */
+.error-box {
+  background: #fee2e2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+/* === Empty State === */
+.empty-box {
+  padding: 20px;
+  text-align: center;
+  color: #475569;
+  border: 1px dashed #cbd5e1;
+  background: #f8fafc;
+  border-radius: 12px;
+}
+
+/* === Donations Grid === */
+.donations-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+/* === Footer Section === */
+.donation-footer {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* === Buttons === */
+.btn {
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.btn-secondary {
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  color: #1c4e80;
+}
+
+.btn-secondary:hover {
+  background: #e0f2fe;
+}
+
+.btn-danger {
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+  color: #991b1b;
+}
+
+.btn-danger:hover {
+  background: #fee2e2;
+}
+
+/* === Status Pills (concise style) === */
+/* Centered, consistent status pill */
+.status-pill {
+  display: inline-flex;             /* allows true centering */
+  align-items: center;              /* vertical center */
+  justify-content: center;          /* horizontal center */
+  padding: 6px 10px;                /* balanced padding */
+  min-height: 28px;                 /* keeps height consistent */
+  min-width: 44px;                  /* small pill still looks like a pill */
+  border-radius: 999px;             /* always pill-shaped */
+  font-size: 0.8rem;
+  font-weight: 700;
+  line-height: 1;                   /* prevents extra vertical jitter */
+  text-align: center;               /* fallback alignment */
+  white-space: nowrap;              /* keep long single words on one line */
+  letter-spacing: 0.2px;
+}
+
+.status-pill.pending {
+  color: #1d4ed8;
+  background-color: #e0ebff;
+}
+
+.status-pill.approved {
+  color: #047857;
+  background-color: #dcfce7;
+}
+
+.status-pill.rejected {
+  color: #b91c1c;
+  background-color: #fee2e2;
+}
+
+.status-pill.added {
+  color: #1c1917;
+  background-color: #f3f4f6;
+}
+
+/* === Donation Actions === */
+.donation-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
