@@ -85,10 +85,14 @@ class SubscriptionObserver(IObserver):
     _notification_strategy: DatabaseNotificationStrategy = DatabaseNotificationStrategy()
 
     def update(self, cc: str) -> None:
+        # Only process notifications for subscribed CC
         if cc != self.cc:
             return # ignore broadcasts for other CCs
+        
+        # Pull the latest description from subject (pull model)
         desc = self._subject.get_desc(cc) or ""
-        # Create a Notification for this user
+        
+        # Create notification for this user
         now = datetime.now(timezone.utc)
         msg = f"⚠️ {self.cc}: {desc}"
         try:
@@ -128,9 +132,11 @@ class CCFulfilmentSubject(ISubject):
                 pass
 
     def notify(self, cc: str) -> None:
-    # copy snapshot to avoid mutation issues while iterating
+        # Create snapshot of observers to avoid mutation issues during iteration
         with self._lock:
             observers = list(self._observers)
+        
+        # Notify all observers interested in this CC
         for obs in observers:
             if obs.is_interested_in(cc):
                 obs.update(cc)
@@ -162,14 +168,16 @@ class CCFulfilmentSubject(ISubject):
             cc (str): Community club name.
             fulfilment_rate (float): Current fulfillment rate (0.0 to 1.0).
         """
+        # Only broadcast if fulfillment rate is below threshold (default 50%)
         if fulfilment_rate < self.threshold:
-            # Compose a friendly description (what observers will PULL)
+            # Set description that observers will pull when notified
             self.set_desc(
                 (
                     f"Fulfilment rate is {fulfilment_rate:.0%}. "
                     "Below target: Your donation is needed!"
                 )
             )
+            # Notify all observers subscribed to this CC
             self.notify(cc)
     
 subject = CCFulfilmentSubject()

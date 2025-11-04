@@ -31,48 +31,55 @@ def run_cleanup_expired_items_once() -> Dict[str, object]:
     """
     sg_today = datetime.now(SG_TZ).date()
 
+    # Find donations that have expired (past their expiry date in Singapore timezone)
     expired_dons: List[Donation] = Donation.query.filter(
         Donation.expiryDate.isnot(None),
         Donation.expiryDate < sg_today
     ).all()
 
+    # Early return if no expired donations found
     if not expired_dons:
         return {"job": "cleanup_expired_items", "status": "ok", "items_removed": 0, "affected_requests": []}
 
-    affected_request_ids = set()
+    affected_request_ids = set()  # Track requests affected by item removal
     items_removed = 0
 
+    # Process each expired donation
     for d in expired_dons:
         items: List[Item] = Item.query.filter_by(donation_id=d.id).all()
+        
+        # Remove all items from this expired donation
         for it in items:
-            # Remove reservations for this item
+            # Find and remove reservations for this item
             reservations = Reservation.query.filter_by(item_id=it.id).all()
             for res in reservations:
                 req = Request.query.get(res.request_id)
                 if req:
-                    # Reduce allocation and possibly revert status to Pending
+                    # Reduce allocation count and revert to Pending if was Matched
                     req.allocation = max(0, (req.allocation or 0) - 1)
                     if req.status == "Matched":
-                        req.status = "Pending"
+                        req.status = "Pending"  # Allow re-matching with other items
                         req.matched_at = None
                     affected_request_ids.add(req.id)
-                db.session.delete(res)
+                db.session.delete(res)  # Remove the reservation
 
-            db.session.delete(it)
+            db.session.delete(it)  # Remove the expired item
             items_removed += 1
 
     db.session.commit()
 
-    # run matching
+    # Run allocation algorithm to re-match affected requests
     run_allocation()
 
-    # Identify affected CCs and broadcast if needed
+    # Check fulfillment rates for affected CCs and broadcast if low
     affected_ccs = set()
     from ..models import Request
     for rid in affected_request_ids:
         req = Request.query.get(rid)
         if req and req.location:
             affected_ccs.add(req.location)
+    
+    # Broadcast low fulfillment alerts for affected community clubs
     for cc in affected_ccs:
         check_and_broadcast_for_cc(cc)
 

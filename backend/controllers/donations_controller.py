@@ -5,6 +5,7 @@ approval workflow, and inventory management for donated items.
 """
 
 from flask import jsonify, request
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from ..extensions import db
 from ..models import Donation, Item, Request, Reservation
 from ..services.find_user import get_current_user, find_manager_by_email
@@ -185,6 +186,12 @@ class DonationController:
 
         try:
             public_url = upload_image_to_supabase(image_file, supabase, bucket)
+        except FileNotFoundError:
+            return jsonify({"message": "Image file not found or corrupted"}), 400
+        except PermissionError:
+            return jsonify({"message": "Permission denied accessing image file"}), 403
+        except ConnectionError:
+            return jsonify({"message": "Failed to connect to image storage service"}), 503
         except Exception as e:
             return jsonify({"message": f"Image upload failed: {e}"}), 400
 

@@ -45,30 +45,33 @@ class CCController:
             tokens = [t for t in q.split() if t]
             markers = [m for m in markers if all(t in m["name"].lower() for t in tokens)]
 
-        # --- Fulfilment rate per CC ---
-        # We assume Request.location stores the CC name chosen in the form (your frontend passes cc name).
+        # Calculate fulfillment rates for each community club
+        # Request.location stores the CC name selected by users
         names = [m["name"] for m in markers]
         if names:
             for m in markers:
                 cc_name = m["name"]
 
+                # Aggregate request quantities and allocations for this CC
                 req_row = db.session.query(
                         func.sum(Request.request_quantity),
                         func.sum(Request.allocation)
                 ).filter(Request.location == cc_name).first()
 
-                r_qty = req_row[0] if req_row[0] else 0
-                r_alloc = req_row[1] if req_row[1] else 0
+                r_qty = req_row[0] if req_row[0] else 0    # Total requested
+                r_alloc = req_row[1] if req_row[1] else 0  # Total allocated
 
+                # Calculate fulfillment rate (100% if no requests)
                 if r_qty == 0:
-                    rate = 1
+                    rate = 1.0  # 100% fulfillment when no requests
                 else:
                     rate = round(r_alloc / r_qty, 2)
                 
-                m["fulfilmentRate"] = rate  # e.g., 0.67 or None
+                # Add fulfillment metrics to marker data
+                m["fulfilmentRate"] = rate  # e.g., 0.67 (67%)
                 m["lowFulfilment"] = (rate is not None) and (rate < 0.5) and req_row[0]
         else:
-            # no names => no markers => nothing to annotate
+            # No markers found, skip fulfillment calculation
             pass
 
         return jsonify({"markers": markers})

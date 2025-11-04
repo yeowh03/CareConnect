@@ -5,11 +5,12 @@ broadcast subscriptions using the Observer pattern, and notification management.
 """
 
 from flask import jsonify, request
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+from sqlalchemy import func
 from ..models import Notification, db  # keep db import if you later need it
 from ..services.find_user import get_current_user
 from ..broadcast_observer import subject, SubscriptionObserver
 from ..services.notification_strategies import DatabaseNotificationStrategy
-from sqlalchemy import func
 
 class NotificationController:
     """Controller for notification and broadcast operations.
@@ -64,9 +65,15 @@ class NotificationController:
             db.session.delete(n)
             db.session.commit()
             return jsonify({"ok": True, "id": notification_id}), 200
+        except IntegrityError as e:
+            db.session.rollback()
+            return jsonify({"message": "Database constraint violation while deleting notification", "error": str(e)}), 409
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            return jsonify({"message": "Database error while deleting notification", "error": str(e)}), 500
         except Exception as e:
             db.session.rollback()
-            return jsonify({"message": "Failed to delete notification", "error": str(e)}), 500
+            return jsonify({"message": "Unexpected error while deleting notification", "error": str(e)}), 500
 
     # POST /api/broadcast/subscribe
     @staticmethod
@@ -181,8 +188,10 @@ class NotificationController:
                 .scalar()
             )
             return jsonify({"unread": int(unread_count)}), 200
+        except SQLAlchemyError as e:
+            return jsonify({"message": "Database error while fetching unread count", "error": str(e)}), 500
         except Exception as e:
-            return jsonify({"message": "Failed to fetch unread count", "error": str(e)}), 500
+            return jsonify({"message": "Unexpected error while fetching unread count", "error": str(e)}), 500
 
     @staticmethod
     def mark_all_read():

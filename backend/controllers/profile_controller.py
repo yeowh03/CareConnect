@@ -5,6 +5,7 @@ registration approval workflow, and user authentication status.
 """
 
 from flask import jsonify, session
+from sqlalchemy.exc import SQLAlchemyError, IntegrityError
 from ..extensions import db
 from ..models import User, Client, Manager
 from ..services.find_user import get_current_user, find_client_by_email, find_manager_by_email

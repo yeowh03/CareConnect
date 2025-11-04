@@ -9,5 +9,7 @@ from ..controllers.community_controller import CCController as c
 
 community_bp = Blueprint("community", __name__, url_prefix="/api")
 
+# Get community clubs with fulfillment rates and search functionality
 @community_bp.get("/community-clubs")
-def community_clubs(): return c.community_clubs()
+def community_clubs(): 
+    return c.community_clubs()

@@ -34,23 +34,23 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # Sessions & CORS
+    # Initialize session management and CORS
     init_session(app, Config.SESSION_TYPE, Config.REDIS_URL, Config.ENV)
     init_cors(app, Config.FRONTEND_ORIGIN)
 
-    # --- Database via Factory (bind the shared db) ---
-    db_type = "postgres"  # "sqlite" or "postgres"
+    # Initialize database using Factory pattern
+    db_type = "postgres"  # Switch between "sqlite" and "postgres"
     impl = DatabaseFactory.getDatabase(db_type)
-    impl.init_app(app, db)  # ← binds the shared db instance
+    impl.init_app(app, db)  # Bind the shared SQLAlchemy instance
 
-    # Create tables
+    # Create database tables if they don't exist
     with app.app_context():
         db.create_all()
 
-    # OAuth
+    # Initialize Google OAuth
     init_oauth(app, Config.GOOGLE_CLIENT_ID, Config.GOOGLE_CLIENT_SECRET)
 
-    # Blueprints
+    # Register all API route blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(profile_bp)
     app.register_blueprint(donations_bp)
@@ -60,19 +60,22 @@ def create_app():
     app.register_blueprint(jobs_bp)
     app.register_blueprint(inventory_bp)
 
+    # Legacy daemon implementations (commented out)
     # start_allocator_daemon(app, every_minutes=1)
     # start_cleanup_expired_items_daemon(app, run_at_hour_sg=0, run_at_minute_sg=0)
     # start_expire_matched_requests_daemon(app, run_at_hour_sg=0, run_at_minute_sg=0)
 
+    # Start background job schedulers
     JobsController.start_schedulers(app)
     return app
 
 app = create_app()
 
+# Run the application if executed directly
 if __name__ == "__main__":
     app.run(
-        host="0.0.0.0",
-        port=int(os.getenv("FLASK_RUN_PORT", "5000")),
-        debug=(Config.ENV != "production"),
-        use_reloader=False,
+        host="0.0.0.0",  # Accept connections from any IP
+        port=int(os.getenv("FLASK_RUN_PORT", "5000")),  # Default to port 5000
+        debug=(Config.ENV != "production"),  # Enable debug mode in development
+        use_reloader=False,  # Disable reloader to prevent scheduler conflicts
     )

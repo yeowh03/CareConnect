@@ -61,24 +61,30 @@ class GoogleOAuthStrategy(AuthenticationStrategy):
             tuple: Authentication result and HTTP status code.
         """
         try:
+            # Exchange authorization code for access token
             oauth.google.authorize_access_token()
+            
+            # Get user info endpoint from Google's metadata
             userinfo_endpoint = oauth.google.load_server_metadata().get("userinfo_endpoint") \
                 or "https://openidconnect.googleapis.com/v1/userinfo"
+            
+            # Fetch user information from Google
             info = oauth.google.get(userinfo_endpoint).json()
             email = info.get("email")
             
             if not email:
                 return {"error": "No email from Google"}, 400
             
+            # Check if user already exists
             user = find_user_by_email(email)
             if user:
-                # Update name if not set
+                # Update name if not previously set
                 user.name = user.name or info.get("name")
                 db.session.commit()
                 session["user_email"] = user.email
                 return {"authenticated": True, "user": user, "redirect": "/clienthome"}, 200
             else:
-                # Auto-create user for Google OAuth
+                # Auto-create new user for Google OAuth
                 return self.create_user(info)
                 
         except Exception as e:
@@ -157,7 +163,7 @@ class PasswordStrategy(AuthenticationStrategy):
             tuple: Registration result and HTTP status code.
         """
         try:
-            # Validate monthly income
+            # Validate monthly income input
             try:
                 mi = float(data["monthlyIncome"])
                 if mi < 0:
@@ -165,7 +171,7 @@ class PasswordStrategy(AuthenticationStrategy):
             except (KeyError, ValueError, TypeError):
                 return {"error": "Monthly income must be a non-negative number"}, 400
             
-            # Check if user already exists
+            # Check for duplicate email registration
             if User.query.get(data["email"]):
                 return {"error": "Email already registered"}, 409
             
