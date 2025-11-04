@@ -82,7 +82,7 @@ class GoogleOAuthStrategy(AuthenticationStrategy):
                 user.name = user.name or info.get("name")
                 db.session.commit()
                 session["user_email"] = user.email
-                return {"authenticated": True, "user": user, "redirect": "/clienthome"}, 200
+                return {"authenticated": True, "redirect": "/clienthome"}, 200
             else:
                 # Auto-create new user for Google OAuth
                 return self.create_user(info)
@@ -118,7 +118,7 @@ class GoogleOAuthStrategy(AuthenticationStrategy):
             notification_strategy.create_notification(msg, user.email)
             
             session["user_email"] = user.email
-            return {"authenticated": True, "user": user, "redirect": "/clienthome"}, 201
+            return {"authenticated": True, "redirect": "/clienthome"}, 201
             
         except Exception as e:
             db.session.rollback()
@@ -214,8 +214,8 @@ class PasswordStrategy(AuthenticationStrategy):
             notification_strategy.create_notification(msg, user.email)
             
             session["user_email"] = user.email
-            return {"authenticated": True, "user": user}, 201
-            
+            return {"authenticated": True}, 201
+        
         except Exception as e:
             db.session.rollback()
             return {"error": f"Registration failed: {str(e)}"}, 500

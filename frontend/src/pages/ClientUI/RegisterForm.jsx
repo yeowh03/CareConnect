@@ -286,7 +286,7 @@ export default function Register() {
         contactNumber,
         monthlyIncome,
       });
-      if (resp.data.ok) {
+      if (resp.data.authenticated) {
         alert("Registration successful! Please wait for manager approval.");
         navigate("/clienthome");
       }
