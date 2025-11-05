@@ -215,7 +215,6 @@ class DonationController:
 
         except Exception as e:
             # Soft-fail the notifications (donation was already created successfully)
-            # You can log this instead of printing in production.
             print("Manager notification failed:", e)
 
         return jsonify({

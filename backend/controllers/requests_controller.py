@@ -79,7 +79,14 @@ class RequestController:
         new_loc  = (data.get("location") or r.location).strip()
 
         if not new_cat:  return jsonify({"message": "request_category is required"}), 400
+        
+        # Validate category against allowed values
+        valid_categories = ["Food", "Drinks", "Furnitures", "Electronics", "Essentials"]
+        if new_cat not in valid_categories:
+            return jsonify({"message": f"request_category must be one of: {', '.join(valid_categories)}"}), 400
+            
         if not new_item: return jsonify({"message": "request_item is required"}), 400
+        if len(new_item) > 120: return jsonify({"message": "request_item must be 120 characters or less"}), 400
         if new_qty < 1:  return jsonify({"message": "request_quantity must be >= 1"}), 400
         if not new_loc:  return jsonify({"message": "location is required"}), 400
 
@@ -239,7 +246,14 @@ class RequestController:
         location = (data.get("location") or "").strip()
 
         if not request_category: return jsonify({"message": "request_category is required"}), 400
+        
+        # Validate category against allowed values
+        valid_categories = ["Food", "Drinks", "Furnitures", "Electronics", "Essentials"]
+        if request_category not in valid_categories:
+            return jsonify({"message": f"request_category must be one of: {', '.join(valid_categories)}"}), 400
+            
         if not request_item: return jsonify({"message": "request_item is required"}), 400
+        
         try:
             request_quantity = int(request_quantity)
             if request_quantity < 1: raise ValueError

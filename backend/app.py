@@ -9,11 +9,7 @@ from flask import Flask
 from backend.config import Config
 from backend.extensions import db, init_cors, init_session, init_oauth
 from backend.database.database_factory import DatabaseFactory
-# from backend.utils import start_cleanup_expired_items_daemon
-# from backend.utils import start_allocator_daemon
-# from backend.utils import start_expire_matched_requests_daemon
 
-# import blueprints AFTER config/factory lines is fine
 from backend.routes.auth_routes import auth_bp
 from backend.routes.profile_routes import profile_bp
 from backend.routes.donations_routes import donations_bp
@@ -59,11 +55,6 @@ def create_app():
     app.register_blueprint(notification_bp)
     app.register_blueprint(jobs_bp)
     app.register_blueprint(inventory_bp)
-
-    # Legacy daemon implementations (commented out)
-    # start_allocator_daemon(app, every_minutes=1)
-    # start_cleanup_expired_items_daemon(app, run_at_hour_sg=0, run_at_minute_sg=0)
-    # start_expire_matched_requests_daemon(app, run_at_hour_sg=0, run_at_minute_sg=0)
 
     # Start background job schedulers
     JobsController.start_schedulers(app)
