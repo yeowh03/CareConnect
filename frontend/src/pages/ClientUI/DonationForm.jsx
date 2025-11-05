@@ -35,7 +35,6 @@ export default function DonationForm() {
     location: ccFromState,   // will be overwritten by API when editing
   });
 
-  // 1) Check auth (same pattern you already use)
   useEffect(() => {
     (async () => {
       try {
