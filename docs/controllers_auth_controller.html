@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.controllers.auth_controller</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.controllers.html" class="white">controllers</a>.auth_controller</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Ccontrollers%5Cauth_controller.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\controllers\auth_controller.py</a></td></tr></table>
+    <p><span class="code">Authentication&nbsp;Controller&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;handles&nbsp;user&nbsp;authentication&nbsp;using&nbsp;the&nbsp;Strategy&nbsp;pattern,<br>
+supporting&nbsp;both&nbsp;Google&nbsp;OAuth&nbsp;and&nbsp;password-based&nbsp;authentication.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.controllers.auth_controller.html#AuthController">AuthController</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="AuthController">class <strong>AuthController</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Controller&nbsp;class&nbsp;for&nbsp;handling&nbsp;authentication&nbsp;operations.<br>
+&nbsp;<br>
+Uses&nbsp;the&nbsp;Strategy&nbsp;pattern&nbsp;to&nbsp;support&nbsp;multiple&nbsp;authentication&nbsp;methods<br>
+including&nbsp;Google&nbsp;OAuth&nbsp;and&nbsp;password-based&nbsp;authentication.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="AuthController-__init__"><strong>__init__</strong></a>(self)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="AuthController-google_callback"><strong>google_callback</strong></a>(frontend_origin: str)</dt><dd><span class="code">Handle&nbsp;Google&nbsp;OAuth&nbsp;callback&nbsp;using&nbsp;strategy&nbsp;pattern.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;frontend_origin&nbsp;(str):&nbsp;Frontend&nbsp;URL&nbsp;for&nbsp;redirect&nbsp;after&nbsp;authentication.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Response:&nbsp;Redirect&nbsp;to&nbsp;frontend&nbsp;or&nbsp;JSON&nbsp;error&nbsp;response.</span></dd></dl>
+
+<dl><dt><a name="AuthController-login_with_password"><strong>login_with_password</strong></a>(data)</dt><dd><span class="code">Login&nbsp;using&nbsp;password&nbsp;strategy.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict):&nbsp;Login&nbsp;credentials&nbsp;including&nbsp;email&nbsp;and&nbsp;password.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="AuthController-logout_user"><strong>logout_user</strong></a>()</dt><dd><span class="code">Logout&nbsp;user&nbsp;(strategy-agnostic).<br>
+&nbsp;<br>
+Clears&nbsp;the&nbsp;user&nbsp;session&nbsp;regardless&nbsp;of&nbsp;authentication&nbsp;method&nbsp;used.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;success&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="AuthController-register_user"><strong>register_user</strong></a>(data)</dt><dd><span class="code">Register&nbsp;user&nbsp;using&nbsp;password&nbsp;strategy.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict):&nbsp;User&nbsp;registration&nbsp;data&nbsp;including&nbsp;email,&nbsp;password,&nbsp;etc.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="AuthController-start_google_login"><strong>start_google_login</strong></a>()</dt><dd><span class="code">Initiate&nbsp;Google&nbsp;OAuth&nbsp;flow.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Response:&nbsp;Redirect&nbsp;response&nbsp;to&nbsp;Google&nbsp;OAuth&nbsp;authorization&nbsp;URL.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>oauth</strong> = &lt;authlib.integrations.flask_client.OAuth object&gt;<br>
+<strong>request</strong> = &lt;LocalProxy unbound&gt;<br>
+<strong>session</strong> = &lt;LocalProxy unbound&gt;</td></tr></table>
+</body></html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.database.database_factory</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.database.html" class="white">database</a>.database_factory</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Cdatabase%5Cdatabase_factory.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\database\database_factory.py</a></td></tr></table>
+    <p><span class="code">Database&nbsp;Factory&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;implements&nbsp;the&nbsp;Factory&nbsp;pattern&nbsp;to&nbsp;create&nbsp;database&nbsp;instances<br>
+based&nbsp;on&nbsp;configuration.&nbsp;Supports&nbsp;SQLite&nbsp;and&nbsp;PostgreSQL&nbsp;databases.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.database.database_factory.html#DatabaseFactory">DatabaseFactory</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="DatabaseFactory">class <strong>DatabaseFactory</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Factory&nbsp;class&nbsp;for&nbsp;creating&nbsp;database&nbsp;instances.<br>
+&nbsp;<br>
+Uses&nbsp;the&nbsp;Factory&nbsp;pattern&nbsp;to&nbsp;instantiate&nbsp;the&nbsp;appropriate&nbsp;database<br>
+implementation&nbsp;based&nbsp;on&nbsp;the&nbsp;specified&nbsp;database&nbsp;type.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Static methods defined here:<br>
+<dl><dt><a name="DatabaseFactory-getDatabase"><strong>getDatabase</strong></a>(db_type: str)</dt><dd><span class="code">Create&nbsp;a&nbsp;database&nbsp;instance&nbsp;based&nbsp;on&nbsp;the&nbsp;specified&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;db_type&nbsp;(str):&nbsp;Database&nbsp;type&nbsp;-&nbsp;'sqlite'&nbsp;or&nbsp;'postgres'/'postgresql'.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Database&nbsp;implementation&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;If&nbsp;unsupported&nbsp;database&nbsp;type&nbsp;is&nbsp;specified.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table>
+</body></html>

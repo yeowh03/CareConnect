@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.services.image_upload</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.services.html" class="white">services</a>.image_upload</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Cservices%5Cimage_upload.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\services\image_upload.py</a></td></tr></table>
+    <p><span class="code">Image&nbsp;Upload&nbsp;Service&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;handles&nbsp;secure&nbsp;image&nbsp;uploads&nbsp;to&nbsp;Supabase&nbsp;storage<br>
+with&nbsp;validation&nbsp;and&nbsp;unique&nbsp;filename&nbsp;generation.</span></p>
+<p>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
+    
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="os.html">os</a><br>
+</td><td class="multicolumn"><a href="time.html">time</a><br>
+</td><td class="multicolumn"><a href="uuid.html">uuid</a><br>
+</td><td class="multicolumn"></td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-upload_image_to_supabase"><strong>upload_image_to_supabase</strong></a>(file_storage, supabase, bucket: str) -&gt; str</dt><dd><span class="code">Upload&nbsp;image&nbsp;file&nbsp;to&nbsp;Supabase&nbsp;storage.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;file_storage:&nbsp;Flask&nbsp;file&nbsp;upload&nbsp;object.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;supabase:&nbsp;Supabase&nbsp;client&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bucket&nbsp;(str):&nbsp;Storage&nbsp;bucket&nbsp;name.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;str:&nbsp;Public&nbsp;URL&nbsp;of&nbsp;uploaded&nbsp;image.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;If&nbsp;file&nbsp;is&nbsp;invalid&nbsp;or&nbsp;missing.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;RuntimeError:&nbsp;If&nbsp;upload&nbsp;fails.</span></dd></dl>
+</td></tr></table>
+</body></html>

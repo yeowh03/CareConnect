@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.services.jobs_service</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.services.html" class="white">services</a>.jobs_service</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Cservices%5Cjobs_service.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\services\jobs_service.py</a></td></tr></table>
+    <p><span class="code">Jobs&nbsp;Service&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;contains&nbsp;core&nbsp;business&nbsp;logic&nbsp;for&nbsp;periodic&nbsp;background&nbsp;jobs<br>
+including&nbsp;cleanup&nbsp;operations,&nbsp;expiry&nbsp;management,&nbsp;and&nbsp;allocation&nbsp;tasks.</span></p>
+<p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-run_cleanup_approved_donations_once"><strong>run_cleanup_approved_donations_once</strong></a>(days_until_delete: int = 2) -&gt; Dict[str, str]</dt><dd><span class="code">Clean&nbsp;up&nbsp;old&nbsp;approved&nbsp;donations&nbsp;that&nbsp;haven't&nbsp;been&nbsp;collected.<br>
+&nbsp;<br>
+Delete&nbsp;donations&nbsp;with&nbsp;status&nbsp;==&nbsp;'Approved'&nbsp;that&nbsp;are&nbsp;older&nbsp;than&nbsp;N&nbsp;days.<br>
+Also,&nbsp;send&nbsp;a&nbsp;notification&nbsp;to&nbsp;the&nbsp;donor&nbsp;about&nbsp;removal.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;days_until_delete&nbsp;(int):&nbsp;Number&nbsp;of&nbsp;days&nbsp;before&nbsp;deleting&nbsp;approved&nbsp;donations.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;Job&nbsp;execution&nbsp;results&nbsp;with&nbsp;deletion&nbsp;count.</span></dd></dl>
+ <dl><dt><a name="-run_cleanup_expired_items_once"><strong>run_cleanup_expired_items_once</strong></a>() -&gt; Dict[str, object]</dt><dd><span class="code">Clean&nbsp;up&nbsp;expired&nbsp;donation&nbsp;items.<br>
+&nbsp;<br>
+Daily&nbsp;cleanup&nbsp;at&nbsp;Singapore&nbsp;midnight:<br>
+-&nbsp;Find&nbsp;donations&nbsp;whose&nbsp;expiryDate&nbsp;is&nbsp;BEFORE&nbsp;today's&nbsp;Singapore&nbsp;date.<br>
+-&nbsp;Remove&nbsp;ALL&nbsp;their&nbsp;items.<br>
+-&nbsp;For&nbsp;any&nbsp;reservations&nbsp;referencing&nbsp;those&nbsp;items:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;decrement&nbsp;the&nbsp;request's&nbsp;allocation,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;if&nbsp;that&nbsp;request&nbsp;was&nbsp;'Matched',&nbsp;set&nbsp;it&nbsp;to&nbsp;'Pending'&nbsp;and&nbsp;clear&nbsp;matched_at.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;Job&nbsp;execution&nbsp;results&nbsp;with&nbsp;counts&nbsp;and&nbsp;affected&nbsp;items.</span></dd></dl>
+ <dl><dt><a name="-run_expire_matched_requests_once"><strong>run_expire_matched_requests_once</strong></a>(days_until_expire: int = 2) -&gt; Dict[str, str]</dt><dd><span class="code">Expire&nbsp;old&nbsp;matched&nbsp;requests&nbsp;that&nbsp;haven't&nbsp;been&nbsp;collected.<br>
+&nbsp;<br>
+After&nbsp;N&nbsp;days&nbsp;in&nbsp;'Matched',&nbsp;free&nbsp;the&nbsp;items&nbsp;and&nbsp;mark&nbsp;request&nbsp;as&nbsp;'Expired'.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;days_until_expire&nbsp;(int):&nbsp;Number&nbsp;of&nbsp;days&nbsp;before&nbsp;expiring&nbsp;matched&nbsp;requests.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;dict:&nbsp;Job&nbsp;execution&nbsp;results.</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>Dict</strong> = typing.Dict<br>
+<strong>List</strong> = typing.List<br>
+<strong>SG_TZ</strong> = datetime.timezone(datetime.timedelta(seconds=28800))<br>
+<strong>db</strong> = &lt;SQLAlchemy&gt;</td></tr></table>
+</body></html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.controllers.donations_controller</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.controllers.html" class="white">controllers</a>.donations_controller</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Ccontrollers%5Cdonations_controller.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\controllers\donations_controller.py</a></td></tr></table>
+    <p><span class="code">Donation&nbsp;Controller&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;handles&nbsp;all&nbsp;donation-related&nbsp;operations&nbsp;including&nbsp;creation,<br>
+approval&nbsp;workflow,&nbsp;and&nbsp;inventory&nbsp;management&nbsp;for&nbsp;donated&nbsp;items.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.controllers.donations_controller.html#DonationController">DonationController</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="DonationController">class <strong>DonationController</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Controller&nbsp;for&nbsp;donation&nbsp;management&nbsp;operations.<br>
+&nbsp;<br>
+Handles&nbsp;donation&nbsp;lifecycle&nbsp;from&nbsp;creation&nbsp;through&nbsp;approval&nbsp;to&nbsp;inventory&nbsp;addition.<br>
+Includes&nbsp;notification&nbsp;system&nbsp;for&nbsp;donors&nbsp;and&nbsp;managers.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="DonationController-__init__"><strong>__init__</strong></a>(self)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="DonationController-create_donation"><strong>create_donation</strong></a>(supabase, bucket)</dt><dd><span class="code">Create&nbsp;a&nbsp;new&nbsp;donation.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;supabase:&nbsp;Supabase&nbsp;client&nbsp;for&nbsp;image&nbsp;upload.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bucket:&nbsp;Storage&nbsp;bucket&nbsp;name.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;donation&nbsp;data&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="DonationController-delete_pending_or_approved"><strong>delete_pending_or_approved</strong></a>(donation_id: int)</dt><dd><span class="code">Delete&nbsp;a&nbsp;pending&nbsp;or&nbsp;approved&nbsp;donation.<br>
+&nbsp;<br>
+Donor&nbsp;may&nbsp;delete&nbsp;if&nbsp;status&nbsp;is&nbsp;Pending&nbsp;or&nbsp;Approved&nbsp;(i.e.,&nbsp;not&nbsp;yet&nbsp;'Added'&nbsp;into&nbsp;items).<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;donation_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;donation&nbsp;to&nbsp;delete.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="DonationController-get_my_donation"><strong>get_my_donation</strong></a>(donation_id: int)</dt><dd><span class="code">Get&nbsp;donation&nbsp;details&nbsp;for&nbsp;current&nbsp;user.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;donation_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;the&nbsp;donation&nbsp;to&nbsp;retrieve.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;donation&nbsp;data&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="DonationController-manager_add"><strong>manager_add</strong></a>(donation_id: int)</dt><dd><span class="code">Add&nbsp;approved&nbsp;donation&nbsp;to&nbsp;inventory.<br>
+&nbsp;<br>
+Approve&nbsp;→&nbsp;Added:<br>
+-&nbsp;Create&nbsp;Item&nbsp;rows&nbsp;as&nbsp;Available&nbsp;only&nbsp;(no&nbsp;reservations).<br>
+-&nbsp;Allocation&nbsp;is&nbsp;performed&nbsp;by&nbsp;the&nbsp;10-min&nbsp;background&nbsp;allocator.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;donation_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;donation&nbsp;to&nbsp;add&nbsp;to&nbsp;inventory.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;created&nbsp;items&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="DonationController-manager_approve"><strong>manager_approve</strong></a>(donation_id: int)</dt><dd><span class="code">Approve&nbsp;a&nbsp;pending&nbsp;donation.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;donation_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;donation&nbsp;to&nbsp;approve.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="DonationController-manager_list_donations"><strong>manager_list_donations</strong></a>()</dt><dd><span class="code">Get&nbsp;donations&nbsp;for&nbsp;manager's&nbsp;community&nbsp;club.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;pending&nbsp;and&nbsp;approved&nbsp;donations&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="DonationController-manager_reject"><strong>manager_reject</strong></a>(donation_id: int)</dt><dd><span class="code">Reject&nbsp;a&nbsp;pending&nbsp;or&nbsp;approved&nbsp;donation.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;donation_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;donation&nbsp;to&nbsp;reject.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="DonationController-my_donations"><strong>my_donations</strong></a>()</dt><dd><span class="code">Get&nbsp;all&nbsp;donations&nbsp;for&nbsp;current&nbsp;user.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;donations&nbsp;array&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="DonationController-update_pending_donation"><strong>update_pending_donation</strong></a>(donation_id: int, supabase, bucket)</dt><dd><span class="code">Update&nbsp;a&nbsp;pending&nbsp;donation.<br>
+&nbsp;<br>
+Only&nbsp;allow&nbsp;updates&nbsp;when&nbsp;donation&nbsp;is&nbsp;Pending.<br>
+Optional&nbsp;image&nbsp;replacement;&nbsp;Food/Drinks&nbsp;still&nbsp;require&nbsp;an&nbsp;expiry&nbsp;date.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;donation_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;donation&nbsp;to&nbsp;update.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;supabase:&nbsp;Supabase&nbsp;client&nbsp;for&nbsp;image&nbsp;upload.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;bucket:&nbsp;Storage&nbsp;bucket&nbsp;name.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>db</strong> = &lt;SQLAlchemy&gt;<br>
+<strong>request</strong> = &lt;LocalProxy unbound&gt;</td></tr></table>
+</body></html>

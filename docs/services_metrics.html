@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.services.metrics</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.services.html" class="white">services</a>.metrics</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Cservices%5Cmetrics.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\services\metrics.py</a></td></tr></table>
+    <p><span class="code">Metrics&nbsp;Service&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;calculates&nbsp;fulfillment&nbsp;metrics&nbsp;for&nbsp;community&nbsp;clubs<br>
+and&nbsp;triggers&nbsp;broadcasts&nbsp;when&nbsp;fulfillment&nbsp;rates&nbsp;are&nbsp;low.</span></p>
+<p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-check_and_broadcast_for_cc"><strong>check_and_broadcast_for_cc</strong></a>(cc: str) -&gt; float</dt><dd><span class="code">Check&nbsp;fulfillment&nbsp;rate&nbsp;for&nbsp;a&nbsp;community&nbsp;club&nbsp;and&nbsp;broadcast&nbsp;if&nbsp;low.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cc&nbsp;(str):&nbsp;Community&nbsp;club&nbsp;name.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;float:&nbsp;Fulfillment&nbsp;rate&nbsp;(0.0&nbsp;to&nbsp;1.0).</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>db</strong> = &lt;SQLAlchemy&gt;<br>
+<strong>func</strong> = &lt;sqlalchemy.sql.functions._FunctionGenerator object&gt;<br>
+<strong>subject</strong> = &lt;backend.broadcast_observer.CCFulfilmentSubject object&gt;</td></tr></table>
+</body></html>

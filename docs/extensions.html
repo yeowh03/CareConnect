@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.extensions</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.extensions</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Cextensions.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\extensions.py</a></td></tr></table>
+    <p><span class="code">Flask&nbsp;Extensions&nbsp;and&nbsp;Initialization&nbsp;Functions.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;contains&nbsp;Flask&nbsp;extension&nbsp;instances&nbsp;and&nbsp;initialization&nbsp;functions<br>
+for&nbsp;CORS,&nbsp;sessions,&nbsp;OAuth,&nbsp;and&nbsp;Supabase&nbsp;client&nbsp;configuration.</span></p>
+<p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-init_cors"><strong>init_cors</strong></a>(app, origin)</dt><dd><span class="code">Initialize&nbsp;CORS&nbsp;for&nbsp;the&nbsp;Flask&nbsp;application.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;app&nbsp;(Flask):&nbsp;Flask&nbsp;application&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;origin&nbsp;(str):&nbsp;Allowed&nbsp;origin&nbsp;for&nbsp;CORS&nbsp;requests.</span></dd></dl>
+ <dl><dt><a name="-init_oauth"><strong>init_oauth</strong></a>(app, client_id, client_secret)</dt><dd><span class="code">Initialize&nbsp;OAuth&nbsp;configuration&nbsp;for&nbsp;Google&nbsp;authentication.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;app&nbsp;(Flask):&nbsp;Flask&nbsp;application&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;client_id&nbsp;(str):&nbsp;Google&nbsp;OAuth&nbsp;client&nbsp;ID.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;client_secret&nbsp;(str):&nbsp;Google&nbsp;OAuth&nbsp;client&nbsp;secret.</span></dd></dl>
+ <dl><dt><a name="-init_session"><strong>init_session</strong></a>(app, session_type, redis_url, env)</dt><dd><span class="code">Initialize&nbsp;Flask&nbsp;session&nbsp;configuration.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;app&nbsp;(Flask):&nbsp;Flask&nbsp;application&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;session_type&nbsp;(str):&nbsp;Session&nbsp;storage&nbsp;type&nbsp;('redis'&nbsp;or&nbsp;'filesystem').<br>
+&nbsp;&nbsp;&nbsp;&nbsp;redis_url&nbsp;(str):&nbsp;Redis&nbsp;connection&nbsp;URL&nbsp;for&nbsp;redis&nbsp;session&nbsp;type.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;env&nbsp;(str):&nbsp;Environment&nbsp;('production'&nbsp;or&nbsp;'development').</span></dd></dl>
+ <dl><dt><a name="-init_supabase"><strong>init_supabase</strong></a>(url, key)</dt><dd><span class="code">Initialize&nbsp;Supabase&nbsp;client&nbsp;for&nbsp;file&nbsp;storage.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;url&nbsp;(str):&nbsp;Supabase&nbsp;project&nbsp;URL.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;key&nbsp;(str):&nbsp;Supabase&nbsp;service&nbsp;key.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Supabase&nbsp;client&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;RuntimeError:&nbsp;If&nbsp;URL&nbsp;or&nbsp;key&nbsp;are&nbsp;not&nbsp;provided.</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>db</strong> = &lt;SQLAlchemy&gt;<br>
+<strong>oauth</strong> = &lt;authlib.integrations.flask_client.OAuth object&gt;</td></tr></table>
+</body></html>
