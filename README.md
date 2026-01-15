@@ -10,7 +10,7 @@ CareConnect is a full-stack web application that facilitates charitable donation
 
 https://youtu.be/QbCB52LaZBY?si=uuOlf7zNbOmczBUk
 
-### Key Features
+## Key Features
 
 - **Multi-Authentication System**: Support for Google OAuth and traditional email/password authentication
 - **Role-Based Access**: Separate interfaces for clients and community managers
