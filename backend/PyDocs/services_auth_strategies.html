@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.services.auth_strategies</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.services.html" class="white">services</a>.auth_strategies</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Cservices%5Cauth_strategies.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\services\auth_strategies.py</a></td></tr></table>
+    <p><span class="code">Authentication&nbsp;Strategies&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;implements&nbsp;the&nbsp;Strategy&nbsp;pattern&nbsp;for&nbsp;authentication,<br>
+supporting&nbsp;multiple&nbsp;authentication&nbsp;methods&nbsp;including&nbsp;Google&nbsp;OAuth<br>
+and&nbsp;traditional&nbsp;email/password&nbsp;authentication.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="abc.html#ABC">abc.ABC</a>(<a href="builtins.html#object">builtins.object</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.services.auth_strategies.html#AuthenticationStrategy">AuthenticationStrategy</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.services.auth_strategies.html#GoogleOAuthStrategy">GoogleOAuthStrategy</a>
+</dt><dt class="heading-text"><a href="backend.services.auth_strategies.html#PasswordStrategy">PasswordStrategy</a>
+</dt></dl>
+</dd>
+</dl>
+</dd>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.services.auth_strategies.html#AuthenticationContext">AuthenticationContext</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="AuthenticationContext">class <strong>AuthenticationContext</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Context&nbsp;class&nbsp;that&nbsp;uses&nbsp;authentication&nbsp;strategies.<br>
+&nbsp;<br>
+Implements&nbsp;the&nbsp;Strategy&nbsp;pattern&nbsp;by&nbsp;allowing&nbsp;different&nbsp;authentication<br>
+strategies&nbsp;to&nbsp;be&nbsp;set&nbsp;and&nbsp;used&nbsp;interchangeably.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="AuthenticationContext-__init__"><strong>__init__</strong></a>(self)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<dl><dt><a name="AuthenticationContext-authenticate"><strong>authenticate</strong></a>(self, data)</dt><dd><span class="code">Authenticate&nbsp;using&nbsp;current&nbsp;strategy.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict):&nbsp;Authentication&nbsp;data.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;Authentication&nbsp;result&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="AuthenticationContext-create_user"><strong>create_user</strong></a>(self, data)</dt><dd><span class="code">Create&nbsp;user&nbsp;using&nbsp;current&nbsp;strategy.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict):&nbsp;User&nbsp;creation&nbsp;data.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;User&nbsp;creation&nbsp;result&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="AuthenticationContext-set_strategy"><strong>set_strategy</strong></a>(
+    self,
+    strategy: backend.services.auth_strategies.AuthenticationStrategy
+)</dt><dd><span class="code">Set&nbsp;the&nbsp;authentication&nbsp;strategy.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;strategy&nbsp;(<a href="#AuthenticationStrategy">AuthenticationStrategy</a>):&nbsp;Strategy&nbsp;to&nbsp;use&nbsp;for&nbsp;authentication.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="AuthenticationStrategy">class <strong>AuthenticationStrategy</strong></a>(<a href="abc.html#ABC">abc.ABC</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Abstract&nbsp;base&nbsp;class&nbsp;for&nbsp;authentication&nbsp;strategies.<br>
+&nbsp;<br>
+Defines&nbsp;the&nbsp;interface&nbsp;that&nbsp;all&nbsp;authentication&nbsp;strategies&nbsp;must&nbsp;implement.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.services.auth_strategies.html#AuthenticationStrategy">AuthenticationStrategy</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="AuthenticationStrategy-authenticate"><strong>authenticate</strong></a>(self, data)</dt><dd><span class="code">Authenticate&nbsp;user&nbsp;with&nbsp;provided&nbsp;data.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict):&nbsp;Authentication&nbsp;data.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;Response&nbsp;dict&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="AuthenticationStrategy-create_user"><strong>create_user</strong></a>(self, data)</dt><dd><span class="code">Create&nbsp;new&nbsp;user&nbsp;with&nbsp;provided&nbsp;data.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict):&nbsp;User&nbsp;creation&nbsp;data.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;Response&nbsp;dict&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset({'authenticate', 'create_user'})</dl>
+
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="GoogleOAuthStrategy">class <strong>GoogleOAuthStrategy</strong></a>(<a href="backend.services.auth_strategies.html#AuthenticationStrategy">AuthenticationStrategy</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Google&nbsp;OAuth&nbsp;authentication&nbsp;strategy.<br>
+&nbsp;<br>
+Handles&nbsp;authentication&nbsp;and&nbsp;user&nbsp;creation&nbsp;using&nbsp;Google&nbsp;OAuth&nbsp;tokens.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.services.auth_strategies.html#GoogleOAuthStrategy">GoogleOAuthStrategy</a></dd>
+<dd><a href="backend.services.auth_strategies.html#AuthenticationStrategy">AuthenticationStrategy</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GoogleOAuthStrategy-authenticate"><strong>authenticate</strong></a>(self, data)</dt><dd><span class="code">Authenticate&nbsp;using&nbsp;Google&nbsp;OAuth&nbsp;token.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict):&nbsp;OAuth&nbsp;data&nbsp;(unused,&nbsp;token&nbsp;comes&nbsp;from&nbsp;OAuth&nbsp;flow).<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;Authentication&nbsp;result&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="GoogleOAuthStrategy-create_user"><strong>create_user</strong></a>(self, data)</dt><dd><span class="code">Create&nbsp;user&nbsp;from&nbsp;Google&nbsp;OAuth&nbsp;data.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict):&nbsp;Google&nbsp;user&nbsp;info&nbsp;from&nbsp;OAuth.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;User&nbsp;creation&nbsp;result&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+<hr>
+Data descriptors inherited from <a href="backend.services.auth_strategies.html#AuthenticationStrategy">AuthenticationStrategy</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="PasswordStrategy">class <strong>PasswordStrategy</strong></a>(<a href="backend.services.auth_strategies.html#AuthenticationStrategy">AuthenticationStrategy</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Email/Password&nbsp;authentication&nbsp;strategy.<br>
+&nbsp;<br>
+Handles&nbsp;traditional&nbsp;email&nbsp;and&nbsp;password&nbsp;authentication&nbsp;and&nbsp;registration.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.services.auth_strategies.html#PasswordStrategy">PasswordStrategy</a></dd>
+<dd><a href="backend.services.auth_strategies.html#AuthenticationStrategy">AuthenticationStrategy</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PasswordStrategy-authenticate"><strong>authenticate</strong></a>(self, data)</dt><dd><span class="code">Authenticate&nbsp;using&nbsp;email&nbsp;and&nbsp;password.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict):&nbsp;Login&nbsp;credentials&nbsp;with&nbsp;email&nbsp;and&nbsp;password.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;Authentication&nbsp;result&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="PasswordStrategy-create_user"><strong>create_user</strong></a>(self, data)</dt><dd><span class="code">Create&nbsp;user&nbsp;with&nbsp;email/password&nbsp;registration.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict):&nbsp;Registration&nbsp;data&nbsp;including&nbsp;email,&nbsp;password,&nbsp;etc.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;Registration&nbsp;result&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+<hr>
+Data descriptors inherited from <a href="backend.services.auth_strategies.html#AuthenticationStrategy">AuthenticationStrategy</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>db</strong> = &lt;SQLAlchemy&gt;<br>
+<strong>oauth</strong> = &lt;authlib.integrations.flask_client.OAuth object&gt;<br>
+<strong>session</strong> = &lt;LocalProxy unbound&gt;</td></tr></table>
+</body></html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.database.database_interface</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.database.html" class="white">database</a>.database_interface</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Cdatabase%5Cdatabase_interface.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\database\database_interface.py</a></td></tr></table>
+    <p><span class="code">Database&nbsp;Interface&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;defines&nbsp;the&nbsp;abstract&nbsp;interface&nbsp;that&nbsp;all&nbsp;database<br>
+implementations&nbsp;must&nbsp;follow&nbsp;in&nbsp;the&nbsp;Factory&nbsp;pattern.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="abc.html#ABC">abc.ABC</a>(<a href="builtins.html#object">builtins.object</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.database.database_interface.html#DatabaseInterface">DatabaseInterface</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="DatabaseInterface">class <strong>DatabaseInterface</strong></a>(<a href="abc.html#ABC">abc.ABC</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Abstract&nbsp;interface&nbsp;for&nbsp;database&nbsp;implementations.<br>
+&nbsp;<br>
+Defines&nbsp;the&nbsp;contract&nbsp;that&nbsp;all&nbsp;database&nbsp;types&nbsp;(SQLite,&nbsp;PostgreSQL,&nbsp;etc.)<br>
+must&nbsp;implement&nbsp;for&nbsp;the&nbsp;Factory&nbsp;pattern.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.database.database_interface.html#DatabaseInterface">DatabaseInterface</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="DatabaseInterface-init_app"><strong>init_app</strong></a>(self, app, db)</dt><dd><span class="code">Configure&nbsp;Flask&nbsp;app&nbsp;for&nbsp;this&nbsp;database&nbsp;type.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;app&nbsp;(Flask):&nbsp;Flask&nbsp;application&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;db&nbsp;(SQLAlchemy):&nbsp;Shared&nbsp;SQLAlchemy&nbsp;instance&nbsp;to&nbsp;configure.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;SQLAlchemy:&nbsp;Configured&nbsp;database&nbsp;instance.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset({'init_app'})</dl>
+
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+</td></tr></table></td></tr></table>
+</body></html>

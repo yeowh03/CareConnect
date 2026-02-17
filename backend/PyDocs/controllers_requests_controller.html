@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.controllers.requests_controller</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.controllers.html" class="white">controllers</a>.requests_controller</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Ccontrollers%5Crequests_controller.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\controllers\requests_controller.py</a></td></tr></table>
+    <p><span class="code">Request&nbsp;Controller&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;handles&nbsp;all&nbsp;request-related&nbsp;operations&nbsp;including&nbsp;creation,<br>
+update,&nbsp;deletion,&nbsp;and&nbsp;completion&nbsp;workflow&nbsp;for&nbsp;item&nbsp;requests.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.controllers.requests_controller.html#RequestController">RequestController</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="RequestController">class <strong>RequestController</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Controller&nbsp;for&nbsp;request&nbsp;management&nbsp;operations.<br>
+&nbsp;<br>
+Handles&nbsp;request&nbsp;lifecycle&nbsp;from&nbsp;creation&nbsp;through&nbsp;matching&nbsp;to&nbsp;completion.<br>
+Includes&nbsp;allocation&nbsp;system&nbsp;and&nbsp;manager&nbsp;approval&nbsp;workflow.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="RequestController-create_request"><strong>create_request</strong></a>()</dt><dd><span class="code">Create&nbsp;a&nbsp;new&nbsp;request.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;request&nbsp;data&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="RequestController-delete_pending_request"><strong>delete_pending_request</strong></a>(req_id: int)</dt><dd><span class="code">Delete&nbsp;a&nbsp;pending&nbsp;request.<br>
+&nbsp;<br>
+Delete&nbsp;a&nbsp;user's&nbsp;own&nbsp;Pending&nbsp;request.<br>
+If&nbsp;any&nbsp;items&nbsp;are&nbsp;(already)&nbsp;allocated/reserved,&nbsp;release&nbsp;them&nbsp;first.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;req_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;request&nbsp;to&nbsp;delete.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="RequestController-get_my_request"><strong>get_my_request</strong></a>(req_id: int)</dt><dd><span class="code">Return&nbsp;a&nbsp;single&nbsp;request&nbsp;owned&nbsp;by&nbsp;current&nbsp;user.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;req_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;the&nbsp;request&nbsp;to&nbsp;retrieve.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;request&nbsp;data&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="RequestController-manager_complete_request"><strong>manager_complete_request</strong></a>(req_id: int)</dt><dd><span class="code">Complete&nbsp;a&nbsp;matched&nbsp;request.<br>
+&nbsp;<br>
+Mark&nbsp;a&nbsp;single&nbsp;Matched&nbsp;request&nbsp;at&nbsp;this&nbsp;manager's&nbsp;CC&nbsp;as&nbsp;Completed.<br>
+(Items&nbsp;were&nbsp;already&nbsp;allocated/unavailable;&nbsp;on&nbsp;completion&nbsp;we&nbsp;keep&nbsp;them&nbsp;consumed.)<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;req_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;request&nbsp;to&nbsp;complete.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="RequestController-manager_matched_requests"><strong>manager_matched_requests</strong></a>()</dt><dd><span class="code">Get&nbsp;matched&nbsp;requests&nbsp;for&nbsp;manager's&nbsp;community&nbsp;club.<br>
+&nbsp;<br>
+Return&nbsp;all&nbsp;Matched&nbsp;requests&nbsp;for&nbsp;the&nbsp;manager's&nbsp;own&nbsp;community&nbsp;club&nbsp;(cc).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;matched&nbsp;requests&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="RequestController-my_requests"><strong>my_requests</strong></a>()</dt><dd><span class="code">Get&nbsp;all&nbsp;requests&nbsp;for&nbsp;current&nbsp;user.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;requests&nbsp;array&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="RequestController-reject_matched_request"><strong>reject_matched_request</strong></a>()</dt><dd><span class="code">Reject&nbsp;a&nbsp;matched&nbsp;request.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="RequestController-update_pending_request"><strong>update_pending_request</strong></a>(req_id: int)</dt><dd><span class="code">Update&nbsp;a&nbsp;pending&nbsp;request.<br>
+&nbsp;<br>
+Only&nbsp;allow&nbsp;updates&nbsp;if&nbsp;status&nbsp;is&nbsp;Pending&nbsp;AND&nbsp;no&nbsp;items&nbsp;are&nbsp;allocated<br>
+(allocation&nbsp;==&nbsp;0&nbsp;and&nbsp;no&nbsp;reservations).&nbsp;This&nbsp;prevents&nbsp;silent&nbsp;resource&nbsp;loss.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;req_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;request&nbsp;to&nbsp;update.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>db</strong> = &lt;SQLAlchemy&gt;<br>
+<strong>request</strong> = &lt;LocalProxy unbound&gt;</td></tr></table>
+</body></html>

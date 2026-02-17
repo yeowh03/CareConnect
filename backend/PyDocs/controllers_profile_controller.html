@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.controllers.profile_controller</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.controllers.html" class="white">controllers</a>.profile_controller</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Ccontrollers%5Cprofile_controller.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\controllers\profile_controller.py</a></td></tr></table>
+    <p><span class="code">Profile&nbsp;Controller&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;handles&nbsp;user&nbsp;profile&nbsp;management&nbsp;including&nbsp;profile&nbsp;updates,<br>
+registration&nbsp;approval&nbsp;workflow,&nbsp;and&nbsp;user&nbsp;authentication&nbsp;status.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.controllers.profile_controller.html#ProfileController">ProfileController</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="ProfileController">class <strong>ProfileController</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Controller&nbsp;for&nbsp;user&nbsp;profile&nbsp;operations.<br>
+&nbsp;<br>
+Handles&nbsp;profile&nbsp;retrieval,&nbsp;updates,&nbsp;and&nbsp;registration&nbsp;approval&nbsp;workflow<br>
+for&nbsp;both&nbsp;clients&nbsp;and&nbsp;managers.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="ProfileController-get_client_profile"><strong>get_client_profile</strong></a>(user_email)</dt><dd><span class="code">Get&nbsp;client&nbsp;profile&nbsp;data.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;user_email&nbsp;(str):&nbsp;Email&nbsp;of&nbsp;client&nbsp;to&nbsp;retrieve.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;JSON&nbsp;response&nbsp;with&nbsp;client&nbsp;profile&nbsp;data.</span></dd></dl>
+
+<dl><dt><a name="ProfileController-get_manager_profile"><strong>get_manager_profile</strong></a>(user_email)</dt><dd><span class="code">Get&nbsp;manager&nbsp;profile&nbsp;data.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;user_email&nbsp;(str):&nbsp;Email&nbsp;of&nbsp;manager&nbsp;to&nbsp;retrieve.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;JSON&nbsp;response&nbsp;with&nbsp;manager&nbsp;profile&nbsp;data.</span></dd></dl>
+
+<dl><dt><a name="ProfileController-list_pending_registrations"><strong>list_pending_registrations</strong></a>()</dt><dd><span class="code">List&nbsp;all&nbsp;pending&nbsp;client&nbsp;registrations.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;JSON&nbsp;response&nbsp;with&nbsp;pending&nbsp;registrations&nbsp;array.</span></dd></dl>
+
+<dl><dt><a name="ProfileController-me"><strong>me</strong></a>()</dt><dd><span class="code">Get&nbsp;current&nbsp;user&nbsp;authentication&nbsp;status.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;user&nbsp;data&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="ProfileController-process_registrations"><strong>process_registrations</strong></a>(outcome: bool, email: str)</dt><dd><span class="code">Process&nbsp;client&nbsp;registration&nbsp;approval&nbsp;or&nbsp;rejection.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;outcome&nbsp;(bool):&nbsp;True&nbsp;to&nbsp;approve,&nbsp;False&nbsp;to&nbsp;reject.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;email&nbsp;(str):&nbsp;Email&nbsp;of&nbsp;client&nbsp;to&nbsp;process.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;JSON&nbsp;response&nbsp;with&nbsp;operation&nbsp;result.</span></dd></dl>
+
+<dl><dt><a name="ProfileController-update_profile"><strong>update_profile</strong></a>(data)</dt><dd><span class="code">Update&nbsp;user&nbsp;profile.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;(dict):&nbsp;Profile&nbsp;data&nbsp;to&nbsp;update.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>db</strong> = &lt;SQLAlchemy&gt;<br>
+<strong>session</strong> = &lt;LocalProxy unbound&gt;</td></tr></table>
+</body></html>

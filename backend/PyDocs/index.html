@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CareConnect Backend Documentation</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 40px;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { 
+            color: #2c3e50; 
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.1em;
+            margin-bottom: 40px;
+        }
+        .category { 
+            margin-bottom: 40px; 
+        }
+        .category h2 { 
+            color: #34495e; 
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+        }
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+        .module-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+        .module-card:hover {
+            background: #e3f2fd;
+            border-color: #3498db;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15);
+        }
+        .module-card a {
+            text-decoration: none;
+            color: #2980b9;
+            font-weight: 500;
+            display: block;
+        }
+        .module-card a:hover {
+            color: #1abc9c;
+        }
+        .stats {
+            background: #ecf0f1;
+            padding: 20px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .stats strong {
+            color: #27ae60;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>CareConnect Backend Documentation</h1>
+        <p class="subtitle">Comprehensive API documentation generated using Python's pydoc module</p>
+        
+        <div class="stats">
+            <strong>35</strong> modules documented
+        </div>
+
+        <div class="category">
+            <h2>Core Application</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <a href="app.html">app</a>
+                </div>
+                <div class="module-card">
+                    <a href="broadcast_observer.html">broadcast_observer</a>
+                </div>
+                <div class="module-card">
+                    <a href="config.html">config</a>
+                </div>
+                <div class="module-card">
+                    <a href="extensions.html">extensions</a>
+                </div>
+                <div class="module-card">
+                    <a href="models.html">models</a>
+                </div>
+            </div>
+        </div>
+        <div class="category">
+            <h2>Controllers</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <a href="controllers_auth_controller.html">auth_controller</a>
+                </div>
+                <div class="module-card">
+                    <a href="controllers_community_controller.html">community_controller</a>
+                </div>
+                <div class="module-card">
+                    <a href="controllers_donations_controller.html">donations_controller</a>
+                </div>
+                <div class="module-card">
+                    <a href="controllers_inventory_controller.html">inventory_controller</a>
+                </div>
+                <div class="module-card">
+                    <a href="controllers_jobs_controller.html">jobs_controller</a>
+                </div>
+                <div class="module-card">
+                    <a href="controllers_notification_controller.html">notification_controller</a>
+                </div>
+                <div class="module-card">
+                    <a href="controllers_profile_controller.html">profile_controller</a>
+                </div>
+                <div class="module-card">
+                    <a href="controllers_requests_controller.html">requests_controller</a>
+                </div>
+            </div>
+        </div>
+        <div class="category">
+            <h2>Database</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <a href="database_database_factory.html">database_factory</a>
+                </div>
+                <div class="module-card">
+                    <a href="database_database_interface.html">database_interface</a>
+                </div>
+                <div class="module-card">
+                    <a href="database_postgres_database.html">postgres_database</a>
+                </div>
+                <div class="module-card">
+                    <a href="database_sqlite_database.html">sqlite_database</a>
+                </div>
+            </div>
+        </div>
+        <div class="category">
+            <h2>Routes</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <a href="routes_auth_routes.html">auth_routes</a>
+                </div>
+                <div class="module-card">
+                    <a href="routes_community_routes.html">community_routes</a>
+                </div>
+                <div class="module-card">
+                    <a href="routes_donations_routes.html">donations_routes</a>
+                </div>
+                <div class="module-card">
+                    <a href="routes_inventory_routes.html">inventory_routes</a>
+                </div>
+                <div class="module-card">
+                    <a href="routes_jobs_routes.html">jobs_routes</a>
+                </div>
+                <div class="module-card">
+                    <a href="routes_notification_routes.html">notification_routes</a>
+                </div>
+                <div class="module-card">
+                    <a href="routes_profile_routes.html">profile_routes</a>
+                </div>
+                <div class="module-card">
+                    <a href="routes_requests_routes.html">requests_routes</a>
+                </div>
+            </div>
+        </div>
+        <div class="category">
+            <h2>Services</h2>
+            <div class="module-grid">
+                <div class="module-card">
+                    <a href="services_auth_strategies.html">auth_strategies</a>
+                </div>
+                <div class="module-card">
+                    <a href="services_community_clubs.html">community_clubs</a>
+                </div>
+                <div class="module-card">
+                    <a href="services_find_user.html">find_user</a>
+                </div>
+                <div class="module-card">
+                    <a href="services_image_upload.html">image_upload</a>
+                </div>
+                <div class="module-card">
+                    <a href="services_jobs_service.html">jobs_service</a>
+                </div>
+                <div class="module-card">
+                    <a href="services_metrics.html">metrics</a>
+                </div>
+                <div class="module-card">
+                    <a href="services_notification_service.html">notification_service</a>
+                </div>
+                <div class="module-card">
+                    <a href="services_notification_strategies.html">notification_strategies</a>
+                </div>
+                <div class="module-card">
+                    <a href="services_password.html">password</a>
+                </div>
+                <div class="module-card">
+                    <a href="services_run_allocation.html">run_allocation</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

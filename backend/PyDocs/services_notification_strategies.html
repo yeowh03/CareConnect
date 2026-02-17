@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.services.notification_strategies</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.services.html" class="white">services</a>.notification_strategies</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Cservices%5Cnotification_strategies.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\services\notification_strategies.py</a></td></tr></table>
+    <p><span class="code">Notification&nbsp;Strategies&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;implements&nbsp;the&nbsp;Strategy&nbsp;pattern&nbsp;for&nbsp;notifications,<br>
+supporting&nbsp;multiple&nbsp;delivery&nbsp;methods&nbsp;including&nbsp;database&nbsp;storage,<br>
+email,&nbsp;and&nbsp;SMS&nbsp;notifications.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="abc.html#ABC">abc.ABC</a>(<a href="builtins.html#object">builtins.object</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.services.notification_strategies.html#NotificationStrategy">NotificationStrategy</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.services.notification_strategies.html#DatabaseNotificationStrategy">DatabaseNotificationStrategy</a>
+</dt><dt class="heading-text"><a href="backend.services.notification_strategies.html#EmailNotificationStrategy">EmailNotificationStrategy</a>
+</dt><dt class="heading-text"><a href="backend.services.notification_strategies.html#SMSNotificationStrategy">SMSNotificationStrategy</a>
+</dt></dl>
+</dd>
+</dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="DatabaseNotificationStrategy">class <strong>DatabaseNotificationStrategy</strong></a>(<a href="backend.services.notification_strategies.html#NotificationStrategy">NotificationStrategy</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Database&nbsp;storage&nbsp;notification&nbsp;strategy.<br>
+&nbsp;<br>
+Stores&nbsp;notifications&nbsp;in&nbsp;the&nbsp;database&nbsp;for&nbsp;retrieval&nbsp;through&nbsp;the&nbsp;web&nbsp;interface.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.services.notification_strategies.html#DatabaseNotificationStrategy">DatabaseNotificationStrategy</a></dd>
+<dd><a href="backend.services.notification_strategies.html#NotificationStrategy">NotificationStrategy</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="DatabaseNotificationStrategy-create_notification"><strong>create_notification</strong></a>(self, message: str, receiver_email: str) -&gt; backend.models.Notification</dt><dd><span class="code">Create&nbsp;and&nbsp;send&nbsp;notification&nbsp;using&nbsp;specific&nbsp;strategy.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;(str):&nbsp;Notification&nbsp;message&nbsp;content.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;receiver_email&nbsp;(str):&nbsp;Email&nbsp;of&nbsp;notification&nbsp;recipient.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Notification:&nbsp;Created&nbsp;notification&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;If&nbsp;required&nbsp;parameters&nbsp;are&nbsp;missing.</span></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+<hr>
+Data descriptors inherited from <a href="backend.services.notification_strategies.html#NotificationStrategy">NotificationStrategy</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="EmailNotificationStrategy">class <strong>EmailNotificationStrategy</strong></a>(<a href="backend.services.notification_strategies.html#NotificationStrategy">NotificationStrategy</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Email&nbsp;notification&nbsp;strategy.<br>
+&nbsp;<br>
+Sends&nbsp;notifications&nbsp;via&nbsp;email&nbsp;while&nbsp;also&nbsp;storing&nbsp;them&nbsp;in&nbsp;the&nbsp;database.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.services.notification_strategies.html#EmailNotificationStrategy">EmailNotificationStrategy</a></dd>
+<dd><a href="backend.services.notification_strategies.html#NotificationStrategy">NotificationStrategy</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="EmailNotificationStrategy-create_notification"><strong>create_notification</strong></a>(self, message: str, receiver_email: str) -&gt; backend.models.Notification</dt><dd><span class="code">Create&nbsp;and&nbsp;send&nbsp;notification&nbsp;using&nbsp;specific&nbsp;strategy.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;(str):&nbsp;Notification&nbsp;message&nbsp;content.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;receiver_email&nbsp;(str):&nbsp;Email&nbsp;of&nbsp;notification&nbsp;recipient.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Notification:&nbsp;Created&nbsp;notification&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;If&nbsp;required&nbsp;parameters&nbsp;are&nbsp;missing.</span></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+<hr>
+Data descriptors inherited from <a href="backend.services.notification_strategies.html#NotificationStrategy">NotificationStrategy</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="NotificationStrategy">class <strong>NotificationStrategy</strong></a>(<a href="abc.html#ABC">abc.ABC</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Abstract&nbsp;interface&nbsp;for&nbsp;notification&nbsp;strategies.<br>
+&nbsp;<br>
+Defines&nbsp;the&nbsp;contract&nbsp;that&nbsp;all&nbsp;notification&nbsp;delivery&nbsp;methods&nbsp;must&nbsp;implement.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.services.notification_strategies.html#NotificationStrategy">NotificationStrategy</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="NotificationStrategy-create_notification"><strong>create_notification</strong></a>(self, message: str, receiver_email: str) -&gt; backend.models.Notification</dt><dd><span class="code">Create&nbsp;and&nbsp;send&nbsp;notification&nbsp;using&nbsp;specific&nbsp;strategy.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;(str):&nbsp;Notification&nbsp;message&nbsp;content.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;receiver_email&nbsp;(str):&nbsp;Email&nbsp;of&nbsp;notification&nbsp;recipient.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Notification:&nbsp;Created&nbsp;notification&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;If&nbsp;required&nbsp;parameters&nbsp;are&nbsp;missing.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset({'create_notification'})</dl>
+
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="SMSNotificationStrategy">class <strong>SMSNotificationStrategy</strong></a>(<a href="backend.services.notification_strategies.html#NotificationStrategy">NotificationStrategy</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">SMS&nbsp;notification&nbsp;strategy.<br>
+&nbsp;<br>
+Sends&nbsp;notifications&nbsp;via&nbsp;SMS&nbsp;while&nbsp;also&nbsp;storing&nbsp;them&nbsp;in&nbsp;the&nbsp;database.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.services.notification_strategies.html#SMSNotificationStrategy">SMSNotificationStrategy</a></dd>
+<dd><a href="backend.services.notification_strategies.html#NotificationStrategy">NotificationStrategy</a></dd>
+<dd><a href="abc.html#ABC">abc.ABC</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="SMSNotificationStrategy-create_notification"><strong>create_notification</strong></a>(self, message: str, receiver_email: str) -&gt; backend.models.Notification</dt><dd><span class="code">Create&nbsp;and&nbsp;send&nbsp;notification&nbsp;using&nbsp;specific&nbsp;strategy.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;(str):&nbsp;Notification&nbsp;message&nbsp;content.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;receiver_email&nbsp;(str):&nbsp;Email&nbsp;of&nbsp;notification&nbsp;recipient.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Notification:&nbsp;Created&nbsp;notification&nbsp;instance.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Raises:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;ValueError:&nbsp;If&nbsp;required&nbsp;parameters&nbsp;are&nbsp;missing.</span></dd></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__abstractmethods__</strong> = frozenset()</dl>
+
+<dl><dt><strong>__annotations__</strong> = {}</dl>
+
+<hr>
+Data descriptors inherited from <a href="backend.services.notification_strategies.html#NotificationStrategy">NotificationStrategy</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>db</strong> = &lt;SQLAlchemy&gt;</td></tr></table>
+</body></html>

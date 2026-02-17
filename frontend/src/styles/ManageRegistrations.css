@@ -1,0 +1,150 @@
+/* === Base Layout === */
+.manager-registrations-container {
+  position: relative;
+  max-width: 1080px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  color: #1f2937;
+}
+
+/* === Back Button === */
+.icon-btn.back-btn {
+  position: absolute;
+  top: 1.2rem;
+  left: 1.2rem;
+  background-color: #f3f3f3;
+  border: none;
+  border-radius: 50%;
+  color: #333;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.icon-btn.back-btn:hover {
+  background-color: #7f6edb;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* === Title === */
+.page-title {
+  margin-top: 4rem; /* below back button */
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #5b4f9b;
+  border-bottom: 2px solid #e5e7eb;
+  padding-bottom: 0.4rem;
+  margin-bottom: 1.2rem;
+  text-align: left;
+}
+
+/* === Error Box === */
+.error-box {
+  background: #fde2e2;
+  border: 1px solid #f6bcbc;
+  color: #7a0b0b;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+/* === Empty State === */
+.empty-text {
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.95rem;
+  background-color: #f8fafc;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+/* === Registrations List === */
+.registrations-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+/* === Registration Card === */
+.registration-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease, transform 0.1s ease;
+}
+
+.registration-card:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.registration-card p {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
+}
+
+/* === Buttons === */
+.registration-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 0.8rem;
+}
+
+.accept-btn {
+  background-color: #7f6edb;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.accept-btn:hover {
+  background-color: #5b4f9b;
+  transform: translateY(-1px);
+}
+
+.reject-btn {
+  background-color: #fff;
+  color: #b00020;
+  border: 1px solid #f0c2c6;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.reject-btn:hover {
+  background-color: #fdecec;
+  transform: translateY(-1px);
+}
+
+/* === Responsive === */
+@media (max-width: 640px) {
+  .manager-registrations-container {
+    padding: 1.2rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .registration-card {
+    padding: 0.9rem;
+  }
+}

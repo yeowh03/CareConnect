@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.controllers.notification_controller</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.controllers.html" class="white">controllers</a>.notification_controller</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Ccontrollers%5Cnotification_controller.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\controllers\notification_controller.py</a></td></tr></table>
+    <p><span class="code">Notification&nbsp;Controller&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;handles&nbsp;notification&nbsp;operations&nbsp;including&nbsp;creation,&nbsp;deletion,<br>
+broadcast&nbsp;subscriptions&nbsp;using&nbsp;the&nbsp;Observer&nbsp;pattern,&nbsp;and&nbsp;notification&nbsp;management.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.controllers.notification_controller.html#NotificationController">NotificationController</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="NotificationController">class <strong>NotificationController</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Controller&nbsp;for&nbsp;notification&nbsp;and&nbsp;broadcast&nbsp;operations.<br>
+&nbsp;<br>
+Handles&nbsp;notification&nbsp;CRUD&nbsp;operations&nbsp;and&nbsp;broadcast&nbsp;subscription&nbsp;management<br>
+using&nbsp;the&nbsp;Observer&nbsp;pattern&nbsp;for&nbsp;community&nbsp;club&nbsp;notifications.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Methods defined here:<br>
+<dl><dt><a name="NotificationController-__init__"><strong>__init__</strong></a>(self)</dt><dd><span class="code">Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</span></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="NotificationController-create_notification"><strong>create_notification</strong></a>(message, receiver_email, link=None)</dt><dd><span class="code">Create&nbsp;a&nbsp;new&nbsp;notification.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;(str):&nbsp;Notification&nbsp;message&nbsp;content.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;receiver_email&nbsp;(str):&nbsp;Email&nbsp;of&nbsp;notification&nbsp;recipient.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;link&nbsp;(str,&nbsp;optional):&nbsp;Optional&nbsp;link&nbsp;for&nbsp;notification.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;Response&nbsp;dict&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="NotificationController-delete_notification"><strong>delete_notification</strong></a>(notification_id: int)</dt><dd><span class="code">Delete&nbsp;a&nbsp;notification&nbsp;owned&nbsp;by&nbsp;current&nbsp;user.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;notification_id&nbsp;(int):&nbsp;ID&nbsp;of&nbsp;notification&nbsp;to&nbsp;delete.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="NotificationController-get_unread_count"><strong>get_unread_count</strong></a>()</dt><dd><span class="code">Get&nbsp;unread&nbsp;notification&nbsp;count.<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;number&nbsp;of&nbsp;unread&nbsp;notifications&nbsp;for&nbsp;the&nbsp;current&nbsp;user.<br>
+Does&nbsp;NOT&nbsp;mark&nbsp;them&nbsp;as&nbsp;read.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;unread&nbsp;count&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="NotificationController-list_subscriptions"><strong>list_subscriptions</strong></a>()</dt><dd><span class="code">List&nbsp;user's&nbsp;broadcast&nbsp;subscriptions.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;subscriptions&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="NotificationController-mark_all_read"><strong>mark_all_read</strong></a>()</dt><dd><span class="code">Mark&nbsp;all&nbsp;notifications&nbsp;as&nbsp;read.<br>
+&nbsp;<br>
+Mark&nbsp;all&nbsp;notifications&nbsp;as&nbsp;read&nbsp;for&nbsp;the&nbsp;current&nbsp;user.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="NotificationController-my_notifications"><strong>my_notifications</strong></a>()</dt><dd><span class="code">Get&nbsp;user's&nbsp;notifications.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;with&nbsp;notifications&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="NotificationController-subscribe_broadcast"><strong>subscribe_broadcast</strong></a>()</dt><dd><span class="code">Subscribe&nbsp;to&nbsp;community&nbsp;club&nbsp;broadcasts.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<dl><dt><a name="NotificationController-unsubscribe_broadcast"><strong>unsubscribe_broadcast</strong></a>()</dt><dd><span class="code">Unsubscribe&nbsp;from&nbsp;community&nbsp;club&nbsp;broadcasts.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;tuple:&nbsp;JSON&nbsp;response&nbsp;and&nbsp;HTTP&nbsp;status&nbsp;code.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>db</strong> = &lt;SQLAlchemy&gt;<br>
+<strong>func</strong> = &lt;sqlalchemy.sql.functions._FunctionGenerator object&gt;<br>
+<strong>request</strong> = &lt;LocalProxy unbound&gt;<br>
+<strong>subject</strong> = &lt;backend.broadcast_observer.CCFulfilmentSubject object&gt;</td></tr></table>
+</body></html>

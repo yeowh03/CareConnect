@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.services.find_user</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.services.html" class="white">services</a>.find_user</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Cservices%5Cfind_user.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\services\find_user.py</a></td></tr></table>
+    <p><span class="code">User&nbsp;Lookup&nbsp;Service&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;provides&nbsp;utility&nbsp;functions&nbsp;for&nbsp;finding&nbsp;and&nbsp;retrieving<br>
+user,&nbsp;client,&nbsp;and&nbsp;manager&nbsp;records&nbsp;from&nbsp;the&nbsp;database.</span></p>
+<p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-find_client_by_email"><strong>find_client_by_email</strong></a>(email)</dt><dd><span class="code">Find&nbsp;client&nbsp;by&nbsp;email&nbsp;address.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;email&nbsp;(str):&nbsp;Client's&nbsp;email&nbsp;address.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Client:&nbsp;Client&nbsp;instance&nbsp;or&nbsp;None&nbsp;if&nbsp;not&nbsp;found.</span></dd></dl>
+ <dl><dt><a name="-find_manager_by_email"><strong>find_manager_by_email</strong></a>(email)</dt><dd><span class="code">Find&nbsp;manager&nbsp;by&nbsp;email&nbsp;address.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;email&nbsp;(str):&nbsp;Manager's&nbsp;email&nbsp;address.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Manager:&nbsp;Manager&nbsp;instance&nbsp;or&nbsp;None&nbsp;if&nbsp;not&nbsp;found.</span></dd></dl>
+ <dl><dt><a name="-find_managers_by_cc"><strong>find_managers_by_cc</strong></a>(cc: str)</dt><dd><span class="code">Find&nbsp;manager&nbsp;by&nbsp;community&nbsp;club&nbsp;name.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cc&nbsp;(str):&nbsp;Community&nbsp;club&nbsp;name.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Manager:&nbsp;First&nbsp;manager&nbsp;for&nbsp;the&nbsp;CC&nbsp;or&nbsp;None&nbsp;if&nbsp;not&nbsp;found.</span></dd></dl>
+ <dl><dt><a name="-find_user_by_email"><strong>find_user_by_email</strong></a>(email)</dt><dd><span class="code">Find&nbsp;user&nbsp;by&nbsp;email&nbsp;address.<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;email&nbsp;(str):&nbsp;User's&nbsp;email&nbsp;address.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;User:&nbsp;User&nbsp;instance&nbsp;or&nbsp;None&nbsp;if&nbsp;not&nbsp;found.</span></dd></dl>
+ <dl><dt><a name="-get_current_user"><strong>get_current_user</strong></a>()</dt><dd><span class="code">Get&nbsp;the&nbsp;currently&nbsp;authenticated&nbsp;user&nbsp;from&nbsp;session.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;User:&nbsp;Current&nbsp;user&nbsp;instance&nbsp;or&nbsp;None&nbsp;if&nbsp;not&nbsp;authenticated.</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>db</strong> = &lt;SQLAlchemy&gt;<br>
+<strong>session</strong> = &lt;LocalProxy unbound&gt;</td></tr></table>
+</body></html>

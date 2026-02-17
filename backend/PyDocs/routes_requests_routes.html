@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.routes.requests_routes</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.routes.html" class="white">routes</a>.requests_routes</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Croutes%5Crequests_routes.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\routes\requests_routes.py</a></td></tr></table>
+    <p><span class="code">Request&nbsp;Routes&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;defines&nbsp;Flask&nbsp;routes&nbsp;for&nbsp;request&nbsp;management&nbsp;including<br>
+creation,&nbsp;updates,&nbsp;completion&nbsp;workflow,&nbsp;and&nbsp;CRUD&nbsp;operations.</span></p>
+<p>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
+    
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-create_request"><strong>create_request</strong></a>()</dt><dd><span class="code">#&nbsp;Create&nbsp;new&nbsp;request&nbsp;and&nbsp;trigger&nbsp;allocation</span></dd></dl>
+ <dl><dt><a name="-delete_pending_request"><strong>delete_pending_request</strong></a>(req_id)</dt><dd><span class="code">#&nbsp;Delete&nbsp;pending&nbsp;request&nbsp;and&nbsp;free&nbsp;any&nbsp;allocated&nbsp;items</span></dd></dl>
+ <dl><dt><a name="-get_my_request"><strong>get_my_request</strong></a>(req_id)</dt><dd><span class="code">#&nbsp;Get&nbsp;specific&nbsp;request&nbsp;details&nbsp;for&nbsp;current&nbsp;user</span></dd></dl>
+ <dl><dt><a name="-manager_complete_request"><strong>manager_complete_request</strong></a>(req_id)</dt><dd><span class="code">#&nbsp;Manager:&nbsp;Mark&nbsp;matched&nbsp;request&nbsp;as&nbsp;completed</span></dd></dl>
+ <dl><dt><a name="-manager_matched_requests"><strong>manager_matched_requests</strong></a>()</dt><dd><span class="code">#&nbsp;Manager:&nbsp;Get&nbsp;matched&nbsp;requests&nbsp;for&nbsp;their&nbsp;CC</span></dd></dl>
+ <dl><dt><a name="-my_requests"><strong>my_requests</strong></a>()</dt><dd><span class="code">#&nbsp;Get&nbsp;current&nbsp;user's&nbsp;requests</span></dd></dl>
+ <dl><dt><a name="-reject_matched_request"><strong>reject_matched_request</strong></a>()</dt><dd><span class="code">#&nbsp;Client:&nbsp;Reject&nbsp;a&nbsp;matched&nbsp;request&nbsp;and&nbsp;free&nbsp;items</span></dd></dl>
+ <dl><dt><a name="-update_pending_request"><strong>update_pending_request</strong></a>(req_id)</dt><dd><span class="code">#&nbsp;Update&nbsp;pending&nbsp;request&nbsp;details</span></dd></dl>
+</td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>requests_bp</strong> = &lt;Blueprint 'requests'&gt;</td></tr></table>
+</body></html>

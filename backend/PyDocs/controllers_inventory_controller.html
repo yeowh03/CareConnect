@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.controllers.inventory_controller</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.<a href="backend.controllers.html" class="white">controllers</a>.inventory_controller</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Ccontrollers%5Cinventory_controller.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\controllers\inventory_controller.py</a></td></tr></table>
+    <p><span class="code">Inventory&nbsp;Controller&nbsp;for&nbsp;CareConnect&nbsp;Backend.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;handles&nbsp;inventory&nbsp;management&nbsp;and&nbsp;reporting&nbsp;including<br>
+community&nbsp;club&nbsp;summaries,&nbsp;fulfillment&nbsp;rates,&nbsp;and&nbsp;shortage&nbsp;tracking.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text"><a href="builtins.html#object">builtins.object</a>
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.controllers.inventory_controller.html#InventoryController">InventoryController</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="InventoryController">class <strong>InventoryController</strong></a>(<a href="builtins.html#object">builtins.object</a>)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code">Controller&nbsp;for&nbsp;inventory&nbsp;management&nbsp;and&nbsp;reporting.<br>
+&nbsp;<br>
+Provides&nbsp;summary&nbsp;statistics,&nbsp;fulfillment&nbsp;rates,&nbsp;and&nbsp;shortage<br>
+analysis&nbsp;for&nbsp;community&nbsp;clubs&nbsp;and&nbsp;inventory&nbsp;items.<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn">Static methods defined here:<br>
+<dl><dt><a name="InventoryController-client_cc_summary"><strong>client_cc_summary</strong></a>()</dt><dd><span class="code">Get&nbsp;simplified&nbsp;CC&nbsp;summary&nbsp;for&nbsp;clients.<br>
+&nbsp;<br>
+Simplified&nbsp;summary&nbsp;for&nbsp;clients:&nbsp;totals&nbsp;+&nbsp;severe&nbsp;shortages.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;JSON&nbsp;response&nbsp;with&nbsp;CC&nbsp;summaries&nbsp;and&nbsp;shortage&nbsp;items.</span></dd></dl>
+
+<dl><dt><a name="InventoryController-get_cc_inventory"><strong>get_cc_inventory</strong></a>(location)</dt></dl>
+
+<dl><dt><a name="InventoryController-get_cc_summary"><strong>get_cc_summary</strong></a>()</dt><dd><span class="code">Generate&nbsp;community&nbsp;club&nbsp;summary&nbsp;statistics.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;list:&nbsp;Summary&nbsp;data&nbsp;for&nbsp;all&nbsp;community&nbsp;clubs.</span></dd></dl>
+
+<dl><dt><a name="InventoryController-manager_cc_summary"><strong>manager_cc_summary</strong></a>()</dt><dd><span class="code">Get&nbsp;comprehensive&nbsp;CC&nbsp;summary&nbsp;for&nbsp;managers.<br>
+&nbsp;<br>
+Overall&nbsp;summary&nbsp;for&nbsp;every&nbsp;CC&nbsp;(including&nbsp;0-activity&nbsp;ones).<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;JSON&nbsp;response&nbsp;with&nbsp;detailed&nbsp;CC&nbsp;statistics.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>db</strong> = &lt;SQLAlchemy&gt;<br>
+<strong>func</strong> = &lt;sqlalchemy.sql.functions._FunctionGenerator object&gt;<br>
+<strong>request</strong> = &lt;LocalProxy unbound&gt;</td></tr></table>
+</body></html>

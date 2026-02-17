@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module backend.models</title>
+</head><body>
+
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="backend.html" class="white">backend</a>.models</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cwh_20%5Conedrive%5Cdocuments%5Cntu%5Csc2006%5Ccareconnect5%5Ccareconnect-main%5Cbackend%5Cmodels.py">c:\users\wh_20\onedrive\documents\ntu\sc2006\careconnect5\careconnect-main\backend\models.py</a></td></tr></table>
+    <p><span class="code">Database&nbsp;Models&nbsp;for&nbsp;CareConnect&nbsp;Application.<br>
+&nbsp;<br>
+This&nbsp;module&nbsp;defines&nbsp;all&nbsp;SQLAlchemy&nbsp;database&nbsp;models&nbsp;used&nbsp;in&nbsp;the&nbsp;CareConnect&nbsp;system,<br>
+including&nbsp;<a href="#User">User</a>,&nbsp;<a href="#Manager">Manager</a>,&nbsp;<a href="#Client">Client</a>,&nbsp;<a href="#Request">Request</a>,&nbsp;<a href="#Donation">Donation</a>,&nbsp;<a href="#Item">Item</a>,&nbsp;<a href="#Reservation">Reservation</a>,&nbsp;and&nbsp;<a href="#Notification">Notification</a>&nbsp;models.</span></p>
+<p>
+<table class="section">
+<tr class="decor index-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Classes</strong></td></tr>
+    
+<tr><td class="decor index-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl>
+<dt class="heading-text">sqlalchemy.orm.decl_api.Model(<a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>)
+</dt><dd>
+<dl>
+<dt class="heading-text"><a href="backend.models.html#Client">Client</a>
+</dt><dt class="heading-text"><a href="backend.models.html#Donation">Donation</a>
+</dt><dt class="heading-text"><a href="backend.models.html#Item">Item</a>
+</dt><dt class="heading-text"><a href="backend.models.html#Manager">Manager</a>
+</dt><dt class="heading-text"><a href="backend.models.html#Notification">Notification</a>
+</dt><dt class="heading-text"><a href="backend.models.html#Request">Request</a>
+</dt><dt class="heading-text"><a href="backend.models.html#Reservation">Reservation</a>
+</dt><dt class="heading-text"><a href="backend.models.html#User">User</a>
+</dt></dl>
+</dd>
+</dl>
+ <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Client">class <strong>Client</strong></a>(sqlalchemy.orm.decl_api.Model)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Client">Client</a>(**kwargs)<br>
+&nbsp;<br>
+<a href="#Client">Client</a>&nbsp;model&nbsp;for&nbsp;users&nbsp;who&nbsp;can&nbsp;make&nbsp;requests&nbsp;and&nbsp;donations.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;email&nbsp;(str):&nbsp;Foreign&nbsp;key&nbsp;to&nbsp;<a href="#User">User</a>.email<br>
+&nbsp;&nbsp;&nbsp;&nbsp;monthly_income&nbsp;(Decimal):&nbsp;<a href="#Client">Client</a>'s&nbsp;monthly&nbsp;income<br>
+&nbsp;&nbsp;&nbsp;&nbsp;account_status&nbsp;(str):&nbsp;Account&nbsp;status&nbsp;-&nbsp;Pending,&nbsp;Confirmed,&nbsp;or&nbsp;Rejected<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gmail_acc&nbsp;(bool):&nbsp;Whether&nbsp;user&nbsp;registered&nbsp;via&nbsp;Google&nbsp;OAuth<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.models.html#Client">Client</a></dd>
+<dd>sqlalchemy.orm.decl_api.Model</dd>
+<dd><a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Client-__init__"><strong>__init__</strong></a>(self, **kwargs)<span class="grey"><span class="heading-text"> from sqlalchemy.orm.instrumentation</span></span></dt><dd><span class="code">A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+&nbsp;<br>
+Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+values&nbsp;in&nbsp;``kwargs``.<br>
+&nbsp;<br>
+Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>account_status</strong></dt>
+</dl>
+<dl><dt><strong>email</strong></dt>
+</dl>
+<dl><dt><strong>gmail_acc</strong></dt>
+</dl>
+<dl><dt><strong>monthly_income</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1bbc1f6e710; Client&gt;</dl>
+
+<dl><dt><strong>__table__</strong> = Table('client', MetaData(), Column('email', Stri...=ScalarElementColumnDefault(False)), schema=None)</dl>
+
+<dl><dt><strong>__tablename__</strong> = 'client'</dl>
+
+<hr>
+Methods inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>query</strong></dt>
+</dl>
+
+<hr>
+Data and other attributes inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>__abstract__</strong> = True</dl>
+
+<dl><dt><strong>__fsa__</strong> = &lt;SQLAlchemy&gt;</dl>
+
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>query_class</strong> = &lt;class 'flask_sqlalchemy.query.Query'&gt;<dd><span class="code">SQLAlchemy&nbsp;:class:`~sqlalchemy.orm.query.Query`&nbsp;subclass&nbsp;with&nbsp;some&nbsp;extra&nbsp;methods<br>
+useful&nbsp;for&nbsp;querying&nbsp;in&nbsp;a&nbsp;web&nbsp;application.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;default&nbsp;query&nbsp;class&nbsp;for&nbsp;:attr:`.Model.query`.<br>
+&nbsp;<br>
+..&nbsp;versionchanged::&nbsp;3.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Renamed&nbsp;to&nbsp;``Query``&nbsp;from&nbsp;``BaseQuery``.</span></dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><a name="Client-__repr__"><strong>__repr__</strong></a>(self) -&gt; 'str'</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__annotations__</strong> = {'__fsa__': 't.ClassVar[SQLAlchemy]', 'query': 't.ClassVar[Query]', 'query_class': 't.ClassVar[type[Query]]'}</dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Donation">class <strong>Donation</strong></a>(sqlalchemy.orm.decl_api.Model)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Donation">Donation</a>(**kwargs)<br>
+&nbsp;<br>
+<a href="#Donation">Donation</a>&nbsp;model&nbsp;for&nbsp;items&nbsp;donated&nbsp;by&nbsp;clients.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;(int):&nbsp;Primary&nbsp;key<br>
+&nbsp;&nbsp;&nbsp;&nbsp;donor_email&nbsp;(str):&nbsp;Foreign&nbsp;key&nbsp;to&nbsp;<a href="#Client">Client</a>.email<br>
+&nbsp;&nbsp;&nbsp;&nbsp;donation_category&nbsp;(str):&nbsp;Category&nbsp;-&nbsp;Food,&nbsp;Drinks,&nbsp;Furnitures,&nbsp;Electronics,&nbsp;Essentials<br>
+&nbsp;&nbsp;&nbsp;&nbsp;donation_item&nbsp;(str):&nbsp;Name&nbsp;of&nbsp;donated&nbsp;item<br>
+&nbsp;&nbsp;&nbsp;&nbsp;donation_quantity&nbsp;(int):&nbsp;Quantity&nbsp;donated<br>
+&nbsp;&nbsp;&nbsp;&nbsp;location&nbsp;(str):&nbsp;<a href="#Donation">Donation</a>&nbsp;location<br>
+&nbsp;&nbsp;&nbsp;&nbsp;image_link&nbsp;(str):&nbsp;URL&nbsp;to&nbsp;donation&nbsp;image<br>
+&nbsp;&nbsp;&nbsp;&nbsp;expiryDate&nbsp;(date):&nbsp;Expiry&nbsp;date&nbsp;for&nbsp;perishable&nbsp;items<br>
+&nbsp;&nbsp;&nbsp;&nbsp;approved_at&nbsp;(datetime):&nbsp;When&nbsp;donation&nbsp;was&nbsp;approved<br>
+&nbsp;&nbsp;&nbsp;&nbsp;status&nbsp;(str):&nbsp;<a href="#Donation">Donation</a>&nbsp;status&nbsp;-&nbsp;Pending,&nbsp;Approved,&nbsp;Added<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.models.html#Donation">Donation</a></dd>
+<dd>sqlalchemy.orm.decl_api.Model</dd>
+<dd><a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Donation-__init__"><strong>__init__</strong></a>(self, **kwargs)<span class="grey"><span class="heading-text"> from sqlalchemy.orm.instrumentation</span></span></dt><dd><span class="code">A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+&nbsp;<br>
+Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+values&nbsp;in&nbsp;``kwargs``.<br>
+&nbsp;<br>
+Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>approved_at</strong></dt>
+</dl>
+<dl><dt><strong>donation_category</strong></dt>
+</dl>
+<dl><dt><strong>donation_item</strong></dt>
+</dl>
+<dl><dt><strong>donation_quantity</strong></dt>
+</dl>
+<dl><dt><strong>donor_email</strong></dt>
+</dl>
+<dl><dt><strong>expiryDate</strong></dt>
+</dl>
+<dl><dt><strong>id</strong></dt>
+</dl>
+<dl><dt><strong>image_link</strong></dt>
+</dl>
+<dl><dt><strong>location</strong></dt>
+</dl>
+<dl><dt><strong>status</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1bbc1f6f390; Donation&gt;</dl>
+
+<dl><dt><strong>__table__</strong> = Table('donation', MetaData(), Column('id', Integ...larElementColumnDefault('Pending')), schema=None)</dl>
+
+<dl><dt><strong>__tablename__</strong> = 'donation'</dl>
+
+<hr>
+Methods inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>query</strong></dt>
+</dl>
+
+<hr>
+Data and other attributes inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>__abstract__</strong> = True</dl>
+
+<dl><dt><strong>__fsa__</strong> = &lt;SQLAlchemy&gt;</dl>
+
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>query_class</strong> = &lt;class 'flask_sqlalchemy.query.Query'&gt;<dd><span class="code">SQLAlchemy&nbsp;:class:`~sqlalchemy.orm.query.Query`&nbsp;subclass&nbsp;with&nbsp;some&nbsp;extra&nbsp;methods<br>
+useful&nbsp;for&nbsp;querying&nbsp;in&nbsp;a&nbsp;web&nbsp;application.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;default&nbsp;query&nbsp;class&nbsp;for&nbsp;:attr:`.Model.query`.<br>
+&nbsp;<br>
+..&nbsp;versionchanged::&nbsp;3.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Renamed&nbsp;to&nbsp;``Query``&nbsp;from&nbsp;``BaseQuery``.</span></dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><a name="Donation-__repr__"><strong>__repr__</strong></a>(self) -&gt; 'str'</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__annotations__</strong> = {'__fsa__': 't.ClassVar[SQLAlchemy]', 'query': 't.ClassVar[Query]', 'query_class': 't.ClassVar[type[Query]]'}</dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Item">class <strong>Item</strong></a>(sqlalchemy.orm.decl_api.Model)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Item">Item</a>(**kwargs)<br>
+&nbsp;<br>
+<a href="#Item">Item</a>&nbsp;model&nbsp;representing&nbsp;individual&nbsp;units&nbsp;from&nbsp;donations.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;(int):&nbsp;Primary&nbsp;key<br>
+&nbsp;&nbsp;&nbsp;&nbsp;donation_id&nbsp;(int):&nbsp;Foreign&nbsp;key&nbsp;to&nbsp;<a href="#Donation">Donation</a>.id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;status&nbsp;(str):&nbsp;<a href="#Item">Item</a>&nbsp;availability&nbsp;-&nbsp;Available&nbsp;or&nbsp;Unavailable<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.models.html#Item">Item</a></dd>
+<dd>sqlalchemy.orm.decl_api.Model</dd>
+<dd><a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Item-__init__"><strong>__init__</strong></a>(self, **kwargs)<span class="grey"><span class="heading-text"> from sqlalchemy.orm.instrumentation</span></span></dt><dd><span class="code">A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+&nbsp;<br>
+Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+values&nbsp;in&nbsp;``kwargs``.<br>
+&nbsp;<br>
+Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>donation_id</strong></dt>
+</dl>
+<dl><dt><strong>id</strong></dt>
+</dl>
+<dl><dt><strong>status</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1bbc1f6f610; Item&gt;</dl>
+
+<dl><dt><strong>__table__</strong> = Table('item', MetaData(), Column('id', Integer()...rElementColumnDefault('Available')), schema=None)</dl>
+
+<dl><dt><strong>__tablename__</strong> = 'item'</dl>
+
+<hr>
+Methods inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>query</strong></dt>
+</dl>
+
+<hr>
+Data and other attributes inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>__abstract__</strong> = True</dl>
+
+<dl><dt><strong>__fsa__</strong> = &lt;SQLAlchemy&gt;</dl>
+
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>query_class</strong> = &lt;class 'flask_sqlalchemy.query.Query'&gt;<dd><span class="code">SQLAlchemy&nbsp;:class:`~sqlalchemy.orm.query.Query`&nbsp;subclass&nbsp;with&nbsp;some&nbsp;extra&nbsp;methods<br>
+useful&nbsp;for&nbsp;querying&nbsp;in&nbsp;a&nbsp;web&nbsp;application.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;default&nbsp;query&nbsp;class&nbsp;for&nbsp;:attr:`.Model.query`.<br>
+&nbsp;<br>
+..&nbsp;versionchanged::&nbsp;3.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Renamed&nbsp;to&nbsp;``Query``&nbsp;from&nbsp;``BaseQuery``.</span></dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><a name="Item-__repr__"><strong>__repr__</strong></a>(self) -&gt; 'str'</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__annotations__</strong> = {'__fsa__': 't.ClassVar[SQLAlchemy]', 'query': 't.ClassVar[Query]', 'query_class': 't.ClassVar[type[Query]]'}</dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Manager">class <strong>Manager</strong></a>(sqlalchemy.orm.decl_api.Model)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Manager">Manager</a>(**kwargs)<br>
+&nbsp;<br>
+<a href="#Manager">Manager</a>&nbsp;model&nbsp;for&nbsp;community&nbsp;club&nbsp;managers.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;email&nbsp;(str):&nbsp;Foreign&nbsp;key&nbsp;to&nbsp;<a href="#User">User</a>.email<br>
+&nbsp;&nbsp;&nbsp;&nbsp;cc&nbsp;(str):&nbsp;Community&nbsp;club&nbsp;name&nbsp;the&nbsp;manager&nbsp;oversees<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.models.html#Manager">Manager</a></dd>
+<dd>sqlalchemy.orm.decl_api.Model</dd>
+<dd><a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Manager-__init__"><strong>__init__</strong></a>(self, **kwargs)<span class="grey"><span class="heading-text"> from sqlalchemy.orm.instrumentation</span></span></dt><dd><span class="code">A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+&nbsp;<br>
+Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+values&nbsp;in&nbsp;``kwargs``.<br>
+&nbsp;<br>
+Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>cc</strong></dt>
+</dl>
+<dl><dt><strong>email</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1bbc1f6da90; Manager&gt;</dl>
+
+<dl><dt><strong>__table__</strong> = Table('manager', MetaData(), Column('email', Str...), table=&lt;manager&gt;, nullable=False), schema=None)</dl>
+
+<dl><dt><strong>__tablename__</strong> = 'manager'</dl>
+
+<hr>
+Methods inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>query</strong></dt>
+</dl>
+
+<hr>
+Data and other attributes inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>__abstract__</strong> = True</dl>
+
+<dl><dt><strong>__fsa__</strong> = &lt;SQLAlchemy&gt;</dl>
+
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>query_class</strong> = &lt;class 'flask_sqlalchemy.query.Query'&gt;<dd><span class="code">SQLAlchemy&nbsp;:class:`~sqlalchemy.orm.query.Query`&nbsp;subclass&nbsp;with&nbsp;some&nbsp;extra&nbsp;methods<br>
+useful&nbsp;for&nbsp;querying&nbsp;in&nbsp;a&nbsp;web&nbsp;application.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;default&nbsp;query&nbsp;class&nbsp;for&nbsp;:attr:`.Model.query`.<br>
+&nbsp;<br>
+..&nbsp;versionchanged::&nbsp;3.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Renamed&nbsp;to&nbsp;``Query``&nbsp;from&nbsp;``BaseQuery``.</span></dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><a name="Manager-__repr__"><strong>__repr__</strong></a>(self) -&gt; 'str'</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__annotations__</strong> = {'__fsa__': 't.ClassVar[SQLAlchemy]', 'query': 't.ClassVar[Query]', 'query_class': 't.ClassVar[type[Query]]'}</dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Notification">class <strong>Notification</strong></a>(sqlalchemy.orm.decl_api.Model)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Notification">Notification</a>(**kwargs)<br>
+&nbsp;<br>
+<a href="#Notification">Notification</a>&nbsp;model&nbsp;for&nbsp;user&nbsp;notifications.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;(int):&nbsp;Primary&nbsp;key<br>
+&nbsp;&nbsp;&nbsp;&nbsp;receiver_email&nbsp;(str):&nbsp;Foreign&nbsp;key&nbsp;to&nbsp;<a href="#User">User</a>.email<br>
+&nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;(str):&nbsp;<a href="#Notification">Notification</a>&nbsp;message&nbsp;content<br>
+&nbsp;&nbsp;&nbsp;&nbsp;created_at&nbsp;(datetime):&nbsp;When&nbsp;notification&nbsp;was&nbsp;created<br>
+&nbsp;&nbsp;&nbsp;&nbsp;viewed&nbsp;(bool):&nbsp;Whether&nbsp;notification&nbsp;has&nbsp;been&nbsp;viewed<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.models.html#Notification">Notification</a></dd>
+<dd>sqlalchemy.orm.decl_api.Model</dd>
+<dd><a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Notification-__init__"><strong>__init__</strong></a>(self, **kwargs)<span class="grey"><span class="heading-text"> from sqlalchemy.orm.instrumentation</span></span></dt><dd><span class="code">A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+&nbsp;<br>
+Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+values&nbsp;in&nbsp;``kwargs``.<br>
+&nbsp;<br>
+Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>created_at</strong></dt>
+</dl>
+<dl><dt><strong>id</strong></dt>
+</dl>
+<dl><dt><strong>message</strong></dt>
+</dl>
+<dl><dt><strong>receiver_email</strong></dt>
+</dl>
+<dl><dt><strong>viewed</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1bbc1f6fc50; Notification&gt;</dl>
+
+<dl><dt><strong>__table__</strong> = Table('notification', MetaData(), Column('id', I...=ScalarElementColumnDefault(False)), schema=None)</dl>
+
+<dl><dt><strong>__tablename__</strong> = 'notification'</dl>
+
+<hr>
+Methods inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>query</strong></dt>
+</dl>
+
+<hr>
+Data and other attributes inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>__abstract__</strong> = True</dl>
+
+<dl><dt><strong>__fsa__</strong> = &lt;SQLAlchemy&gt;</dl>
+
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>query_class</strong> = &lt;class 'flask_sqlalchemy.query.Query'&gt;<dd><span class="code">SQLAlchemy&nbsp;:class:`~sqlalchemy.orm.query.Query`&nbsp;subclass&nbsp;with&nbsp;some&nbsp;extra&nbsp;methods<br>
+useful&nbsp;for&nbsp;querying&nbsp;in&nbsp;a&nbsp;web&nbsp;application.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;default&nbsp;query&nbsp;class&nbsp;for&nbsp;:attr:`.Model.query`.<br>
+&nbsp;<br>
+..&nbsp;versionchanged::&nbsp;3.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Renamed&nbsp;to&nbsp;``Query``&nbsp;from&nbsp;``BaseQuery``.</span></dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><a name="Notification-__repr__"><strong>__repr__</strong></a>(self) -&gt; 'str'</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__annotations__</strong> = {'__fsa__': 't.ClassVar[SQLAlchemy]', 'query': 't.ClassVar[Query]', 'query_class': 't.ClassVar[type[Query]]'}</dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Request">class <strong>Request</strong></a>(sqlalchemy.orm.decl_api.Model)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Request">Request</a>(**kwargs)<br>
+&nbsp;<br>
+<a href="#Request">Request</a>&nbsp;model&nbsp;for&nbsp;items&nbsp;requested&nbsp;by&nbsp;clients.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;(int):&nbsp;Primary&nbsp;key<br>
+&nbsp;&nbsp;&nbsp;&nbsp;requester_email&nbsp;(str):&nbsp;Foreign&nbsp;key&nbsp;to&nbsp;<a href="#Client">Client</a>.email<br>
+&nbsp;&nbsp;&nbsp;&nbsp;request_category&nbsp;(str):&nbsp;Category&nbsp;-&nbsp;Food,&nbsp;Drinks,&nbsp;Furnitures,&nbsp;Electronics,&nbsp;Essentials<br>
+&nbsp;&nbsp;&nbsp;&nbsp;request_item&nbsp;(str):&nbsp;Name&nbsp;of&nbsp;requested&nbsp;item<br>
+&nbsp;&nbsp;&nbsp;&nbsp;request_quantity&nbsp;(int):&nbsp;Quantity&nbsp;requested<br>
+&nbsp;&nbsp;&nbsp;&nbsp;allocation&nbsp;(int):&nbsp;Number&nbsp;of&nbsp;items&nbsp;allocated<br>
+&nbsp;&nbsp;&nbsp;&nbsp;location&nbsp;(str):&nbsp;Pickup&nbsp;location<br>
+&nbsp;&nbsp;&nbsp;&nbsp;status&nbsp;(str):&nbsp;<a href="#Request">Request</a>&nbsp;status&nbsp;-&nbsp;Pending,&nbsp;Matched,&nbsp;Expired,&nbsp;Completed<br>
+&nbsp;&nbsp;&nbsp;&nbsp;created_at&nbsp;(datetime):&nbsp;When&nbsp;request&nbsp;was&nbsp;created<br>
+&nbsp;&nbsp;&nbsp;&nbsp;matched_at&nbsp;(datetime):&nbsp;When&nbsp;request&nbsp;was&nbsp;matched&nbsp;with&nbsp;donations<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.models.html#Request">Request</a></dd>
+<dd>sqlalchemy.orm.decl_api.Model</dd>
+<dd><a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Request-__init__"><strong>__init__</strong></a>(self, **kwargs)<span class="grey"><span class="heading-text"> from sqlalchemy.orm.instrumentation</span></span></dt><dd><span class="code">A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+&nbsp;<br>
+Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+values&nbsp;in&nbsp;``kwargs``.<br>
+&nbsp;<br>
+Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>allocation</strong></dt>
+</dl>
+<dl><dt><strong>created_at</strong></dt>
+</dl>
+<dl><dt><strong>id</strong></dt>
+</dl>
+<dl><dt><strong>location</strong></dt>
+</dl>
+<dl><dt><strong>matched_at</strong></dt>
+</dl>
+<dl><dt><strong>request_category</strong></dt>
+</dl>
+<dl><dt><strong>request_item</strong></dt>
+</dl>
+<dl><dt><strong>request_quantity</strong></dt>
+</dl>
+<dl><dt><strong>requester_email</strong></dt>
+</dl>
+<dl><dt><strong>status</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1bbc1f6ee90; Request&gt;</dl>
+
+<dl><dt><strong>__table__</strong> = Table('request', MetaData(), Column('id', Intege...me(timezone=True), table=&lt;request&gt;), schema=None)</dl>
+
+<dl><dt><strong>__tablename__</strong> = 'request'</dl>
+
+<hr>
+Methods inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>query</strong></dt>
+</dl>
+
+<hr>
+Data and other attributes inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>__abstract__</strong> = True</dl>
+
+<dl><dt><strong>__fsa__</strong> = &lt;SQLAlchemy&gt;</dl>
+
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>query_class</strong> = &lt;class 'flask_sqlalchemy.query.Query'&gt;<dd><span class="code">SQLAlchemy&nbsp;:class:`~sqlalchemy.orm.query.Query`&nbsp;subclass&nbsp;with&nbsp;some&nbsp;extra&nbsp;methods<br>
+useful&nbsp;for&nbsp;querying&nbsp;in&nbsp;a&nbsp;web&nbsp;application.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;default&nbsp;query&nbsp;class&nbsp;for&nbsp;:attr:`.Model.query`.<br>
+&nbsp;<br>
+..&nbsp;versionchanged::&nbsp;3.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Renamed&nbsp;to&nbsp;``Query``&nbsp;from&nbsp;``BaseQuery``.</span></dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><a name="Request-__repr__"><strong>__repr__</strong></a>(self) -&gt; 'str'</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__annotations__</strong> = {'__fsa__': 't.ClassVar[SQLAlchemy]', 'query': 't.ClassVar[Query]', 'query_class': 't.ClassVar[type[Query]]'}</dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="Reservation">class <strong>Reservation</strong></a>(sqlalchemy.orm.decl_api.Model)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#Reservation">Reservation</a>(**kwargs)<br>
+&nbsp;<br>
+<a href="#Reservation">Reservation</a>&nbsp;model&nbsp;linking&nbsp;requests&nbsp;to&nbsp;specific&nbsp;items.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;id&nbsp;(int):&nbsp;Primary&nbsp;key<br>
+&nbsp;&nbsp;&nbsp;&nbsp;request_id&nbsp;(int):&nbsp;Foreign&nbsp;key&nbsp;to&nbsp;<a href="#Request">Request</a>.id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;item_id&nbsp;(int):&nbsp;Foreign&nbsp;key&nbsp;to&nbsp;<a href="#Item">Item</a>.id<br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.models.html#Reservation">Reservation</a></dd>
+<dd>sqlalchemy.orm.decl_api.Model</dd>
+<dd><a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Reservation-__init__"><strong>__init__</strong></a>(self, **kwargs)<span class="grey"><span class="heading-text"> from sqlalchemy.orm.instrumentation</span></span></dt><dd><span class="code">A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+&nbsp;<br>
+Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+values&nbsp;in&nbsp;``kwargs``.<br>
+&nbsp;<br>
+Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>id</strong></dt>
+</dl>
+<dl><dt><strong>item_id</strong></dt>
+</dl>
+<dl><dt><strong>request_id</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1bbc1f6f890; Reservation&gt;</dl>
+
+<dl><dt><strong>__table__</strong> = Table('reservation', MetaData(), Column('id', In...able=&lt;reservation&gt;, nullable=False), schema=None)</dl>
+
+<dl><dt><strong>__tablename__</strong> = 'reservation'</dl>
+
+<hr>
+Methods inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>query</strong></dt>
+</dl>
+
+<hr>
+Data and other attributes inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>__abstract__</strong> = True</dl>
+
+<dl><dt><strong>__fsa__</strong> = &lt;SQLAlchemy&gt;</dl>
+
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>query_class</strong> = &lt;class 'flask_sqlalchemy.query.Query'&gt;<dd><span class="code">SQLAlchemy&nbsp;:class:`~sqlalchemy.orm.query.Query`&nbsp;subclass&nbsp;with&nbsp;some&nbsp;extra&nbsp;methods<br>
+useful&nbsp;for&nbsp;querying&nbsp;in&nbsp;a&nbsp;web&nbsp;application.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;default&nbsp;query&nbsp;class&nbsp;for&nbsp;:attr:`.Model.query`.<br>
+&nbsp;<br>
+..&nbsp;versionchanged::&nbsp;3.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Renamed&nbsp;to&nbsp;``Query``&nbsp;from&nbsp;``BaseQuery``.</span></dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><a name="Reservation-__repr__"><strong>__repr__</strong></a>(self) -&gt; 'str'</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__annotations__</strong> = {'__fsa__': 't.ClassVar[SQLAlchemy]', 'query': 't.ClassVar[Query]', 'query_class': 't.ClassVar[type[Query]]'}</dl>
+
+</td></tr></table> <p>
+<table class="section">
+<tr class="decor title-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><a name="User">class <strong>User</strong></a>(sqlalchemy.orm.decl_api.Model)</td></tr>
+    
+<tr><td class="decor title-decor" rowspan=2><span class="code">&nbsp;&nbsp;&nbsp;</span></td>
+<td class="decor title-decor" colspan=2><span class="code"><a href="#User">User</a>(**kwargs)<br>
+&nbsp;<br>
+<a href="#User">User</a>&nbsp;model&nbsp;representing&nbsp;both&nbsp;managers&nbsp;and&nbsp;clients.<br>
+&nbsp;<br>
+Attributes:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;email&nbsp;(str):&nbsp;Primary&nbsp;key,&nbsp;unique&nbsp;email&nbsp;address<br>
+&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;(str):&nbsp;<a href="#User">User</a>'s&nbsp;full&nbsp;name<br>
+&nbsp;&nbsp;&nbsp;&nbsp;contact_number&nbsp;(str):&nbsp;Unique&nbsp;contact&nbsp;number<br>
+&nbsp;&nbsp;&nbsp;&nbsp;password_hash&nbsp;(str):&nbsp;Hashed&nbsp;password&nbsp;(null&nbsp;for&nbsp;Google&nbsp;OAuth&nbsp;users)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;role&nbsp;(str):&nbsp;<a href="#User">User</a>&nbsp;role&nbsp;-&nbsp;'M'&nbsp;for&nbsp;<a href="#Manager">Manager</a>,&nbsp;'C'&nbsp;for&nbsp;<a href="#Client">Client</a><br>&nbsp;</span></td></tr>
+<tr><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt>Method resolution order:</dt>
+<dd><a href="backend.models.html#User">User</a></dd>
+<dd>sqlalchemy.orm.decl_api.Model</dd>
+<dd><a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="User-__init__"><strong>__init__</strong></a>(self, **kwargs)<span class="grey"><span class="heading-text"> from sqlalchemy.orm.instrumentation</span></span></dt><dd><span class="code">A&nbsp;simple&nbsp;constructor&nbsp;that&nbsp;allows&nbsp;initialization&nbsp;from&nbsp;kwargs.<br>
+&nbsp;<br>
+Sets&nbsp;attributes&nbsp;on&nbsp;the&nbsp;constructed&nbsp;instance&nbsp;using&nbsp;the&nbsp;names&nbsp;and<br>
+values&nbsp;in&nbsp;``kwargs``.<br>
+&nbsp;<br>
+Only&nbsp;keys&nbsp;that&nbsp;are&nbsp;present&nbsp;as<br>
+attributes&nbsp;of&nbsp;the&nbsp;instance's&nbsp;class&nbsp;are&nbsp;allowed.&nbsp;These&nbsp;could&nbsp;be,<br>
+for&nbsp;example,&nbsp;any&nbsp;mapped&nbsp;columns&nbsp;or&nbsp;relationships.</span></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>contact_number</strong></dt>
+</dl>
+<dl><dt><strong>email</strong></dt>
+</dl>
+<dl><dt><strong>name</strong></dt>
+</dl>
+<dl><dt><strong>password_hash</strong></dt>
+</dl>
+<dl><dt><strong>role</strong></dt>
+</dl>
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__mapper__</strong> = &lt;Mapper at 0x1bbc202cad0; User&gt;</dl>
+
+<dl><dt><strong>__table__</strong> = Table('user', MetaData(), Column('email', String...um'), table=&lt;user&gt;, nullable=False), schema=None)</dl>
+
+<dl><dt><strong>__tablename__</strong> = 'user'</dl>
+
+<hr>
+Methods inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>query</strong></dt>
+</dl>
+
+<hr>
+Data and other attributes inherited from sqlalchemy.orm.decl_api.Model:<br>
+<dl><dt><strong>__abstract__</strong> = True</dl>
+
+<dl><dt><strong>__fsa__</strong> = &lt;SQLAlchemy&gt;</dl>
+
+<dl><dt><strong>metadata</strong> = MetaData()</dl>
+
+<dl><dt><strong>query_class</strong> = &lt;class 'flask_sqlalchemy.query.Query'&gt;<dd><span class="code">SQLAlchemy&nbsp;:class:`~sqlalchemy.orm.query.Query`&nbsp;subclass&nbsp;with&nbsp;some&nbsp;extra&nbsp;methods<br>
+useful&nbsp;for&nbsp;querying&nbsp;in&nbsp;a&nbsp;web&nbsp;application.<br>
+&nbsp;<br>
+This&nbsp;is&nbsp;the&nbsp;default&nbsp;query&nbsp;class&nbsp;for&nbsp;:attr:`.Model.query`.<br>
+&nbsp;<br>
+..&nbsp;versionchanged::&nbsp;3.0<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Renamed&nbsp;to&nbsp;``Query``&nbsp;from&nbsp;``BaseQuery``.</span></dl>
+
+<dl><dt><strong>registry</strong> = &lt;sqlalchemy.orm.decl_api.registry object&gt;</dl>
+
+<hr>
+Methods inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><a name="User-__repr__"><strong>__repr__</strong></a>(self) -&gt; 'str'</dt><dd><span class="code">Return&nbsp;repr(self).</span></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><span class="code">dictionary&nbsp;for&nbsp;instance&nbsp;variables</span></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><span class="code">list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object</span></dd>
+</dl>
+<hr>
+Data and other attributes inherited from <a href="flask_sqlalchemy.model.html#Model">flask_sqlalchemy.model.Model</a>:<br>
+<dl><dt><strong>__annotations__</strong> = {'__fsa__': 't.ClassVar[SQLAlchemy]', 'query': 't.ClassVar[Query]', 'query_class': 't.ClassVar[type[Query]]'}</dl>
+
+</td></tr></table></td></tr></table><p>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
+    
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>db</strong> = &lt;SQLAlchemy&gt;</td></tr></table>
+</body></html>
